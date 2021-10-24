@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import shop from "../api/shop";
+import ProductList from "./ProductList";
 
 class App extends Component {
   state = {
@@ -7,7 +8,6 @@ class App extends Component {
   }
   componentWillMount() {
     shop.getProducts((products) => {
-      console.log(products);
       this.setState({
         products
       })
@@ -19,6 +19,7 @@ class App extends Component {
         <div className="flex-1 min-w-0">
           <h2 className="p-4 bg-blue-400 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">Shopping Card</h2>
           <hr />
+          <ProductList products={this.state.products} />
         </div>
       </div>
     );
