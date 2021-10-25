@@ -18,6 +18,4 @@ class ProductItem extends Component {
 }
 export default ProductItem;
 
-
-
   
