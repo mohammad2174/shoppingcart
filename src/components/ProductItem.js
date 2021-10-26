@@ -9,9 +9,9 @@ class ProductItem extends Component {
     return (
       <div>
           <Product {...product} />
-          <button disabled = {product.inventory ? 'Add To Card' : 'Sold Out'}>
-              {product.inventory > 0 ? 'Add To Card' : 'Sold Out'}
-          </button>
+           <a href="#" disabled = {product.inventory ? 'Add To Card' : 'Sold Out'} className="flex justify-center items-center mt-4 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+           {product.inventory > 0 ? 'Add To Card' : 'Sold Out'}
+           </a>
       </div>  
     )
   }
