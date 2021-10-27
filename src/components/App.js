@@ -1,17 +1,13 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { recieveProducts } from "../actions";
 import shop from "../api/shop";
 import ProductList from "./ProductList";
 
 class App extends Component {
-  state = {
-    products : []
-  }
+
   componentWillMount() {
-    shop.getProducts((products) => {
-      this.setState({
-        products
-      })
-    })
+    shop.getProducts((products) => this.props.recieveProducts(products))
   }
   render() {
     return (
@@ -19,11 +15,15 @@ class App extends Component {
         <div className="flex-1 min-w-0">
           <h2 className="p-4 bg-blue-400 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">Shopping Card</h2>
           <hr />
-          <ProductList products={this.state.products} />
+          {/* <ProductList /> */}
         </div>
       </div>
     );
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+    recieveProducts : products => dispatch(recieveProducts(products))
+})
+
+export default connect(null, mapDispatchToProps)(App);
