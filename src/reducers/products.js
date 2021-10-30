@@ -4,7 +4,7 @@ const products = (state = {}, action) => {
     console.log(action);
     switch (action.type) {
         case RECIEVE_PRODUCTS:
-            let newProducts = action.type.reduce((obj, product) => {
+            let newProducts = action.products.reduce((obj, product) => {
                 obj[product.id] = product;
                 return obj;
             }, {})
