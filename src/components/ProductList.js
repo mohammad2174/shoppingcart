@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import products from "../reducers/products";
 import ProductItem from "./ProductItem";
 
 class ProductsList extends Component {
@@ -22,4 +24,13 @@ class ProductsList extends Component {
     )
   }
 }
-export default ProductsList;
+
+const getProducts = products => Object.keys(products).map(id => products[id])
+
+const mapStateToProps = state => {
+  return {
+    products : getProducts(state.products)
+  }
+}
+
+export default connect(mapStateToProps)(ProductsList);
