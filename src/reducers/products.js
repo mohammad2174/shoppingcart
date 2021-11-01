@@ -1,4 +1,4 @@
-import { RECIEVE_PRODUCTS } from "../constants/actionTypes";
+import { ADD_TO_CARD, RECIEVE_PRODUCTS } from "../constants/actionTypes";
 
 const products = (state = {}, action) => {
 
@@ -11,6 +11,16 @@ const products = (state = {}, action) => {
                     return obj;
                 }, {})
             }
+        case ADD_TO_CARD:
+            let { productId } = action;
+            let product = state[productId];
+            return {
+                ...state,
+                [productId] : {
+                    ...product,
+                    inventory : product.inventory - 1
+                }
+            }    
 
         default: 
         return state
