@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Card from "./Card";
 import Product from "./Product";
 
 class ProductItem extends Component {
