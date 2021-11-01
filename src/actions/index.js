@@ -4,3 +4,8 @@ export const recieveProducts = products => ({
         type : types.RECIEVE_PRODUCTS,
         products
 })
+
+export const addToCard = productId => ({
+        type : types.ADD_TO_CARD,
+        productId
+})
