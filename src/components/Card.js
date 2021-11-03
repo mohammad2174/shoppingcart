@@ -4,17 +4,20 @@ import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
 
 class Card extends Component {
-    state = {
-        open : true,
-        setOpen : false
-    }
+  state = {
+    open : true
+  }
+
+  setOpen = () => {
+    this.setState({open : false})
+  }
     
   render() {
     const products = this.props.products
 	
     return (
-        <Transition.Root show={true} as={Fragment}>
-        <Dialog as="div" className="fixed inset-0 overflow-hidden"  onClose={() => this.state.open}>
+        <Transition.Root show={this.state.open} as={Fragment}>
+        <Dialog as="div" className="fixed inset-0 overflow-hidden" onClose={this.setOpen}>
           <div className="absolute inset-0 overflow-hidden">
             <Transition.Child
               as={Fragment}
@@ -47,6 +50,7 @@ class Card extends Component {
                           <button
                             type="button"
                             className="-m-2 p-2 text-gray-400 hover:text-gray-500"
+                            onClick={() => this.setOpen(true)}
                           >
                             <span className="sr-only">Close panel</span>
                             <XIcon className="h-6 w-6" aria-hidden="true" />
