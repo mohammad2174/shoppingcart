@@ -11,10 +11,17 @@ class Card extends Component {
   setOpen = () => {
     this.setState({open : false})
   }
-    
+
   render() {
     const products = this.props.products
-	
+    const counts = products.map((product) => {
+      return product.price
+    })
+    let total = 0;
+    for (let i = 0; i < counts.length; i++) {
+    total += counts[i];
+  }
+
     return (
         <Transition.Root show={this.state.open} as={Fragment}>
         <Dialog as="div" className="fixed inset-0 overflow-hidden" onClose={this.setOpen}>
@@ -77,12 +84,12 @@ class Card extends Component {
                                     <h3>
                                       <a href={product.href}>{product.title}</a>
                                     </h3>
-                                    <p className="ml-4">{product.price}</p>
+                                    <p className="ml-4">${product.price}</p>
                                   </div>
                                   <p className="mt-1 text-sm text-gray-500">{product.color}</p>
                                 </div>
                                 <div className="flex-1 flex items-end justify-between text-sm">
-                                  <p className="text-gray-500">Qty {product.inventory}</p>
+                                  <p className="text-gray-500">Qty x {product.inventory}</p>
 
                                   <div className="flex">
                                     <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500">
@@ -97,11 +104,10 @@ class Card extends Component {
                         </div>
                       </div>
                     </div>
-  
-                    <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
+                    <div className="border-t border-gray-200 py-6 px-4 sm:px-6">                   
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>$262.00</p>
+                        <p>${total}</p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                       <div className="mt-6">
@@ -117,7 +123,8 @@ class Card extends Component {
                           or{' '}
                           <button
                             type="button"
-                            className="text-indigo-600 font-medium hover:text-indigo-500" 
+                            className="text-indigo-600 font-medium hover:text-indigo-500"
+                            onClick={() => this.setOpen(true)} 
                           >
                             Continue Shopping<span aria-hidden="true"> &rarr;</span>
                           </button>
