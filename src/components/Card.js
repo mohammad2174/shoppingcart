@@ -5,7 +5,7 @@ import { XIcon } from '@heroicons/react/outline';
 
 class Card extends Component {
   state = {
-    open : true
+    open : this.props.open
   }
 
   setOpen = () => {
