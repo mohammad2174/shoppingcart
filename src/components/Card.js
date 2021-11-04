@@ -15,7 +15,7 @@ class Card extends Component {
   render() {
     const products = this.props.products
     const counts = products.map((product) => {
-      return product.price
+      return product.price * product.inventory
     })
     let total = 0;
     for (let i = 0; i < counts.length; i++) {
