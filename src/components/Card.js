@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
+import { connect } from "react-redux";
 
 class Card extends Component {
   state = {
@@ -21,6 +22,7 @@ class Card extends Component {
     for (let i = 0; i < counts.length; i++) {
     total += counts[i];
   }
+  console.log(products);
 
     return (
         <Transition.Root show={this.state.open} as={Fragment}>
@@ -141,4 +143,17 @@ class Card extends Component {
     )
   }
 }
-export default Card;
+
+const getCardProducts = state => {
+  return state.card.addedIds.map(id => ({
+    ...state.products[id],
+    quantity : (state.card.quantityById[id] || 0)
+  }))
+}
+
+const mapStateToProps = state => ({
+  products: getCardProducts(state),
+  // total: getTotal() 
+})
+
+export default connect(mapStateToProps)(Card);
