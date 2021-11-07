@@ -15,6 +15,12 @@ class Card extends Component {
 
   render() {
     const products = this.props.products
+    const hasProducts = products.length > 0
+    const nodes = hasProducts ? (
+      <h3>Shopping cart</h3>
+    ) : (
+      <em>Please add to the Shopping cart</em>
+    )
     const counts = products.map((product) => {
       return product.price * product.inventory
     })
@@ -54,7 +60,7 @@ class Card extends Component {
                   <div className="h-full flex flex-col bg-white shadow-xl overflow-y-scroll">
                     <div className="flex-1 py-6 overflow-y-auto px-4 sm:px-6">
                       <div className="flex items-start justify-between">
-                        <Dialog.Title className="text-lg font-medium text-gray-900">Shopping cart</Dialog.Title>
+                        <Dialog.Title className="text-lg font-medium text-gray-900">{nodes}</Dialog.Title>
                         <div className="ml-3 h-7 flex items-center">
                           <button
                             type="button"
@@ -113,12 +119,12 @@ class Card extends Component {
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                       <div className="mt-6">
-                        <a
-                          href="#"
-                          className="flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                        <button
+                          disabled = {hasProducts ? '' : 'disabled'}
+                          className="flex justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
                         >
                           Checkout
-                        </a>
+                        </button>
                       </div>
                       <div className="mt-6 flex justify-center text-sm text-center text-gray-500">
                         <p>
