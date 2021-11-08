@@ -3,6 +3,7 @@ import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
 import { connect } from "react-redux";
+import Product from "./Product";
 
 class Card extends Component {
   state = {
@@ -17,7 +18,7 @@ class Card extends Component {
     const products = this.props.products
     const hasProducts = products.length > 0
     const nodes = hasProducts ? (
-      <h3>Shopping cart</h3>
+      products.map(product => <Product key={product.id} {...product} />)
     ) : (
       <em>Please add to the Shopping cart</em>
     )
@@ -75,7 +76,7 @@ class Card extends Component {
   
                       <div className="mt-8">
                         <div className="flow-root">
-             <ul role="list" className="-my-6 divide-y divide-gray-200">
+             {/* <ul role="list" className="-my-6 divide-y divide-gray-200">
                      {products.map((product) => (
                             <li key={product.id} className="py-6 flex">
                               <div className="flex-shrink-0 w-24 h-24 border border-gray-200 rounded-md overflow-hidden">
@@ -108,7 +109,7 @@ class Card extends Component {
                               </div>
                             </li>
                           ))}
-                        </ul> 
+                        </ul>  */}
                         </div>
                       </div>
                     </div>
