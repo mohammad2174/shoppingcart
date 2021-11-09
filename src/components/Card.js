@@ -20,7 +20,7 @@ class Card extends Component {
     const nodes = hasProducts ? (
       products.map(product => <Shop key={product.id} {...product} />)
     ) : (
-      <em>Please add to the Shopping cart</em>
+      <h3>Please add to the Shopping cart</h3>
     )
     const counts = products.map((product) => {
       return product.price * product.inventory
