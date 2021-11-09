@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class Product extends Component {
 
   render() {
-      const { title, price, inventory, color ,imageAlt ,imageSrc } = this.props;
+      const { title, price, quantity, color ,imageAlt ,imageSrc } = this.props;
       
     return (
       <div>
@@ -18,7 +18,7 @@ class Product extends Component {
             <div>
               <h3 className="text-sm text-gray-700">
                   <span aria-hidden="true" className="absolute inset-0" />
-                  {title} x {inventory}
+                  {title} x {quantity}
               </h3>
               <p className="mt-1 text-sm text-gray-500">{color}</p>
             </div>
