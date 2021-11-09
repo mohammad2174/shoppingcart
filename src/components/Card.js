@@ -15,21 +15,13 @@ class Card extends Component {
   }
 
   render() {
-    const products = this.props.products
+    const {products, total} = this.props
     const hasProducts = products.length > 0
     const nodes = hasProducts ? (
       products.map(product => <Shop key={product.id} {...product} />)
     ) : (
       <h3>Please add to the Shopping cart</h3>
     )
-    const counts = products.map((product) => {
-      return product.price * product.inventory
-    })
-    let total = 0;
-    for (let i = 0; i < counts.length; i++) {
-    total += counts[i];
-  }
-  console.log(products);
 
     return (
         <Transition.Root show={this.state.open} as={Fragment}>
@@ -119,9 +111,11 @@ const getCardProducts = state => {
   }))
 }
 
+const getTotal = state => state.card.addedIds.reduce((total, id) => total + state.products[id].price * (state.card.quantityById[id] || 0), 0)
+
 const mapStateToProps = state => ({
   products: getCardProducts(state),
-  // total: getTotal() 
+  total: getTotal(state) 
 })
 
 export default connect(mapStateToProps)(Card);
