@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addToCard } from "../actions";
 import ProductItem from "./ProductItem";
-import Cardlist from './Cardlist';
 
 class ProductsList extends Component {
   render() {
@@ -18,7 +17,6 @@ class ProductsList extends Component {
           <ProductItem key={product.id} product = {product} onAddToCardClicked = {() => addToCard(product.id)} /> 
         </div>
       ))}
-      <Cardlist products = {products} />
           </div>
         </div>
       </div>  
