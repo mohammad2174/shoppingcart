@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { checkout } from "../actions";
 
 class Shop extends Component {
 
   render() {
-      const {  id, title, price, quantity, color ,imageAlt ,imageSrc } = this.props;
+      const {  id, title, price, quantity, color ,imageAlt ,imageSrc, checkout } = this.props;
       
     return (
         <div className="mt-8">
@@ -30,7 +32,7 @@ class Shop extends Component {
                   <p className="text-gray-500">Qty x {quantity}</p>
 
                   <div className="flex">
-                    <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500">
+                    <button type="button" onClick={checkout} className="font-medium text-indigo-600 hover:text-indigo-500">
                       Remove
                     </button>
                   </div>
@@ -43,4 +45,9 @@ class Shop extends Component {
     )
   }
 }
-export default Shop;
+
+const mapDispatchToProps = dispatch => ({
+  checkout: () => dispatch(checkout())
+})
+
+export default connect(null, mapDispatchToProps)(Shop);
