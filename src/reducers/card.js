@@ -1,4 +1,4 @@
-import { ADD_TO_CARD } from "../constants/actionTypes";
+import { ADD_TO_CARD, CHECKOUT_REQUEST } from "../constants/actionTypes";
 
 
 const initialState = {
@@ -23,6 +23,8 @@ const quantityById = (state = initialState.quantityById, action) => {
 
 const card = (state = initialState, action) => {
     switch (action.type) {
+        case CHECKOUT_REQUEST:
+            return initialState
         case ADD_TO_CARD: 
             return {
                 addedIds: addedIds(state.addedIds, action),
