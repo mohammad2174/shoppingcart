@@ -9,3 +9,7 @@ export const addToCard = productId => ({
         type : types.ADD_TO_CARD,
         productId
 })
+
+export const checkout = () => ({
+        type : types.CHECKOUT_REQUEST
+})
