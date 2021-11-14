@@ -6,7 +6,7 @@ class Shop extends Component {
 
   render() {
       const {  id, title, price, quantity, color ,imageAlt ,imageSrc, checkout } = this.props;
-      
+
     return (
         <div className="mt-8">
         <div className="flow-root">
@@ -32,7 +32,7 @@ class Shop extends Component {
                   <p className="text-gray-500">Qty x {quantity}</p>
 
                   <div className="flex">
-                    <button type="button" onClick={checkout} className="font-medium text-indigo-600 hover:text-indigo-500">
+                    <button type="button" onClick={() => checkout(id)} className="font-medium text-indigo-600 hover:text-indigo-500">
                       Remove
                     </button>
                   </div>
@@ -47,7 +47,7 @@ class Shop extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  checkout: () => dispatch(checkout())
+  checkout: productId => dispatch(checkout(productId))
 })
 
 export default connect(null, mapDispatchToProps)(Shop);
