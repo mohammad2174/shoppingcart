@@ -16,13 +16,13 @@ const addedIds = (state = initialState.addedIds, action) => {
 
 const subIds = (state = initialState.subIds, action) => {
     let arr = state
-    for(var i = 0; i < arr.length; i++){ 
-    
-        if ( arr[i] === action.productId) { 
-    
-            arr.splice(i, 1);
+    arr.forEach((item) => {
+        const index = arr.indexOf(item)
+        if(item === action.productId) {
+            
+          arr.splice(index, 1);
         }
-    }
+    })
     return arr
 }
 
