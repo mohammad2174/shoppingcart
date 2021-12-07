@@ -18,7 +18,7 @@ class Product extends Component {
             <div>
               <h3 className="text-sm text-gray-700">
                   <span aria-hidden="true" className="absolute inset-0" />
-                  {title} x {quantity}
+                  {title} X {quantity ? quantity : <span className="text-red-600">Has Ended</span>}
               </h3>
               <p className="mt-1 text-sm text-gray-500">{color}</p>
             </div>
