@@ -5,6 +5,7 @@ import { XIcon } from '@heroicons/react/outline';
 import { connect } from "react-redux";
 import Shop from "./Shop";
 
+
 class Card extends Component {
   state = {
     open : this.props.open
