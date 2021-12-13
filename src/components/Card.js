@@ -4,8 +4,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
 import { connect } from "react-redux";
 import Shop from "./Shop";
-import SignIn from "./Signin";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 class Card extends Component {
@@ -80,7 +79,7 @@ class Card extends Component {
                           disabled = {hasProducts ? '' : 'disabled'}
                           className={hasProducts ? "flex justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700" : "flex cursor-not-allowed justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"}
                         >
-                          {hasProducts ? <Router><Link to="/signin">Checkout</Link><Routes><Route path="/signin" component={SignIn} /></Routes></Router> : 'Checkout'}
+                          {hasProducts ? <Link to="signin">Checkout</Link> : 'Checkout'}
                         </button>
                       </div>
                       <div className="mt-6 flex justify-center text-sm text-center text-gray-500">
