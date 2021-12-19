@@ -9,11 +9,10 @@ import { Routes, Route } from "react-router-dom";
 class ProductsList extends Component {
   render() {
       const { products , addToCard } = this.props;
-      const pathname = window.location.href;
-      console.log(pathname);
+      const pathname = window.location.pathname === '/signin';
     return (
       <>
-      {pathname === 'http://localhost:3000/signin' ? 
+      {pathname ? 
       <Routes>
           <Route path="signin" element={<SignIn />} />
       </Routes>

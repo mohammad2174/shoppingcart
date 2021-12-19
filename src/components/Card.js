@@ -5,6 +5,7 @@ import { XIcon } from '@heroicons/react/outline';
 import { connect } from "react-redux";
 import Shop from "./Shop";
 import { Link } from "react-router-dom";
+import {checkout} from "../actions";
 
 
 class Card extends Component {
@@ -17,7 +18,7 @@ class Card extends Component {
   }
 
   render() {
-    const {products, total} = this.props
+    const {products, total, checkout} = this.props
     const hasProducts = products.length > 0
     const nodes = hasProducts ? (
       products.map(product => <Shop key={product.id} {...product} />)
@@ -75,7 +76,7 @@ class Card extends Component {
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                       <div className="mt-6">
-                        <button
+                        <button onClick={checkout}
                           disabled = {hasProducts ? '' : 'disabled'}
                           className={hasProducts ? "flex justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700" : "flex cursor-not-allowed justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"}
                         >
@@ -120,4 +121,8 @@ const mapStateToProps = state => ({
   total: getTotal(state) 
 })
 
-export default connect(mapStateToProps)(Card);
+const mapDispatchToProps = dispatch => ({
+  checkout : () => dispatch(checkout())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Card);
