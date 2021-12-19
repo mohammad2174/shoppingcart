@@ -6,9 +6,9 @@ import Cardlist from '../components/Cardlist';
 
 
 class Home extends Component {
-  componentWillMount() {
-    shop.getProducts((products) => this.props.recieveProducts(products))
-  }
+  // componentWillMount() {
+  //   shop.getProducts((products) => this.props.recieveProducts(products))
+  // }
     render () {
         return (
             <div className="bg-purple-600">
@@ -35,8 +35,9 @@ class Home extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    recieveProducts : products => dispatch(recieveProducts(products))
-})
+// const mapDispatchToProps = dispatch => ({
+//     recieveProducts : products => dispatch(recieveProducts(products))
+// })
 
-export default connect(null, mapDispatchToProps)(Home);
+// export default connect(null, mapDispatchToProps)(Home);
+export default Home;
