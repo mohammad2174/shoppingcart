@@ -1,14 +1,9 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { recieveProducts } from "../actions";
-import shop from "../api/shop";
 import ProductList from "./ProductList";
 
 
 class Header extends Component {
-    componentWillMount() {
-        shop.getProducts((products) => this.props.recieveProducts(products))
-      }
+
   render() {
     return (
         <div className="lg:flex lg:items-center lg:justify-between">
@@ -23,8 +18,4 @@ class Header extends Component {
 }
 
 
-const mapDispatchToProps = dispatch => ({
-    recieveProducts : products => dispatch(recieveProducts(products))
-})
-
-export default connect(null, mapDispatchToProps)(Header);
+export default Header;

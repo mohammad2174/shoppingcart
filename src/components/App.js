@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { recieveProducts } from "../actions";
 import shop from "../api/shop";
 import Header from "./Header";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "../Routes/Home";
+import { recieveProducts } from "../actions";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 
 class App extends Component {
