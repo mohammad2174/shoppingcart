@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 
 
 class Register extends Component {
@@ -11,9 +12,11 @@ class Register extends Component {
               <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Create new account</h2>
               <p className="mt-2 text-center text-sm text-gray-600">
                 Or{' '}
-                <a href="/signin" className="font-medium text-gray-600 cursor-pointer hover:text-indigo-500">
+                <Link to="/signin">
+                <span className="font-medium text-gray-600 cursor-pointer hover:text-indigo-500">
                 Already A Member? <b className="text-indigo-500">Login</b>
-                </a>
+                </span>
+                </Link>
               </p>
             </div>
             <div className="bg-white shadow-2xl overflow-hidden sm:rounded-lg">
@@ -27,7 +30,7 @@ class Register extends Component {
                     name="fname"
                     autoComplete="fname"
                     required
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                    className="appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-gray-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm"
                   />
                 </div>  
 
@@ -38,7 +41,7 @@ class Register extends Component {
                     name="lname"
                     autoComplete="lname"
                     required
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                    className="appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-gray-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm"
                   />
                 </div>
 
@@ -47,9 +50,10 @@ class Register extends Component {
                   <input
                     id="email-address"
                     name="email"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                     autoComplete="email"
                     required
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                    className="appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-gray-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm"
                   />
                 </div>
 
@@ -58,10 +62,10 @@ class Register extends Component {
                   <input
                     id="password"
                     name="password"
-                    type="password"
+                    pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])([a-zA-Z0-9@$!%*?&]{8,})$"
                     autoComplete="current-password"
                     required
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                    className="appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-gray-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm"
                   />
                 </div>
               </div>  
