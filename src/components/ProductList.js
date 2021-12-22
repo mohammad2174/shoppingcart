@@ -4,17 +4,20 @@ import { addToCard } from "../actions";
 import ProductItem from "./ProductItem";
 import SignIn from "../Routes/Signin";
 import { Routes, Route } from "react-router-dom";
+import Register from "../Routes/Register";
 
 
 class ProductsList extends Component {
   render() {
       const { products , addToCard } = this.props;
       const pathname = window.location.pathname === '/signin';
+      const pathname1 = window.location.pathname === '/register';
     return (
       <>
-      {pathname ? 
+      {pathname || pathname1 ? 
       <Routes>
           <Route path="signin" element={<SignIn />} />
+          <Route path="register" element={<Register />} />
       </Routes>
       :
         <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
