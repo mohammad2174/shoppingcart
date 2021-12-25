@@ -2,8 +2,9 @@ import React, { Component, Fragment, useState } from "react";
 import { connect } from "react-redux";
 import { addToCard } from "../actions";
 import ProductItem from "./ProductItem";
+import Cardlist from "./Cardlist"
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
-import { MenuIcon, ShoppingBagIcon, XIcon } from '@heroicons/react/outline'
+import { MenuIcon, XIcon } from '@heroicons/react/outline'
 
 
 class ProductsList extends Component {
@@ -134,14 +135,7 @@ class ProductsList extends Component {
 
             <div className="ml-auto flex items-center">
               <div className="ml-4 flow-root lg:ml-6">
-                <a href="#" className="group -m-2 p-2 flex items-center">
-                  <ShoppingBagIcon
-                    className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
-                    aria-hidden="true"
-                  />
-                  <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
-                  <span className="sr-only">items in cart, view bag</span>
-                </a>
+                <Cardlist products />
               </div>
             </div>
           </div>
