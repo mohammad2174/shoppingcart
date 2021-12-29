@@ -1,8 +1,9 @@
 import React, { Component, Fragment, useState } from "react";
 import { connect } from "react-redux";
 import { addToCard } from "../actions";
-import ProductItem from "./ProductItem";
-import Cardlist from "./Cardlist"
+import ProductItem from "../components/ProductItem";
+import { Routes, Route } from "react-router-dom";
+import Cardlist from "../components/Cardlist";
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 
@@ -16,7 +17,7 @@ class ProductsList extends Component {
       const navigation = {
         pages: [
           { name: 'Company', href: '#' },
-          { name: 'Stores', href: '#' },
+          { name: 'Store', href: '#' },
         ],
       }
     return (
