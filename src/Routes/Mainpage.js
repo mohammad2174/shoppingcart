@@ -7,7 +7,7 @@ import ProductList from "./ProductList";
 class Header extends Component {
 
   render() {
-    const callouts = 
+    const arrivals = 
       {
         name: 'New Arrivals',
         description: 'Work from home accessories',
@@ -21,7 +21,7 @@ class Header extends Component {
         imageSrc: 'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGNsb3RoaW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
         imageAlt: 'Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.',
       }
-      const travel =  
+    const lifestyle =  
       {
         name: 'Life-Style',
         description: 'Daily commute essentials',
@@ -37,13 +37,13 @@ class Header extends Component {
                   <div className="relative md:row-span-3">
                     <h3 className="absolute ml-3 bottom-0 text-sm text-gray-300">              
                      <span className="absolute inset-0" />
-                     {callouts.name}               
+                     {arrivals.name}               
                     </h3>
-                    <p className="absolute ml-3 text-base bottom-4 font-semibold text-gray-50">{callouts.description}</p>
+                    <p className="absolute ml-3 text-base bottom-4 font-semibold text-gray-50">{arrivals.description}</p>
                     <Link to="/store">  
                       <img
-                       src={callouts.imageSrc}
-                       alt={callouts.imageAlt}
+                       src={arrivals.imageSrc}
+                       alt={arrivals.imageAlt}
                        className="w-fullcursor-pointer hover:opacity-75 rounded-lg object-center object-cover"
                      />
                     </Link>  
@@ -65,13 +65,13 @@ class Header extends Component {
                   <div className="mt-0 relative md:row-span-1">
                   <h3 className="absolute ml-3 bottom-0 text-sm text-gray-300">
                        <span className="absolute inset-0" />
-                         {travel.name}
+                         {lifestyle.name}
                    </h3>
-                   <p className="absolute ml-3 text-base bottom-4 font-semibold text-gray-50">{travel.description}</p>
+                   <p className="absolute ml-3 text-base bottom-4 font-semibold text-gray-50">{lifestyle.description}</p>
                    <Link to="/men"> 
                     <img
-                    src={travel.imageSrc}
-                    alt={travel.imageAlt}
+                    src={lifestyle.imageSrc}
+                    alt={lifestyle.imageAlt}
                     className="w-full cursor-pointer hover:opacity-75 rounded-lg object-center object-cover xl:h-60 lg:h-44 md:h-28"
                     />
                    </Link>
