@@ -5,6 +5,8 @@ import { Routes, Route } from "react-router-dom";
 import Register from "../Routes/Register";
 import Mainpage from "../Routes/Mainpage";
 import ProductList from "../Routes/ProductList";
+import Men from "../Routes/Men";
+import Women from "../Routes/Women";
 
 
 class Header extends Component {
@@ -34,8 +36,8 @@ class Header extends Component {
           <Route path="signin" element={<SignIn />} />
           <Route path="register" element={<Register />} />
           <Route path="store" element={<ProductList />} />
-          <Route path="women" element={<ProductList />} />
-          <Route path="men" element={<ProductList />} />
+          <Route path="women" element={<Women />} />
+          <Route path="men" element={<Men />} />
           <Route path="/" element={<Mainpage />} />
           </Routes> 
           </div>
