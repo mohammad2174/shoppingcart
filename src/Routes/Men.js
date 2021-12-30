@@ -20,74 +20,6 @@ class Men extends Component {
           { name: 'Store', href: '/store' },
         ],
       }
-      const clothings = [
-        {
-          id: 1,
-          name: 'Full Nelson',
-          href: '#',
-          imageSrc: 'https://images.unsplash.com/photo-1485145782098-4f5fd605a66b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8dG9wc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-          imageAlt: "Full Nelson.",
-          describtion: 'Shop Now',
-        },
-        {
-          id: 2,
-          name: 'Re-Arranged',
-          href: '#',
-          imageSrc: 'https://images.unsplash.com/photo-1535365229039-e36084b548f0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fG1vZGVsJTIwbWVufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-          imageAlt: "Re-Arranged.",
-          describtion: 'Shop Now',
-        },
-        {
-          id: 2,
-          name: 'My Way',
-          href: '#',
-          imageSrc: 'https://images.unsplash.com/photo-1602562887763-851fa56061e3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGphY2tldHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-          imageAlt: "My Way.",
-          describtion: 'Shop Now',
-        },
-        {
-          id: 2,
-          name: 'Counterfeit',
-          href: '#',
-          imageSrc: 'https://images.unsplash.com/photo-1516826957135-700dedea698c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGRlbmltJTIwamVhbnN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-          imageAlt: "Counterfeit.",
-          describtion: 'Shop Now',
-        },
-      ]
-      const accessories = [
-        {
-          id: 1,
-          name: 'Full Nelson',
-          href: '#',
-          imageSrc: 'https://images.unsplash.com/photo-1583292650898-7d22cd27ca6f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjd8fGFjY2Vzc29yaWVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-          imageAlt: "Full Nelson.",
-          describtion: 'Shop Now',
-        },
-        {
-          id: 2,
-          name: 'Re-Arranged',
-          href: '#',
-          imageSrc: 'https://images.unsplash.com/photo-1579362093956-a743707ecac1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDB8fGFjY2Vzc29yaWVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-          imageAlt: "Re-Arranged.",
-          describtion: 'Shop Now',
-        },
-        {
-          id: 2,
-          name: 'My Way',
-          href: '#',
-          imageSrc: 'https://images.unsplash.com/photo-1620999597215-df2fcbfaec9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTV8fGFjY2Vzc29yaWVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-          imageAlt: "My Way.",
-          describtion: 'Shop Now',
-        },
-        {
-          id: 2,
-          name: 'Counterfeit',
-          href: '#',
-          imageSrc: 'https://images.unsplash.com/photo-1600442715817-4d9c8b6c729f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjQ1fHxhY2Nlc3Nvcmllc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-          imageAlt: "Counterfeit.",
-          describtion: 'Shop Now',
-        },
-      ]
     return (
       <>
       <nav aria-label="Top" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -137,22 +69,35 @@ class Men extends Component {
               </Popover.Button>
               </Link>
               : '' }
-              <Transition
-                as={Fragment}
-                enter="transition ease-out duration-200"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="transition ease-in duration-150"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-              > 
-          <Popover.Panel className="absolute top-full inset-x-0 text-sm text-gray-500">
-            {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
-            <div className="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true" />
+              </>
+              )}
+              </Popover>
+              ))}
+                {navigation.pages.map((page) => (
+                  <Link to="/store"
+                    key={page.name}
+                    className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                  >
+                    {page.name}
+                  </Link>
+                ))}
+              </div>
+            </Popover.Group>
 
+            <div className="ml-auto flex items-center">
+              <div className="ml-4 flow-root lg:ml-6">
+                <Cardlist products />
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div className="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true" />
+      {products.map((category) => (      
             <div className="relative bg-white">
+              {category.id === 'men' ?
               <div className="max-w-7xl mx-auto px-8">
-                <div className="grid grid-cols-2 gap-y-10 gap-x-8 py-16">
+                <div className="grid grid-cols-2 gap-y-10 gap-x-8 py-16"> 
                   <div className="col-start-2 grid grid-cols-2 gap-x-8">
                     {category.featured.map((item) => (
                       <div key={item.name} className="group relative text-base sm:text-sm">
@@ -197,33 +142,9 @@ class Men extends Component {
                   </div>
                 </div>
               </div>
+              : '' }
             </div>
-          </Popover.Panel>
-        </Transition>
-      </>
-    )}
-  </Popover>
-))}
-
-                {navigation.pages.map((page) => (
-                  <Link to="/store"
-                    key={page.name}
-                    className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                  >
-                    {page.name}
-                  </Link>
-                ))}
-              </div>
-            </Popover.Group>
-
-            <div className="ml-auto flex items-center">
-              <div className="ml-4 flow-root lg:ml-6">
-                <Cardlist products />
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>  
+          ))}  
       </>
     )
   }
