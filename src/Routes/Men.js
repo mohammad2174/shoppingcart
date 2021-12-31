@@ -100,6 +100,9 @@ class Men extends Component {
                 <div className="grid grid-cols-2 gap-y-10 gap-x-8 py-16"> 
                   <div className="col-start-2 grid grid-cols-2 gap-x-8">
                     {category.featured.map((item) => (
+                      <>
+                      {item.name === 'New Arrivals' ? 
+                      <Link to="/">
                       <div key={item.name} className="group relative text-base sm:text-sm">
                         <div className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
                           <img
@@ -108,7 +111,7 @@ class Men extends Component {
                             className="object-center object-cover"
                           />
                         </div>
-                        <a href={item.href} className="mt-6 block font-medium text-gray-900">
+                        <a className="mt-6 block font-medium text-gray-900">
                           <span className="absolute z-10 inset-0" aria-hidden="true" />
                           {item.name}
                         </a>
@@ -116,6 +119,29 @@ class Men extends Component {
                           Shop now
                         </p>
                       </div>
+                      </Link>
+                       : ''}
+                       {item.name === 'Artwork Tees' ? 
+                      <Link to="/">
+                      <div key={item.name} className="group relative text-base sm:text-sm">
+                        <div className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
+                          <img
+                            src={item.imageSrc}
+                            alt={item.imageAlt}
+                            className="object-center object-cover"
+                          />
+                        </div>
+                        <a className="mt-6 block font-medium text-gray-900">
+                          <span className="absolute z-10 inset-0" aria-hidden="true" />
+                          {item.name}
+                        </a>
+                        <p aria-hidden="true" className="mt-1">
+                          Shop now
+                        </p>
+                      </div>
+                      </Link>
+                       : ''}
+                      </>
                     ))}
                   </div>
                   <div className="row-start-1 grid grid-cols-3 gap-y-10 gap-x-8 text-sm">
@@ -132,7 +158,25 @@ class Men extends Component {
                           {section.items.map((item) => (
                             <li key={item.name} className="flex">
                               <a href={item.href} className="hover:text-gray-800">
-                                {item.name}
+                                {item.name === 'Tops' ? <Link to="/tops">{item.name}</Link> : ''}
+                                {item.name === 'Dresses' ? <Link to="/">{item.name}</Link> : ''}
+                                {item.name === 'Pants' ? <Link to="/pants">{item.name}</Link> : ''}
+                                {item.name === 'Denim' ? <Link to="/">{item.name}</Link> : ''}
+                                {item.name === 'Sweaters' ? <Link to="/">{item.name}</Link> : ''}
+                                {item.name === 'T-Shirts' ? <Link to="/">{item.name}</Link> : ''}
+                                {item.name === 'Jackets' ? <Link to="/">{item.name}</Link> : ''}
+                                {item.name === 'Activewear' ? <Link to="/">{item.name}</Link> : ''}
+                                {item.name === 'Browse All' ? <Link to="/">{item.name}</Link> : ''}
+                                {item.name === 'Watches' ? <Link to="/">{item.name}</Link> : ''}
+                                {item.name === 'Wallets' ? <Link to="/">{item.name}</Link> : ''}
+                                {item.name === 'Bags' ? <Link to="/">{item.name}</Link> : ''}
+                                {item.name === 'Sunglasses' ? <Link to="/">{item.name}</Link> : ''}
+                                {item.name === 'Hats' ? <Link to="/">{item.name}</Link> : ''}
+                                {item.name === 'Belts' ? <Link to="/">{item.name}</Link> : ''}
+                                {item.name === 'Full Nelson' ? <Link to="/">{item.name}</Link> : ''}
+                                {item.name === 'My Way' ? <Link to="/">{item.name}</Link> : ''}
+                                {item.name === 'Re-Arranged' ? <Link to="/">{item.name}</Link> : ''}
+                                {item.name === 'Counterfeit' ? <Link to="/">{item.name}</Link> : ''}
                               </a>
                             </li>
                           ))}
