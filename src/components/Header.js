@@ -7,6 +7,10 @@ import Mainpage from "../Routes/Mainpage";
 import ProductList from "../Routes/ProductList";
 import Men from "../Routes/Men";
 import Women from "../Routes/Women";
+import Tops from "../Routes/Tops";
+import Dresses from "../Routes/Dresses";
+import Pants from "../Routes/Pants";
+import Denim from "../Routes/Denim";
 
 
 class Header extends Component {
@@ -38,6 +42,10 @@ class Header extends Component {
           <Route path="store" element={<ProductList />} />
           <Route path="women" element={<Women />} />
           <Route path="men" element={<Men />} />
+          <Route path="tops" element={<Tops />} />
+          <Route path="dresses" element={<Dresses />} />
+          <Route path="pants" element={<Pants />} />
+          <Route path="denim" element={<Denim />} />
           <Route path="/" element={<Mainpage />} />
           </Routes> 
           </div>
