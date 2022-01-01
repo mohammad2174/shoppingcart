@@ -158,21 +158,19 @@ class Men extends Component {
                           {section.items.map((item) => (
                             <li key={item.name} className="flex">
                               <a href={item.href} className="hover:text-gray-800">
-                                {item.name === 'Tops' ? <Link to="/tops">{item.name}</Link> : ''}
-                                {item.name === 'Dresses' ? <Link to="/">{item.name}</Link> : ''}
+                                {item.name === 'Tops' ? <Link to="/man-tops">{item.name}</Link> : ''}
                                 {item.name === 'Pants' ? <Link to="/pants">{item.name}</Link> : ''}
-                                {item.name === 'Denim' ? <Link to="/">{item.name}</Link> : ''}
-                                {item.name === 'Sweaters' ? <Link to="/">{item.name}</Link> : ''}
-                                {item.name === 'T-Shirts' ? <Link to="/">{item.name}</Link> : ''}
-                                {item.name === 'Jackets' ? <Link to="/">{item.name}</Link> : ''}
-                                {item.name === 'Activewear' ? <Link to="/">{item.name}</Link> : ''}
-                                {item.name === 'Browse All' ? <Link to="/">{item.name}</Link> : ''}
-                                {item.name === 'Watches' ? <Link to="/">{item.name}</Link> : ''}
-                                {item.name === 'Wallets' ? <Link to="/">{item.name}</Link> : ''}
-                                {item.name === 'Bags' ? <Link to="/">{item.name}</Link> : ''}
-                                {item.name === 'Sunglasses' ? <Link to="/">{item.name}</Link> : ''}
-                                {item.name === 'Hats' ? <Link to="/">{item.name}</Link> : ''}
-                                {item.name === 'Belts' ? <Link to="/">{item.name}</Link> : ''}
+                                {item.name === 'Sweaters' ? <Link to="/sweaters">{item.name}</Link> : ''}
+                                {item.name === 'T-Shirts' ? <Link to="/t-shirts">{item.name}</Link> : ''}
+                                {item.name === 'Jackets' ? <Link to="/jackets">{item.name}</Link> : ''}
+                                {item.name === 'Activewear' ? <Link to="/activewear">{item.name}</Link> : ''}
+                                {item.name === 'Browse All' ? <Link to="/browseall">{item.name}</Link> : ''}
+                                {item.name === 'Watches' ? <Link to="/watches">{item.name}</Link> : ''}
+                                {item.name === 'Wallets' ? <Link to="/wallets">{item.name}</Link> : ''}
+                                {item.name === 'Bags' ? <Link to="/bags">{item.name}</Link> : ''}
+                                {item.name === 'Sunglasses' ? <Link to="/sunglasses">{item.name}</Link> : ''}
+                                {item.name === 'Hats' ? <Link to="/hats">{item.name}</Link> : ''}
+                                {item.name === 'Belts' ? <Link to="/belts">{item.name}</Link> : ''}
                                 {item.name === 'Full Nelson' ? <Link to="/">{item.name}</Link> : ''}
                                 {item.name === 'My Way' ? <Link to="/">{item.name}</Link> : ''}
                                 {item.name === 'Re-Arranged' ? <Link to="/">{item.name}</Link> : ''}
