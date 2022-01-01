@@ -7,10 +7,22 @@ import Mainpage from "../Routes/Mainpage";
 import ProductList from "../Routes/ProductList";
 import Men from "../Routes/Men";
 import Women from "../Routes/Women";
-import Tops from "../Routes/Tops";
 import Dresses from "../Routes/Dresses";
 import Pants from "../Routes/Pants";
 import Denim from "../Routes/Denim";
+import Sweaters from "../Routes/Sweaters";
+import Tshirts from "../Routes/Tshirts";
+import Jackets from "../Routes/Jackets";
+import Activewear from "../Routes/Activewear";
+import Watches from "../Routes/Watches";
+import Bags from "../Routes/Bags";
+import Wallets from "../Routes/Wallets";
+import Sunglasses from "../Routes/Sunglasses";
+import Hats from "../Routes/Hats";
+import Belts from "../Routes/Belts";
+import BrowseAll from "../Routes/BrowseAll";
+import Mantops from "../Routes/Mantops";
+import Womentops from "../Routes/Womentops";
 
 
 class Header extends Component {
@@ -42,10 +54,22 @@ class Header extends Component {
           <Route path="store" element={<ProductList />} />
           <Route path="women" element={<Women />} />
           <Route path="men" element={<Men />} />
-          <Route path="tops" element={<Tops />} />
+          <Route path="man-tops" element={<Mantops />} />
+          <Route path="woman-tops" element={<Womentops />} />
           <Route path="dresses" element={<Dresses />} />
           <Route path="pants" element={<Pants />} />
           <Route path="denim" element={<Denim />} />
+          <Route path="sweaters" element={<Sweaters />} />
+          <Route path="t-shirts" element={<Tshirts />} />
+          <Route path="jackets" element={<Jackets />} />
+          <Route path="activewear" element={<Activewear />} />
+          <Route path="watches" element={<Watches />} />
+          <Route path="bags" element={<Bags />} />
+          <Route path="wallets" element={<Wallets />} />
+          <Route path="sunglasses" element={<Sunglasses />} />
+          <Route path="hats" element={<Hats />} />
+          <Route path="belts" element={<Belts />} />
+          <Route path="browseall" element={<BrowseAll />} />
           <Route path="/" element={<Mainpage />} />
           </Routes> 
           </div>
