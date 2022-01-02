@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Routes, Route } from "react-router-dom";
-import ProductList from "./ProductList";
 
 
 class Header extends Component {
