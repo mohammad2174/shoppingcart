@@ -23,6 +23,7 @@ import Belts from "../Routes/Belts";
 import BrowseAll from "../Routes/BrowseAll";
 import Mantops from "../Routes/Mantops";
 import Womentops from "../Routes/Womentops";
+import Company from "../Routes/Company";
 
 
 class Header extends Component {
@@ -52,6 +53,7 @@ class Header extends Component {
           <Route path="signin" element={<SignIn />} />
           <Route path="register" element={<Register />} />
           <Route path="store" element={<ProductList />} />
+          <Route path="company" element={<Company />} />
           <Route path="women" element={<Women />} />
           <Route path="men" element={<Men />} />
           <Route path="man-tops" element={<Mantops />} />

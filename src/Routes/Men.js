@@ -16,7 +16,7 @@ class Men extends Component {
       }
       const navigation = {
         pages: [
-          { name: 'Company', href: '#' },
+          { name: 'Company', href: '/company' },
           { name: 'Store', href: '/store' },
         ],
       }
@@ -74,12 +74,23 @@ class Men extends Component {
               </Popover>
               ))}
                 {navigation.pages.map((page) => (
+                  <>
+                  {page.name === 'Store' ? 
                   <Link to="/store"
-                    key={page.name}
-                    className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                  >
-                    {page.name}
-                  </Link>
+                  key={page.name}
+                  className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                >
+                  {page.name}
+                </Link>
+                :
+                <Link to="/company"
+                  key={page.name}
+                  className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                >
+                  {page.name}
+                </Link>
+                  }
+                  </>
                 ))}
               </div>
             </Popover.Group>
