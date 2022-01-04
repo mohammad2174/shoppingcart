@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-
-
-
+import phoneLogo from "../assests/icons8-phone-32.png";
+import mailLogo from "../assests/icons8-mail-50.png";
 
 class Company extends Component {
   render() {
@@ -19,10 +18,18 @@ class Company extends Component {
           </div>
           <div className="mt-10 sm:mt-0">
         <div className="md:grid md:grid-cols-3 md:gap-6">
-          <div className="bg-indigo-400 md:col-span-1">
+          <div className="bg-indigo-400 h-5/6 md:col-span-1">
             <div className="px-4 lg:px-12 pt-12 md:px-4 sm:px-0">
               <h3 className="text-lg font-medium leading-6 text-white">Contact information</h3>
-              <p className="mt-4 text-sm text-white">Use a permanent address where you can receive mail.</p>
+              <p className="mt-4 text-sm text-white">Use a permanent address where you can receive mail the ways to contact us are as follows.</p>
+              <div className="flex">
+              <img className="pt-8 w-5" src={phoneLogo} />
+              <span className="pt-8 pl-3 text-white">+1 (555) 123-4567</span>
+              </div>
+              <div className="flex pb-12">
+              <img className="pt-6 w-5" src={mailLogo} />
+              <span className="pt-6 pl-3 text-white">support@workcation.com</span>
+              </div>
             </div>
           </div>
           <div className="mt-5 md:mt-0 md:col-span-2">
