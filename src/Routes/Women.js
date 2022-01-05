@@ -258,7 +258,7 @@ class Men extends Component {
               {category.id === 'women' ?
               <div className="max-w-7xl mx-auto px-8">
                 <div className="grid grid-cols-2 gap-y-10 gap-x-8 py-16"> 
-                  <div className="col-start-2 grid grid-cols-2 gap-x-8">
+                  <div className="col-start-2 grid sm:grid-cols-2 sm:gap-x-8">
                     {category.featured.map((item) => (
                       <>
                       {item.name === 'New Arrivals' ? 
@@ -304,7 +304,7 @@ class Men extends Component {
                       </>
                     ))}
                   </div>
-                  <div className="row-start-1 grid grid-cols-3 gap-y-10 gap-x-8 text-sm">
+                  <div className="row-start-1 grid grid-cols-2 gap-y-5 gap-x-2 text-xs sm:grid-cols-3 sm:gap-x-2 sm:gap-y-10 sm:text-sm">
                     {category.sections.map((section) => (
                       <div key={section.name}>
                         <p id={`${section.name}-heading`} className="font-medium text-gray-900">
