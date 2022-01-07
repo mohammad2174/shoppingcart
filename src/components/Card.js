@@ -14,6 +14,10 @@ class Card extends Component {
   }
 
   setOpen = () => {
+    this.setState({open : true})
+  }
+
+  setClose = () => {
     this.setState({open : false})
   }
 
@@ -61,7 +65,7 @@ class Card extends Component {
                           <button
                             type="button"
                             className="-m-2 p-2 text-gray-400 hover:text-gray-500"
-                            onClick={() => this.setOpen(true)}
+                            onClick={() => this.setClose()}
                           >
                             <span className="sr-only">Close panel</span>
                             <XIcon className="h-6 w-6" aria-hidden="true" />
@@ -89,7 +93,7 @@ class Card extends Component {
                           <button
                             type="button"
                             className="text-indigo-600 font-medium hover:text-indigo-500"
-                            onClick={() => this.setOpen(true)} 
+                            onClick={() => this.setClose()} 
                           >
                             Continue Shopping<span aria-hidden="true"> &rarr;</span>
                           </button>
