@@ -20,7 +20,7 @@ class Tops extends Component {
             { name: 'Store', href: '/store' },
           ],
         }
-        const clothings = [
+        const mantops = [
           {
             id: 1,
             name: 'Full Nelson',
@@ -28,6 +28,7 @@ class Tops extends Component {
             imageSrc: 'https://images.unsplash.com/photo-1503341338985-c0477be52513?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8OHw5ODU3OTk2fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
             imageAlt: "Full Nelson.",
             describtion: 'Shop Now',
+            price: 46
           },
           {
             id: 2,
@@ -36,6 +37,7 @@ class Tops extends Component {
             imageSrc: 'https://images.unsplash.com/photo-1626160200758-71b8bf10d34f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8N3wwMTh1N19mdnhBUXx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
             imageAlt: "Re-Arranged.",
             describtion: 'Shop Now',
+            price: 61
           },
           {
             id: 2,
@@ -44,6 +46,7 @@ class Tops extends Component {
             imageSrc: 'https://images.unsplash.com/photo-1621844725002-936a3734920a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NHwwMTh1N19mdnhBUXx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
             imageAlt: "My Way.",
             describtion: 'Shop Now',
+            price: 74
           },
           {
             id: 2,
@@ -52,6 +55,7 @@ class Tops extends Component {
             imageSrc: 'https://images.unsplash.com/photo-1532374894023-69a0b7159b4f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTV8MDE4dTdfZnZ4QVF8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
             imageAlt: "Counterfeit.",
             describtion: 'Shop Now',
+            price: 37
           },
         ]
       return (
@@ -130,25 +134,26 @@ class Tops extends Component {
         <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
           <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">Tops</h2>
           <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-            {clothings.map((clothing) => (
-              <div key={clothing.id} className="group relative">
+            {mantops.map((mantop) => (
+              <div key={mantop.id} className="group relative">
                 <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
                   <img
-                    src={clothing.imageSrc}
-                    alt={clothing.imageAlt}
+                    src={mantop.imageSrc}
+                    alt={mantop.imageAlt}
                     className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                   />
                 </div>
                 <div className="mt-4 flex justify-between">
                   <div>
                     <h3 className="text-sm text-gray-700">
-                      <a href={clothing.href}>
+                      <a href={mantop.href}>
                         <span aria-hidden="true" className="absolute inset-0" />
-                        {clothing.name}
+                        {mantop.name}
                       </a>
                     </h3>
-                    <p className="mt-1 text-sm text-gray-500">{clothing.describtion}</p>
+                    <p className="mt-1 text-sm text-gray-500">{mantop.describtion}</p>
                   </div>
+                  <p className="text-sm font-medium text-gray-500">${mantop.price}</p>
                 </div>
               </div>
             ))}
