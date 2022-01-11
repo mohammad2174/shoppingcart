@@ -8,6 +8,7 @@ import Navigation from "../components/Navigation";
 class Bags extends Component {
   state = {
     open : false,
+    bag : '',
     selectedColor : [
       { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
       { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
@@ -25,8 +26,8 @@ class Bags extends Component {
     ],
   }
 
-  setOpen = () => {
-    this.setState({open : true})
+  setOpen = (bag) => {
+    this.setState({open : true, bag : bag})
   }
 
   setClose = () => {
@@ -87,13 +88,13 @@ class Bags extends Component {
           },
         ]
         const product = {
-          name: 'Basic Tee 6-Pack ',
-          price: '$192',
+          name: this.state.bag.name,
+          price: this.state.bag.price,
           rating: 3.9,
           reviewCount: 117,
           href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-quick-preview-02-detail.jpg',
-          imageAlt: 'Two each of gray, white, and black shirts arranged on table.',
+          imageSrc: this.state.bag.imageSrc,
+          imageAlt: this.state.bag.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,
         }
@@ -113,7 +114,7 @@ class Bags extends Component {
                     className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                   />
                 <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen()} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
+                <button onClick={() => this.setOpen(bag)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
                 </div>  
                 </div>
                 <div className="mt-4 flex justify-between">
@@ -183,7 +184,7 @@ class Bags extends Component {
                         Product information
                       </h3>
 
-                      <p className="text-2xl text-gray-900">{product.price}</p>
+                      <p className="text-2xl text-gray-900">${product.price}</p>
 
                       {/* Reviews */}
                       <div className="mt-6">

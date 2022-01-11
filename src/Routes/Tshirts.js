@@ -8,6 +8,7 @@ import Navigation from "../components/Navigation";
 class Tshirts extends Component {
   state = {
     open : false,
+    tshirt: '',
     selectedColor : [
       { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
       { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
@@ -25,8 +26,8 @@ class Tshirts extends Component {
     ],
   }
 
-  setOpen = () => {
-    this.setState({open : true})
+  setOpen = (tshirt) => {
+    this.setState({open : true, tshirt : tshirt })
   }
 
   setClose = () => {
@@ -62,7 +63,7 @@ class Tshirts extends Component {
             id: 2,
             name: 'Re-Arranged',
             href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1527719327859-c6ce80353573?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fHQlMjBzaGlydHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+            imageSrc: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGNvbGxlY3Rpb24lMjAlMjBwYXR0ZXJuZWQlMjB0JTIwc2hpcnR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
             imageAlt: "Re-Arranged.",
             describtion: 'Shop Now',
             price: 24
@@ -86,17 +87,19 @@ class Tshirts extends Component {
             price: 21
           },
         ]
-        const product = {
-          name: 'Basic Tee 6-Pack ',
-          price: '$192',
-          rating: 3.9,
-          reviewCount: 117,
-          href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-quick-preview-02-detail.jpg',
-          imageAlt: 'Two each of gray, white, and black shirts arranged on table.',
-          colors: this.state.selectedColor,
-          sizes: this.state.selectedSize,
-        }
+        const product = 
+          {
+            name: this.state.tshirt.name,
+            price: this.state.tshirt.price,
+            rating: 3.9,
+            reviewCount: 117,
+            href: '#',
+            imageSrc: this.state.tshirt.imageSrc,
+            imageAlt: this.state.tshirt.imageAlt,
+            colors: this.state.selectedColor,
+            sizes: this.state.selectedSize,
+          }
+          
       return (
         <>
         <Navigation />
@@ -112,7 +115,7 @@ class Tshirts extends Component {
                     className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                   />
                 <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen()} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
+                <button onClick={() => this.setOpen(tshirt)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
                 </div>  
                 </div>
                 <div className="mt-4 flex justify-between">
@@ -129,7 +132,7 @@ class Tshirts extends Component {
                 </div>
               </div>
             ))}
-          </div>
+          </div> 
         </div>
         <Transition.Root show={this.state.open} as={Fragment}>
       <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={this.setOpen}>
@@ -169,20 +172,20 @@ class Tshirts extends Component {
                   <span className="sr-only">Close</span>
                   <XIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
-
+                
                 <div className="w-full grid grid-cols-1 gap-y-8 gap-x-6 items-start sm:grid-cols-12 lg:gap-x-8">
                   <div className="aspect-w-2 aspect-h-3 rounded-lg bg-gray-100 overflow-hidden sm:col-span-4 lg:col-span-5">
                     <img src={product.imageSrc} alt={product.imageAlt} className="object-center object-cover" />
                   </div>
                   <div className="sm:col-span-8 lg:col-span-7">
-                    <h2 className="text-2xl font-extrabold text-gray-900 sm:pr-12">{product.name}</h2>
+                    <h2 className="text-2xl font-extrabold text-gray-900 sm:pr-12">${product.price}</h2>
 
                     <section aria-labelledby="information-heading" className="mt-2">
                       <h3 id="information-heading" className="sr-only">
                         Product information
                       </h3>
 
-                      <p className="text-2xl text-gray-900">{product.price}</p>
+                      <p className="text-2xl text-gray-900">{product.id}</p>
 
                       {/* Reviews */}
                       <div className="mt-6">
@@ -324,8 +327,8 @@ class Tshirts extends Component {
           </Transition.Child>
         </div>
       </Dialog>
-    </Transition.Root>   
-        </>
+        </Transition.Root> 
+       </>
       )
     }
   }
