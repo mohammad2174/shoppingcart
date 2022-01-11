@@ -8,6 +8,7 @@ import Navigation from "../components/Navigation";
 class Denim extends Component {
   state = {
     open : false,
+    denim : '',
     selectedColor : [
       { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
       { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
@@ -25,8 +26,8 @@ class Denim extends Component {
     ],
   }
 
-  setOpen = () => {
-    this.setState({open : true})
+  setOpen = (denim) => {
+    this.setState({open : true, denim : denim})
   }
 
   setClose = () => {
@@ -87,13 +88,13 @@ class Denim extends Component {
           },
         ]
         const product = {
-          name: 'Basic Tee 6-Pack ',
-          price: '$192',
+          name: this.state.denim.name,
+          price: this.state.denim.price,
           rating: 3.9,
           reviewCount: 117,
           href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-quick-preview-02-detail.jpg',
-          imageAlt: 'Two each of gray, white, and black shirts arranged on table.',
+          imageSrc: this.state.denim.imageSrc,
+          imageAlt: this.state.denim.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,
         }
@@ -112,7 +113,7 @@ class Denim extends Component {
                     className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                   />
                 <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen()} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
+                <button onClick={() => this.setOpen(denim)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
                 </div>  
                 </div>
                 <div className="mt-4 flex justify-between">
@@ -182,7 +183,7 @@ class Denim extends Component {
                         Product information
                       </h3>
 
-                      <p className="text-2xl text-gray-900">{product.price}</p>
+                      <p className="text-2xl text-gray-900">${product.price}</p>
 
                       {/* Reviews */}
                       <div className="mt-6">

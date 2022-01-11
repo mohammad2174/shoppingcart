@@ -8,6 +8,15 @@ import Navigation from "../components/Navigation";
 class ProductsList extends Component {
   state = {
     open : false,
+    womantop : '',
+    mantop : '',
+    dress : '',
+    pant : '',
+    denim : '',
+    sweater : '',
+    tshirt : '',
+    jacket : '',
+    Activewear : '',
     selectedColor : [
       { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
       { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
@@ -25,8 +34,8 @@ class ProductsList extends Component {
     ],
   }
 
-  setOpen = () => {
-    this.setState({open : true})
+  setOpen = (womantop,mantop,dress,pant,denim,sweater,tshirt,jacket,Activewear) => {
+    this.setState({open : true, womantop : womantop, mantop : mantop, dress : dress, pant : pant, denim : denim, sweater : sweater, tshirt : tshirt, jacket : jacket, Activewear : Activewear})
   }
 
   setClose = () => {
@@ -391,13 +400,13 @@ class ProductsList extends Component {
         },
       ]
       const product = {
-        name: 'Basic Tee 6-Pack ',
-        price: '$192',
+        name: this.state.womantop.name || this.state.mantop.name || this.state.dress.name || this.state.pant.name || this.state.denim.name || this.state.sweater.name || this.state.tshirt.name || this.state.jacket.name || this.state.Activewear.name,
+        price: this.state.womantop.price || this.state.mantop.price || this.state.dress.price || this.state.pant.price || this.state.denim.price || this.state.sweater.price || this.state.tshirt.price || this.state.jacket.price || this.state.Activewear.price,
         rating: 3.9,
         reviewCount: 117,
         href: '#',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-quick-preview-02-detail.jpg',
-        imageAlt: 'Two each of gray, white, and black shirts arranged on table.',
+        imageSrc: this.state.womantop.imageSrc || this.state.mantop.imageSrc || this.state.dress.imageSrc || this.state.pant.imageSrc || this.state.denim.imageSrc || this.state.sweater.imageSrc || this.state.tshirt.imageSrc || this.state.jacket.imageSrc || this.state.Activewear.imageSrc,
+        imageAlt: this.state.womantop.imageAlt || this.state.mantop.imageAlt || this.state.dress.imageAlt || this.state.pant.imageAlt || this.state.denim.imageAlt || this.state.sweater.imageAlt || this.state.tshirt.imageAlt || this.state.jacket.imageAlt || this.state.Activewear.imageAlt,
         colors: this.state.selectedColor,
         sizes: this.state.selectedSize,
       }
@@ -417,7 +426,7 @@ class ProductsList extends Component {
                   className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                 />
               <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen()} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
+                <button onClick={() => this.setOpen(womantop)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
                 </div>  
               </div>
               <div className="mt-4 flex justify-between">
@@ -445,7 +454,7 @@ class ProductsList extends Component {
                   className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                 />
               <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen()} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
+                <button onClick={() => this.setOpen(mantop)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
                 </div>  
               </div>
               <div className="mt-4 flex justify-between">
@@ -474,7 +483,7 @@ class ProductsList extends Component {
                   className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                 />
               <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen()} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
+                <button onClick={() => this.setOpen(dress)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
                 </div>  
               </div>
               <div className="mt-4 flex justify-between">
@@ -503,7 +512,7 @@ class ProductsList extends Component {
                   className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                 />
               <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen()} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
+                <button onClick={() => this.setOpen(pant)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
                 </div>  
               </div>
               <div className="mt-4 flex justify-between">
@@ -532,7 +541,7 @@ class ProductsList extends Component {
                   className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                 />
               <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen()} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
+                <button onClick={() => this.setOpen(denim)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
                 </div>  
               </div>
               <div className="mt-4 flex justify-between">
@@ -561,7 +570,7 @@ class ProductsList extends Component {
                   className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                 />
               <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen()} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
+                <button onClick={() => this.setOpen(sweater)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
                 </div>  
               </div>
               <div className="mt-4 flex justify-between">
@@ -590,7 +599,7 @@ class ProductsList extends Component {
                   className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                 />
               <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen()} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
+                <button onClick={() => this.setOpen(tshirt)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
                 </div>  
               </div>
               <div className="mt-4 flex justify-between">
@@ -619,7 +628,7 @@ class ProductsList extends Component {
                   className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                 />
               <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen()} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
+                <button onClick={() => this.setOpen(jacket)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
                 </div>  
               </div>
               <div className="mt-4 flex justify-between">
@@ -648,7 +657,7 @@ class ProductsList extends Component {
                   className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                 />
               <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen()} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
+                <button onClick={() => this.setOpen(Activewear)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
                 </div>  
               </div>
               <div className="mt-4 flex justify-between">
@@ -718,7 +727,7 @@ class ProductsList extends Component {
                         Product information
                       </h3>
 
-                      <p className="text-2xl text-gray-900">{product.price}</p>
+                      <p className="text-2xl text-gray-900">${product.price}</p>
 
                       {/* Reviews */}
                       <div className="mt-6">
