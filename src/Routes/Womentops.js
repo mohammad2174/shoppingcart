@@ -55,6 +55,7 @@ class Tops extends Component {
             name: 'Full Nelson',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1485145782098-4f5fd605a66b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8dG9wc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://images.unsplash.com/photo-1624258012762-6c0fc69cccf5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTF8fHRzaGlydHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
             imageAlt: "Full Nelson.",
             describtion: 'Shop Now',
             price: 25
@@ -64,24 +65,27 @@ class Tops extends Component {
             name: 'Re-Arranged',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1525171254930-643fc658b64e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dG9wc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://images.unsplash.com/photo-1581655353564-df123a1eb820?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXwxMjAyMzMxNHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
             imageAlt: "Re-Arranged.",
             describtion: 'Shop Now',
             price: 47
           },
           {
-            id: 2,
+            id: 3,
             name: 'My Way',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dG9wc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://images.unsplash.com/photo-1618354691714-7d92150909db?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjJ8fHRzaGlydHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
             imageAlt: "My Way.",
             describtion: 'Shop Now',
             price: 39
           },
           {
-            id: 2,
+            id: 4,
             name: 'Counterfeit',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1506795660198-e95c77602129?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dG9wc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://images.unsplash.com/photo-1618677603544-51162346e165?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjd8fHRzaGlydHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
             imageAlt: "Counterfeit.",
             describtion: 'Shop Now',
             price: 53
@@ -93,7 +97,7 @@ class Tops extends Component {
           rating: 3.9,
           reviewCount: 117,
           href: '#',
-          imageSrc: this.state.top.imageSrc,
+          imageSrc: (this.state.top.id === 1 || this.state.top.id === 2 || this.state.top.id === 3 || this.state.top.id === 4 ? this.state.top.catimageSrc : this.state.top.imageSrc),
           imageAlt: this.state.top.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,

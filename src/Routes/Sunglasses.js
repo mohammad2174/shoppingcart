@@ -55,6 +55,7 @@ class Sunglasses extends Component {
             name: 'Full Nelson',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1611824204322-24963b44d68b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fHN1bmdsYXNzZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://images.unsplash.com/photo-1559070081-648fb00b2ed1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjV8fHN1bmdsYXNzZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
             imageAlt: "Full Nelson.",
             describtion: 'Shop Now',
             price: 59
@@ -64,24 +65,27 @@ class Sunglasses extends Component {
             name: 'Re-Arranged',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1552337557-45792b252a2e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8c3VuZ2xhc3Nlc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3VuZ2xhc3Nlc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
             imageAlt: "Re-Arranged.",
             describtion: 'Shop Now',
             price: 103
           },
           {
-            id: 2,
+            id: 3,
             name: 'My Way',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1544714042-5c0a53d63ed5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjR8fHN1bmdsYXNzZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://images.unsplash.com/photo-1567473810954-507d59716c25?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjR8fHN1bmdsYXNzZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
             imageAlt: "My Way.",
             describtion: 'Shop Now',
             price: 97
           },
           {
-            id: 2,
+            id: 4,
             name: 'Counterfeit',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1592245734204-6561336cbc6f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTF8fHN1bmdsYXNzZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://images.unsplash.com/photo-1566421966482-ad8076104d8e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjd8fHN1bmdsYXNzZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
             imageAlt: "Counterfeit.",
             describtion: 'Shop Now',
             price: 105
@@ -93,7 +97,7 @@ class Sunglasses extends Component {
           rating: 3.9,
           reviewCount: 117,
           href: '#',
-          imageSrc: this.state.sunglass.imageSrc,
+          imageSrc: (this.state.sunglass.id === 1 || this.state.sunglass.id === 2 || this.state.sunglass.id === 3 || this.state.sunglass.id === 4 ? this.state.sunglass.catimageSrc : this.state.sunglass.imageSrc),
           imageAlt: this.state.sunglass.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,

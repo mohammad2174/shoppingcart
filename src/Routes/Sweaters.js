@@ -55,6 +55,7 @@ class Sweaters extends Component {
             name: 'Full Nelson',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1608984361471-ff566593088f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fHN3ZWF0ZXJzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://media.istockphoto.com/photos/sweater-yellow-color-isolated-on-whitetrendy-womens-clothingknitted-picture-id1278802435?b=1&k=20&m=1278802435&s=170667a&w=0&h=66zjl1eo9fICf3iuuzUu6xwJJfZPbSfIEp85HEvEbFc=',
             imageAlt: "Full Nelson.",
             describtion: 'Shop Now',
             price: 209
@@ -64,24 +65,27 @@ class Sweaters extends Component {
             name: 'Re-Arranged',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1610901157620-340856d0a50f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c3dlYXRlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://images.unsplash.com/photo-1612797748239-a83ed306dcfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c3dlYXRlciUyMHdlYXRoZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
             imageAlt: "Re-Arranged.",
             describtion: 'Shop Now',
             price: 260
           },
           {
-            id: 2,
+            id: 3,
             name: 'My Way',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1589359425603-dfe010cf3ffa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fHN3ZWF0ZXJzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://media.istockphoto.com/photos/blue-sweater-isolated-on-white-casual-vintage-knitted-sweater-wool-picture-id1340959863?b=1&k=20&m=1340959863&s=170667a&w=0&h=LXJTB6W61wgFCDHq3RAnzdMnugQPHM8XFWx1Q4Ft43I=',
             imageAlt: "My Way.",
             describtion: 'Shop Now',
             price: 275
           },
           {
-            id: 2,
+            id: 4,
             name: 'Counterfeit',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1613590373588-e61986b98327?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fHN3ZWF0ZXIlMjB3ZWF0aGVyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://images.unsplash.com/photo-1614676471928-2ed0ad1061a4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8c3dlYXRlciUyMHdlYXRoZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
             imageAlt: "Counterfeit.",
             describtion: 'Shop Now',
             price: 230
@@ -93,7 +97,7 @@ class Sweaters extends Component {
           rating: 3.9,
           reviewCount: 117,
           href: '#',
-          imageSrc: this.state.sweater.imageSrc,
+          imageSrc: (this.state.sweater.id === 1 || this.state.sweater.id === 2 || this.state.sweater.id === 3 || this.state.sweater.id === 4 ? this.state.sweater.catimageSrc : this.state.sweater.imageSrc),
           imageAlt: this.state.sweater.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,
