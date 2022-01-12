@@ -55,6 +55,7 @@ class Hats extends Component {
             name: 'Full Nelson',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1583002083815-8c6305bd56a4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGhhdHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://images.unsplash.com/photo-1531399395381-6603d3b9899f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGhhdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
             imageAlt: "Full Nelson.",
             describtion: 'Shop Now',
             price: 69
@@ -64,24 +65,27 @@ class Hats extends Component {
             name: 'Re-Arranged',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1534215754734-18e55d13e346?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8aGF0c3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://media.istockphoto.com/photos/baseball-hat-picture-id864713752?b=1&k=20&m=864713752&s=170667a&w=0&h=wPmlyJ0vl4w1e1CQN80EoifelKWoYe3cN4nfeKOXJsI=',
             imageAlt: "Re-Arranged.",
             describtion: 'Shop Now',
             price: 75
           },
           {
-            id: 2,
+            id: 3,
             name: 'My Way',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1504279264812-f45ce7b63bf6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTE1fHxoYXRzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://images.unsplash.com/photo-1618354691792-d1d42acfd860?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGhhdHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
             imageAlt: "My Way.",
             describtion: 'Shop Now',
             price: 83
           },
           {
-            id: 2,
+            id: 4,
             name: 'Counterfeit',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTE5fHxoYXRzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8aGF0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
             imageAlt: "Counterfeit.",
             describtion: 'Shop Now',
             price: 75
@@ -93,7 +97,7 @@ class Hats extends Component {
           rating: 3.9,
           reviewCount: 117,
           href: '#',
-          imageSrc: this.state.hat.imageSrc,
+          imageSrc: (this.state.hat.id === 1 || this.state.hat.id === 2 || this.state.hat.id === 3 || this.state.hat.id === 4 ? this.state.hat.catimageSrc : this.state.hat.imageSrc),
           imageAlt: this.state.hat.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,

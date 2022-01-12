@@ -55,6 +55,7 @@ class Denim extends Component {
             name: 'Full Nelson',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1516756587022-7891ad56a8cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZGVuaW0lMjBqYWNrZXR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://media.istockphoto.com/photos/blue-denim-jacket-for-background-close-up-of-the-front-of-a-denim-picture-id1317351339?b=1&k=20&m=1317351339&s=170667a&w=0&h=0WbP8ZS3TrjLji9foKjFsO2rx87zeK1537Gif89HYfY=',
             imageAlt: "Full Nelson.",
             describtion: 'Shop Now',
             price: 240
@@ -64,24 +65,27 @@ class Denim extends Component {
             name: 'Re-Arranged',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1545912656-922de67c0b36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGRlbmltJTIwc2tpcnR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://media.istockphoto.com/photos/denim-skirt-isolated-picture-id1162100585?b=1&k=20&m=1162100585&s=170667a&w=0&h=ydqi0U7vYxc3jnmQ_0KUc1QtFjw4_SoNp4Ca_LaMRQo=',
             imageAlt: "Re-Arranged.",
             describtion: 'Shop Now',
             price: 263
           },
           {
-            id: 2,
+            id: 3,
             name: 'My Way',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1570099424905-94ee2997ae4a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGRlbmltJTIwc2hvcnRzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://media.istockphoto.com/photos/one-short-blue-jeans-isolated-on-white-picture-id695708092?b=1&k=20&m=695708092&s=170667a&w=0&h=L0-lYNMeryKtjAZOGiOWRiYRgGCSOdqjh_gwNmJxfWU=',
             imageAlt: "My Way.",
             describtion: 'Shop Now',
             price: 275
           },
           {
-            id: 2,
+            id: 4,
             name: 'Counterfeit',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1535821768496-80f6b2bd573a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGRlbmltJTIwamVhbnN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://images.unsplash.com/photo-1572689535562-3c54a15292d3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGRlbmltJTIwamVhbnN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
             imageAlt: "Counterfeit.",
             describtion: 'Shop Now',
             price: 261
@@ -93,7 +97,7 @@ class Denim extends Component {
           rating: 3.9,
           reviewCount: 117,
           href: '#',
-          imageSrc: this.state.denim.imageSrc,
+          imageSrc: (this.state.denim.id === 1 || this.state.denim.id === 2 || this.state.denim.id === 3 || this.state.denim.id === 4 ? this.state.denim.catimageSrc : this.state.denim.imageSrc),
           imageAlt: this.state.denim.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,
