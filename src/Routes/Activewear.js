@@ -55,6 +55,7 @@ class Activewear extends Component {
             name: 'Full Nelson',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1538805060514-97d9cc17730c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXwxMTY4MjEyN3x8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://media.istockphoto.com/photos/clothes-make-running-picture-id466367844?b=1&k=20&m=466367844&s=170667a&w=0&h=UCZTwrAOn3ffct8Edo7PMfY4RJBDVIkBcs1xey8skYI=',
             imageAlt: "Full Nelson.",
             describtion: 'Shop Now',
             price: 360
@@ -64,24 +65,27 @@ class Activewear extends Component {
             name: 'Re-Arranged',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1596646912242-80d82d06c463?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MnwxOTg0NTczMHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://media.istockphoto.com/photos/mannequin-at-fashion-store-picture-id155601795?b=1&k=20&m=155601795&s=170667a&w=0&h=5-n5--57wo7sdS6UMtBLD7wNvxkZkCrDwnT0Sz335vI=',
             imageAlt: "Re-Arranged.",
             describtion: 'Shop Now',
             price: 342
           },
           {
-            id: 2,
+            id: 3,
             name: 'My Way',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1470468969717-61d5d54fd036?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTB8NDYwNzE2N3x8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://images.unsplash.com/photo-1595909315417-2edd382a56dc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YWN0aXZld2VhcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
             imageAlt: "My Way.",
             describtion: 'Shop Now',
             price: 299
           },
           {
-            id: 2,
+            id: 4,
             name: 'Counterfeit',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1500468756762-a401b6f17b46?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXwxMTMxNTk0fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://media.istockphoto.com/photos/flat-lay-with-sportswear-with-sneakers-fitness-tracker-and-sports-picture-id818706894?b=1&k=20&m=818706894&s=170667a&w=0&h=Wa8_cUQmTFRs9RJq1k0nDiY1gLRc6L-N5lcQWa1QlBw=',
             imageAlt: "Counterfeit.",
             describtion: 'Shop Now',
             price: 286
@@ -93,7 +97,7 @@ class Activewear extends Component {
           rating: 3.9,
           reviewCount: 117,
           href: '#',
-          imageSrc: this.state.activewear.imageSrc,
+          imageSrc: (this.state.activewear.id === 1 || this.state.activewear.id === 2 || this.state.activewear.id === 3 || this.state.activewear.id === 4 ? this.state.activewear.catimageSrc : this.state.activewear.imageSrc),
           imageAlt: this.state.activewear.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,

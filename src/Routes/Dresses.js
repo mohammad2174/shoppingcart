@@ -55,6 +55,7 @@ class Dresses extends Component {
             name: 'Full Nelson',
             href: '#',
             imageSrc: 'https://media.istockphoto.com/photos/woman-wearing-a-floral-pattern-dress-on-an-autumn-day-in-nature-picture-id1292110906?b=1&k=20&m=1292110906&s=170667a&w=0&h=4zpVYOydO2_d9eu6tYy1QC8e2AiBMJbxmC466Q_mCgo=',
+            catimageSrc: 'https://images.unsplash.com/photo-1628705077470-21ff5a207b47?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTB8fGRyZXNzZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
             imageAlt: "Full Nelson.",
             describtion: 'Shop Now',
             price: 101
@@ -64,24 +65,27 @@ class Dresses extends Component {
             name: 'Re-Arranged',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1596783074918-c84cb06531ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZHJlc3Nlc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://images.unsplash.com/photo-1630534591852-25eb98a6aa8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzc5fHxkcmVzc2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
             imageAlt: "Re-Arranged.",
             describtion: 'Shop Now',
             price: 75
           },
           {
-            id: 2,
+            id: 3,
             name: 'My Way',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1622122201714-77da0ca8e5d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8ZHJlc3Nlc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://images.unsplash.com/photo-1629737166947-7b5b5ad11622?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzM0fHxkcmVzc2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
             imageAlt: "My Way.",
             describtion: 'Shop Now',
             price: 64
           },
           {
-            id: 2,
+            id: 4,
             name: 'Counterfeit',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1618214802314-7dff34596edb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGRyZXNzZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://media.istockphoto.com/photos/beautiful-womans-dress-lies-on-the-floor-picture-id1296111355?b=1&k=20&m=1296111355&s=170667a&w=0&h=8i8MWIGRyIw9QXZPYHJz2ON0I9HCFOWDmhYd8e_kO-4=',
             imageAlt: "Counterfeit.",
             describtion: 'Shop Now',
             price: 130
@@ -93,7 +97,7 @@ class Dresses extends Component {
           rating: 3.9,
           reviewCount: 117,
           href: '#',
-          imageSrc: this.state.dress.imageSrc,
+          imageSrc: (this.state.dress.id === 1 || this.state.dress.id === 2 || this.state.dress.id === 3 || this.state.dress.id === 4 ? this.state.dress.catimageSrc : this.state.dress.imageSrc),
           imageAlt: this.state.dress.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,

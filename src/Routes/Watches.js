@@ -8,6 +8,7 @@ import Navigation from "../components/Navigation";
 class Watches extends Component {
   state = {
     open : false,
+    watch : '',
     selectedColor : [
       { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
       { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
@@ -25,8 +26,8 @@ class Watches extends Component {
     ],
   }
 
-  setOpen = () => {
-    this.setState({open : true})
+  setOpen = (watch) => {
+    this.setState({open : true, watch : watch})
   }
 
   setClose = () => {
@@ -54,6 +55,7 @@ class Watches extends Component {
             name: 'Full Nelson',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1520512486727-1b8bc58e20c9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXwzNTk4OTg2fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://images.unsplash.com/photo-1621179090954-90e10af21f65?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fHdyaXN0JTIwd2F0Y2hlc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
             imageAlt: "Full Nelson.",
             describtion: 'Shop Now',
             price: 85
@@ -63,37 +65,40 @@ class Watches extends Component {
             name: 'Re-Arranged',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1517390947773-a742ed6ce0d9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXxuRDV3SG9aUGRXUXx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://images.unsplash.com/photo-1612771409641-b0478cab8b69?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fHdyaXN0JTIwd2F0Y2hlc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
             imageAlt: "Re-Arranged.",
             describtion: 'Shop Now',
             price: 120
           },
           {
-            id: 2,
+            id: 3,
             name: 'My Way',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1482686092144-82c035eea710?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MnxxUWNMRTZfdmgxd3x8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://images.unsplash.com/photo-1607776905497-b4f788205f6a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d3Jpc3QlMjB3YXRjaGVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
             imageAlt: "My Way.",
             describtion: 'Shop Now',
             price: 96
           },
           {
-            id: 2,
+            id: 4,
             name: 'Counterfeit',
             href: '#',
             imageSrc: 'https://images.unsplash.com/photo-1509941943102-10c232535736?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NHxuRDV3SG9aUGRXUXx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
+            catimageSrc: 'https://media.istockphoto.com/photos/wrist-watch-picture-id180844253?b=1&k=20&m=180844253&s=170667a&w=0&h=k1qOo872uHt0odQ3-OqMsu1LvH5XrWXHVVdSSjF-ekM=',
             imageAlt: "Counterfeit.",
             describtion: 'Shop Now',
             price: 111
           },
         ]
         const product = {
-          name: 'Basic Tee 6-Pack ',
-          price: '$192',
+          name: this.state.watch.name,
+          price: this.state.watch.price,
           rating: 3.9,
           reviewCount: 117,
           href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-quick-preview-02-detail.jpg',
-          imageAlt: 'Two each of gray, white, and black shirts arranged on table.',
+          imageSrc: (this.state.watch.id === 1 || this.state.watch.id === 2 || this.state.watch.id === 3 || this.state.watch.id === 4 ? this.state.watch.catimageSrc : this.state.watch.imageSrc),
+          imageAlt: this.state.watch.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,
         }
@@ -112,7 +117,7 @@ class Watches extends Component {
                     className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                   />
                 <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen()} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
+                <button onClick={() => this.setOpen(watch)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
                 </div>
                 </div>
                 <div className="mt-4 flex justify-between">
@@ -182,7 +187,7 @@ class Watches extends Component {
                         Product information
                       </h3>
 
-                      <p className="text-2xl text-gray-900">{product.price}</p>
+                      <p className="text-2xl text-gray-900">${product.price}</p>
 
                       {/* Reviews */}
                       <div className="mt-6">
