@@ -4,8 +4,8 @@ import { addToCard } from "../actions";
 import ProductItem from "../components/ProductItem";
 import { Link } from "react-router-dom";
 import Cardlist from "../components/Cardlist";
-import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
-import { MenuIcon, XIcon } from '@heroicons/react/outline'
+import { Dialog, Popover, Tab, Transition } from '@headlessui/react';
+import { MenuIcon, XIcon } from '@heroicons/react/outline';
 
 
 class Men extends Component {
