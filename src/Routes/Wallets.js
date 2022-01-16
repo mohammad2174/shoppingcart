@@ -3,11 +3,14 @@ import { Dialog, RadioGroup, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
 import { StarIcon } from '@heroicons/react/solid';
 import Navigation from "../components/Navigation";
+import tickLogo from '../assests/icons8-done.gif';
+
 
 
 class Wallets extends Component {
   state = {
     open : false,
+    modalopen : false,
     wallet: '',
     selectedColor : [
       { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
@@ -32,6 +35,14 @@ class Wallets extends Component {
 
   setClose = () => {
     this.setState({open : false})
+  }
+
+  setmodalOpen = () => {
+    this.setState({modalopen : true, open : false})
+  }
+
+  setmodalClose = () => {
+    this.setState({modalopen : false})
   }
 
   setSelectedColor = () => {
@@ -102,6 +113,8 @@ class Wallets extends Component {
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,
         }
+        const cancelButtonRef = this.state.setmodalClose
+        
       return (
         <>
         <Navigation />
@@ -131,6 +144,7 @@ class Wallets extends Component {
                     <p className="mt-1 text-sm text-gray-500">{wallet.describtion}</p>
                   </div>
                   <p className="text-sm font-medium text-gray-500">${wallet.price}</p>
+                  <p className="mt-1 text-sm text-gray-500">X{wallet.inventory}</p>
                 </div>
               </div>
             ))}
@@ -218,7 +232,7 @@ class Wallets extends Component {
                         Product options
                       </h3>
 
-                      <form>
+                      
                         {/* Colors */}
                         <div>
                           <h4 className="text-sm text-gray-900 font-medium">Color</h4>
@@ -317,13 +331,83 @@ class Wallets extends Component {
                         <button
                           type="submit"
                           className="mt-6 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                          onClick={() => this.setmodalOpen()}
                         >
                           Add to bag
                         </button>
-                      </form>
+                      
                     </section>
                   </div>
                 </div>
+              </div>
+            </div>
+          </Transition.Child>
+        </div>
+      </Dialog>
+    </Transition.Root>  
+    {/* modals */}
+    <Transition.Root show={this.state.modalopen} as={Fragment}>
+      <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={this.setmodalOpen}>
+        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          </Transition.Child>
+
+          {/* This element is to trick the browser into centering the modal contents. */}
+          <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
+            &#8203;
+          </span>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            enterTo="opacity-100 translate-y-0 sm:scale-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+            leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+          >
+            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div className="sm:flex sm:items-start">
+                  <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+                    <img src={tickLogo} aria-hidden="true"/>
+                  </div>
+                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                    <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
+                      Adding to bag
+                    </Dialog.Title>
+                    <div className="mt-2">
+                      <p className="text-sm text-gray-500">
+                        Are you sure you want to adding to your bag? If not, press the Cancel button.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button
+                  type="button"
+                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
+                  onClick={() => this.setmodalClose()}
+                >
+                  Activate page
+                </button>
+                <button
+                  type="button"
+                  className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                  onClick={() => this.setmodalClose()}
+                  ref={cancelButtonRef}
+                >
+                  Cancel
+                </button>
               </div>
             </div>
           </Transition.Child>
