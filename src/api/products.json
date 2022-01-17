@@ -1,117 +1,49 @@
 [
   {
-    "id": "women",
-    "name": "Women",
-    "featured": [
-      {
-        "name": "New Arrivals",
-        "href": "#",
-        "imageSrc": "https://media.istockphoto.com/photos/she-is-my-best-friend-picture-id1194741547?b=1&k=20&m=1194741547&s=170667a&w=0&h=nTF9xCL4Bzfz3V9xueJhcZ8svIWjg79UHeXt0KKJ_gc=",
-        "imageAlt": "Models sitting back to back, wearing Basic Tee in black and bone."
-      },
-      {
-        "name": "Basic Tees",
-        "href": "#",
-        "imageSrc": "https://images.unsplash.com/photo-1472746729193-36ad213ac4a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXwyMTI2NDQxfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-        "imageAlt": "Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees."
-      }
-    ],
-    "sections": [
-      {
-        "id": "clothing",
-        "name": "Clothing",
-        "items": [
-          { "name": "Tops", "href": "#" },
-          { "name": "Dresses", "href": "#" },
-          { "name": "Pants", "href": "#" },
-          { "name": "Denim", "href": "#" },
-          { "name": "Sweaters", "href": "#" },
-          { "name": "T-Shirts", "href": "#" },
-          { "name": "Jackets", "href": "#" },
-          { "name": "Activewear", "href": "#" },
-          { "name": "Browse All", "href": "#" }
-        ]
-      },
-      {
-        "id": "accessories",
-        "name": "Accessories",
-        "items": [
-          { "name": "Watches", "href": "#" },
-          { "name": "Wallets", "href": "#" },
-          { "name": "Bags", "href": "#" },
-          { "name": "Sunglasses", "href": "#" },
-          { "name": "Hats", "href": "#" },
-          { "name": "Belts", "href": "#" }
-        ]
-      },
-      {
-        "id": "brands",
-        "name": "Brands",
-        "items": [
-          { "name": "Full Nelson", "href": "#" },
-          { "name": "My Way", "href": "#" },
-          { "name": "Re-Arranged", "href": "#" },
-          { "name": "Counterfeit", "href": "#" },
-          { "name": "Significant Other", "href": "#" }
-        ]
-      }
-   ]
+    "id": 1,
+    "name": "Full Nelson",
+    "href": "#",
+    "imageSrc": "https://images.unsplash.com/photo-1503341338985-c0477be52513?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8OHw5ODU3OTk2fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    "catimageSrc": "https://images.unsplash.com/photo-1503340588524-222d094c7066?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8M3xkRUdXdnBIRWFwUXx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
+    "imageAlt": "Full Nelson.",
+    "describtion": "Shop Now",
+    "price": 46,
+    "inventory": 4
   },
   {
-    "id": "men",
-    "name": "Men",
-    "featured": [
-      {
-        "name": "New Arrivals",
-        "href": "#",
-        "imageSrc": "https://images.unsplash.com/photo-1555441842-7cbc8f6a7171?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8Mnw0NDU4ODAzfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-        "imageAlt": "Drawstring top with elastic loop closure and textured interior padding."
-      },
-      {
-        "name": "Artwork Tees",
-        "href": "#",
-        "imageSrc": "https://images.unsplash.com/photo-1592516195984-44d68247d57e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTd8Mjk1NjYyODh8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
-        "imageAlt":
-          "Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt."
-      }
-    ],
-    "sections": [
-      {
-        "id": "clothing",
-        "name": "Clothing",
-        "items": [
-          { "name": "Tops", "href": "#" },
-          { "name": "Pants", "href": "#" },
-          { "name": "Sweaters", "href": "#" },
-          { "name": "T-Shirts", "href": "#" },
-          { "name": "Jackets", "href": "#" },
-          { "name": "Activewear", "href": "#" },
-          { "name": "Browse All", "href": "#" }
-        ]
-      },
-      {
-        "id": "accessories",
-        "name": "Accessories",
-        "items": [
-          { "name": "Watches", "href": "#" },
-          { "name": "Wallets", "href": "#" },
-          { "name": "Bags", "href": "#" },
-          { "name": "Sunglasses", "href": "#" },
-          { "name": "Hats", "href": "#" },
-          { "name": "Belts", "href": "#" }
-        ]
-      },
-      {
-        "id": "brands",
-        "name": "Brands",
-        "items": [
-          { "name": "Re-Arranged", "href": "#" },
-          { "name": "Counterfeit", "href": "#" },
-          { "name": "Full Nelson", "href": "#" },
-          { "name": "My Way", "href": "#" }
-        ]
-      }
-    ]
+    "id": 2,
+    "name": "Re-Arranged",
+    "href": "#",
+    "imageSrc": "https://images.unsplash.com/photo-1626160200758-71b8bf10d34f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8N3wwMTh1N19mdnhBUXx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
+    "catimageSrc": "https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8Mnw5OTUzMDU5fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    "imageAlt": "Re-Arranged.",
+    "describtion": "Shop Now",
+    "price": 61,
+    "inventory": 3
+  },
+  {
+    "id": 3,
+    "name": "My Way",
+    "href": "#",
+    "imageSrc": "https://images.unsplash.com/photo-1621844725002-936a3734920a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NHwwMTh1N19mdnhBUXx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
+    "catimageSrc": "https://media.istockphoto.com/photos/blank-white-tshirt-front-with-clipping-path-picture-id482949611?b=1&k=20&m=482949611&s=170667a&w=0&h=oPsmQCKbaB4oiWTmQ2QCj485lb60y47FplQezKpkv-0=",
+    "imageAlt": "My Way.",
+    "describtion": "Shop Now",
+    "price": 74,
+    "inventory": 5
+  },
+  {
+    "id": 4,
+    "name": "Counterfeit",
+    "href": "#",
+    "imageSrc": "https://images.unsplash.com/photo-1532374894023-69a0b7159b4f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTV8MDE4dTdfZnZ4QVF8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
+    "catimageSrc": "https://images.unsplash.com/photo-1562157873-818bc0726f68?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXw5OTUzMDU5fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    "imageAlt": "Counterfeit.",
+    "describtion": "Shop Now",
+    "price": 37,
+    "inventory": 2
   }
 ]
+
+
 
