@@ -4,7 +4,7 @@ import Product from "./Product";
 class ProductItem extends Component {
   render() {
       const { product , onAddToCardClicked } = this.props;
-
+      console.log(product)
     return (
       <div>
           <Product {...product}  quantity={product.inventory} />

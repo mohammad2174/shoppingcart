@@ -4,6 +4,9 @@ import { XIcon } from '@heroicons/react/outline';
 import { StarIcon } from '@heroicons/react/solid';
 import Navigation from "../components/Navigation";
 import tickLogo from '../assests/icons8-done.gif';
+import { connect } from "react-redux";
+import { addToCard } from "../actions";
+import ProductItem from "../components/ProductItem";
 
 
 
@@ -57,55 +60,11 @@ class Tops extends Component {
     }))
   }
     render() {
+      const { products , addToCard } = this.props;
       function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
-        const tops = [
-            {
-              id: 1,
-              name: 'Full Nelson',
-              href: '#',
-              imageSrc: 'https://images.unsplash.com/photo-1503341338985-c0477be52513?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8OHw5ODU3OTk2fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-              catimageSrc: 'https://images.unsplash.com/photo-1503340588524-222d094c7066?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8M3xkRUdXdnBIRWFwUXx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
-              imageAlt: "Full Nelson.",
-              describtion: 'Shop Now',
-              price: 46,
-              inventory: 4
-            },
-            {
-              id: 2,
-              name: 'Re-Arranged',
-              href: '#',
-              imageSrc: 'https://images.unsplash.com/photo-1626160200758-71b8bf10d34f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8N3wwMTh1N19mdnhBUXx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
-              catimageSrc: 'https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8Mnw5OTUzMDU5fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-              imageAlt: "Re-Arranged.",
-              describtion: 'Shop Now',
-              price: 61,
-              inventory: 3
-            },
-            {
-              id: 3,
-              name: 'My Way',
-              href: '#',
-              imageSrc: 'https://images.unsplash.com/photo-1621844725002-936a3734920a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NHwwMTh1N19mdnhBUXx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
-              catimageSrc: 'https://media.istockphoto.com/photos/blank-white-tshirt-front-with-clipping-path-picture-id482949611?b=1&k=20&m=482949611&s=170667a&w=0&h=oPsmQCKbaB4oiWTmQ2QCj485lb60y47FplQezKpkv-0=',
-              imageAlt: "My Way.",
-              describtion: 'Shop Now',
-              price: 74,
-              inventory: 5
-            },
-            {
-              id: 4,
-              name: 'Counterfeit',
-              href: '#',
-              imageSrc: 'https://images.unsplash.com/photo-1532374894023-69a0b7159b4f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTV8MDE4dTdfZnZ4QVF8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
-              catimageSrc: 'https://images.unsplash.com/photo-1562157873-818bc0726f68?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXw5OTUzMDU5fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-              imageAlt: "Counterfeit.",
-              describtion: 'Shop Now',
-              price: 37,
-              inventory: 2
-            },
-          ]
+        const tops = products
         const product = {
             name: this.state.top.name,
             price: this.state.top.price,
@@ -149,7 +108,7 @@ class Tops extends Component {
                   </div>
                   <div>
                   <p className="text-sm font-medium text-gray-500">${top.price}</p>
-                  <p className="mt-1 text-sm text-gray-500">X{top.inventory}</p>
+                  <p className="mt-1 text-sm text-gray-500">X{top.inventory ? top.inventory : <span className="text-red-600">Has Ended</span>}</p>
                   </div>
                 </div>
               </div>
@@ -399,10 +358,11 @@ class Tops extends Component {
               <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                 <button
                   type="button"
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => this.setmodalClose()}
+                  className={this.state.top.inventory ? "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm" : "w-full inline-flex cursor-not-allowed justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"}
+                  onClick={() => addToCard(this.state.top.id) && this.setmodalClose()}
+                  disabled = {this.state.top.inventory ? '' : 'disabled'}
                 >
-                  Activate page
+                  {this.state.top.inventory > 0 ? 'Activate page' : 'Sold Out'}
                 </button>
                 <button
                   type="button"
@@ -423,5 +383,16 @@ class Tops extends Component {
     }
   }
 
+const getProducts = products => Object.keys(products).map(id => products[id])
 
- export default Tops;
+const mapStateToProps = state => {
+  return {
+    products : getProducts(state.products)
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  addToCard : productId => dispatch(addToCard(productId))
+})
+
+ export default connect(mapStateToProps , mapDispatchToProps)(Tops);
