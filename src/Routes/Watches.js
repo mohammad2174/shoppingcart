@@ -4,7 +4,8 @@ import { XIcon } from '@heroicons/react/outline';
 import { StarIcon } from '@heroicons/react/solid';
 import Navigation from "../components/Navigation";
 import tickLogo from '../assests/icons8-done.gif';
-
+import { connect } from "react-redux";
+import { addToCard } from "../actions";
 
 
 class Watches extends Component {
@@ -57,51 +58,11 @@ class Watches extends Component {
     }))
   }
     render() {
+      const { products , addToCard } = this.props;
       function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
-        const watches = [
-          {
-            id: 1,
-            name: 'Full Nelson',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1520512486727-1b8bc58e20c9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXwzNTk4OTg2fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://images.unsplash.com/photo-1621179090954-90e10af21f65?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fHdyaXN0JTIwd2F0Y2hlc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-            imageAlt: "Full Nelson.",
-            describtion: 'Shop Now',
-            price: 85
-          },
-          {
-            id: 2,
-            name: 'Re-Arranged',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1517390947773-a742ed6ce0d9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXxuRDV3SG9aUGRXUXx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://images.unsplash.com/photo-1612771409641-b0478cab8b69?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fHdyaXN0JTIwd2F0Y2hlc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-            imageAlt: "Re-Arranged.",
-            describtion: 'Shop Now',
-            price: 120
-          },
-          {
-            id: 3,
-            name: 'My Way',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1482686092144-82c035eea710?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MnxxUWNMRTZfdmgxd3x8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://images.unsplash.com/photo-1607776905497-b4f788205f6a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d3Jpc3QlMjB3YXRjaGVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            imageAlt: "My Way.",
-            describtion: 'Shop Now',
-            price: 96
-          },
-          {
-            id: 4,
-            name: 'Counterfeit',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1509941943102-10c232535736?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NHxuRDV3SG9aUGRXUXx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://media.istockphoto.com/photos/wrist-watch-picture-id180844253?b=1&k=20&m=180844253&s=170667a&w=0&h=k1qOo872uHt0odQ3-OqMsu1LvH5XrWXHVVdSSjF-ekM=',
-            imageAlt: "Counterfeit.",
-            describtion: 'Shop Now',
-            price: 111
-          },
-        ]
+      const watches = products.slice(8, 12)
         const product = {
           name: this.state.watch.name,
           price: this.state.watch.price,
@@ -143,8 +104,10 @@ class Watches extends Component {
                     </h3>
                     <p className="mt-1 text-sm text-gray-500">{watch.describtion}</p>
                   </div>
+                  <div>
                   <p className="text-sm font-medium text-gray-500">${watch.price}</p>
-                  <p className="mt-1 text-sm text-gray-500">X{watch.inventory}</p>
+                  <p className="mt-1 text-sm text-gray-500">X{watch.inventory ? watch.inventory : <span className="text-red-600">Has Ended</span>}</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -394,11 +357,11 @@ class Watches extends Component {
               </div>
               <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                 <button
-                  type="button"
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => this.setmodalClose()}
+                  className={this.state.watch.inventory ? "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm" : "w-full inline-flex cursor-not-allowed justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"}
+                  onClick={() => addToCard(this.state.watch.id) && this.setmodalClose()}
+                  disabled = {this.state.watch.inventory ? '' : 'disabled'}
                 >
-                  Activate page
+                  {this.state.watch.inventory > 0 ? 'Activate page' : 'Sold Out'}
                 </button>
                 <button
                   type="button"
@@ -420,4 +383,16 @@ class Watches extends Component {
   }
 
 
- export default Watches;
+const getProducts = products => Object.keys(products).map(id => products[id])
+
+const mapStateToProps = state => {
+  return {
+    products : getProducts(state.products)
+  }
+}
+  
+const mapDispatchToProps = dispatch => ({
+  addToCard : productId => dispatch(addToCard(productId))
+})
+  
+export default connect(mapStateToProps , mapDispatchToProps)(Watches);

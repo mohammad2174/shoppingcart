@@ -4,7 +4,8 @@ import { XIcon } from '@heroicons/react/outline';
 import { StarIcon } from '@heroicons/react/solid';
 import Navigation from "../components/Navigation";
 import tickLogo from '../assests/icons8-done.gif';
-
+import { connect } from "react-redux";
+import { addToCard } from "../actions";
 
 
 class Jackets extends Component {
@@ -57,51 +58,11 @@ class Jackets extends Component {
     }))
   }
     render() {
+      const { products , addToCard } = this.props;
       function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
-        const jackets = [
-          {
-            id: 1,
-            name: 'Full Nelson',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1546771515-3c353a3da013?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGphY2tldHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://images.unsplash.com/photo-1489972536996-943907ea1cd8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTAwfHxqYWNrZXRzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            imageAlt: "Full Nelson.",
-            describtion: 'Shop Now',
-            price: 278
-          },
-          {
-            id: 2,
-            name: 'Re-Arranged',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1548126032-079a0fb0099d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8amFja2V0c3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://media.istockphoto.com/photos/blank-tracksuit-top-mockup-picture-id1326352310?b=1&k=20&m=1326352310&s=170667a&w=0&h=_i7JGS0z6HToAMNFUKr2XXJVgOlN_qLYxUwucq-MDI4=',
-            imageAlt: "Re-Arranged.",
-            describtion: 'Shop Now',
-            price: 245
-          },
-          {
-            id: 3,
-            name: 'My Way',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/flagged/photo-1554033750-2137b5cfd7ce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGphY2tldHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://images.unsplash.com/photo-1610502778270-c5c6f4c7d575?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXw4MzM3ODk0N3x8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
-            imageAlt: "My Way.",
-            describtion: 'Shop Now',
-            price: 264
-          },
-          {
-            id: 4,
-            name: 'Counterfeit',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8amFja2V0JTIwbWVufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8amFja2V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            imageAlt: "Counterfeit.",
-            describtion: 'Shop Now',
-            price: 241
-          },
-        ]
+        const jackets = products.slice(32, 36)
         const product = {
           name: this.state.jacket.name,
           price: this.state.jacket.price,
@@ -143,8 +104,10 @@ class Jackets extends Component {
                     </h3>
                     <p className="mt-1 text-sm text-gray-500">{jacket.describtion}</p>
                   </div>
+                  <div>
                   <p className="text-sm font-medium text-gray-500">${jacket.price}</p>
-                  <p className="mt-1 text-sm text-gray-500">X{jacket.inventory}</p>
+                  <p className="mt-1 text-sm text-gray-500">X{jacket.inventory ? jacket.inventory : <span className="text-red-600">Has Ended</span>}</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -395,10 +358,11 @@ class Jackets extends Component {
               <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                 <button
                   type="button"
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => this.setmodalClose()}
+                  className={this.state.jacket.inventory ? "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm" : "w-full inline-flex cursor-not-allowed justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"}
+                  onClick={() => addToCard(this.state.jacket.id) && this.setmodalClose()}
+                  disabled = {this.state.jacket.inventory ? '' : 'disabled'}
                 >
-                  Activate page
+                  {this.state.jacket.inventory > 0 ? 'Activate page' : 'Sold Out'}
                 </button>
                 <button
                   type="button"
@@ -420,4 +384,16 @@ class Jackets extends Component {
   }
 
 
- export default Jackets;
+const getProducts = products => Object.keys(products).map(id => products[id])
+
+const mapStateToProps = state => {
+  return {
+    products : getProducts(state.products)
+  }
+}
+            
+const mapDispatchToProps = dispatch => ({
+  addToCard : productId => dispatch(addToCard(productId))
+})
+            
+export default connect(mapStateToProps , mapDispatchToProps)(Jackets);

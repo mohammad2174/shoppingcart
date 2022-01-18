@@ -4,7 +4,8 @@ import { XIcon } from '@heroicons/react/outline';
 import { StarIcon } from '@heroicons/react/solid';
 import Navigation from "../components/Navigation";
 import tickLogo from '../assests/icons8-done.gif';
-
+import { connect } from "react-redux";
+import { addToCard } from "../actions";
 
 
 class Wallets extends Component {
@@ -57,51 +58,11 @@ class Wallets extends Component {
     }))
   }
     render() {
+        const { products , addToCard } = this.props;
         function classNames(...classes) {
           return classes.filter(Boolean).join(' ')
         }
-        const wallets = [
-          {
-            id: 1,
-            name: 'Full Nelson',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1486308510493-aa64833637bc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MnwxNzgwNjI1fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://images.unsplash.com/photo-1566150906772-1b8d20ca63cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTc2fHx3YWxsZXR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            imageAlt: "Full Nelson.",
-            describtion: 'Shop Now',
-            price: 65
-          },
-          {
-            id: 2,
-            name: 'Re-Arranged',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1611099024089-7f57ca9aca7f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjR8fHdhbGxldHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://images.unsplash.com/photo-1611099144078-5596e87ef54c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODZ8fHdhbGxldHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-            imageAlt: "Re-Arranged.",
-            describtion: 'Shop Now',
-            price: 98
-          },
-          {
-            id: 3,
-            name: 'My Way',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1514320397154-598ebdb55602?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjV8fHdhbGxldHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://images.unsplash.com/photo-1620109176813-e91290f6c795?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjd8fHdhbGxldHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-            imageAlt: "My Way.",
-            describtion: 'Shop Now',
-            price: 75
-          },
-          {
-            id: 4,
-            name: 'Counterfeit',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1633381638831-0ced80e2fee4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODV8fHdhbGxldHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://images.unsplash.com/photo-1611099543824-aecbbd0f6eb7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTIxfHx3YWxsZXR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            imageAlt: "Counterfeit.",
-            describtion: 'Shop Now',
-            price: 124
-          },
-        ]
+        const wallets = products.slice(12, 16)
         const product = {
           name: this.state.wallet.name,
           price: this.state.wallet.price,
@@ -143,8 +104,10 @@ class Wallets extends Component {
                     </h3>
                     <p className="mt-1 text-sm text-gray-500">{wallet.describtion}</p>
                   </div>
+                  <div>
                   <p className="text-sm font-medium text-gray-500">${wallet.price}</p>
-                  <p className="mt-1 text-sm text-gray-500">X{wallet.inventory}</p>
+                  <p className="mt-1 text-sm text-gray-500">X{wallet.inventory ? wallet.inventory : <span className="text-red-600">Has Ended</span>}</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -395,10 +358,11 @@ class Wallets extends Component {
               <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                 <button
                   type="button"
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => this.setmodalClose()}
+                  className={this.state.wallet.inventory ? "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm" : "w-full inline-flex cursor-not-allowed justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"}
+                  onClick={() => addToCard(this.state.wallet.id) && this.setmodalClose()}
+                  disabled = {this.state.wallet.inventory ? '' : 'disabled'}
                 >
-                  Activate page
+                  {this.state.wallet.inventory > 0 ? 'Activate page' : 'Sold Out'}
                 </button>
                 <button
                   type="button"
@@ -420,4 +384,16 @@ class Wallets extends Component {
   }
 
 
- export default Wallets;
+const getProducts = products => Object.keys(products).map(id => products[id])
+
+const mapStateToProps = state => {
+  return {
+    products : getProducts(state.products)
+  }
+}
+    
+const mapDispatchToProps = dispatch => ({
+  addToCard : productId => dispatch(addToCard(productId))
+})
+    
+export default connect(mapStateToProps , mapDispatchToProps)(Wallets);

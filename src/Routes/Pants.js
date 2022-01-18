@@ -4,6 +4,8 @@ import { XIcon } from '@heroicons/react/outline';
 import { StarIcon } from '@heroicons/react/solid';
 import Navigation from "../components/Navigation";
 import tickLogo from '../assests/icons8-done.gif';
+import { connect } from "react-redux";
+import { addToCard } from "../actions";
 
 
 
@@ -57,51 +59,11 @@ class Pants extends Component {
     }))
   }
     render() {
+      const { products , addToCard } = this.props;
       function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
-        const pants = [
-          {
-            id: 1,
-            name: 'Full Nelson',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGFudHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://images.unsplash.com/photo-1588544622467-6df9eef29c7a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTE5fHxwYW50c3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-            imageAlt: "Full Nelson.",
-            describtion: 'Shop Now',
-            price: 146
-          },
-          {
-            id: 2,
-            name: 'Re-Arranged',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1584865288642-42078afe6942?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8cGFudHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGFudHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            imageAlt: "Re-Arranged.",
-            describtion: 'Shop Now',
-            price: 153
-          },
-          {
-            id: 3,
-            name: 'My Way',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGFudHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://images.unsplash.com/photo-1590159983013-d4ff5fc71c1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjR8fHBhbnRzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            imageAlt: "My Way.",
-            describtion: 'Shop Now',
-            price: 192
-          },
-          {
-            id: 4,
-            name: 'Counterfeit',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cGFudHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://media.istockphoto.com/photos/blue-mens-trousers-picture-id1281807530?b=1&k=20&m=1281807530&s=170667a&w=0&h=4_FEA9unoKVOozJUWxCk6ZBJM6vabX8ZfnHt9n-IZ4c=',
-            imageAlt: "Counterfeit.",
-            describtion: 'Shop Now',
-            price: 164
-          },
-        ]
+        const pants = products.slice(28, 32)
         const product = {
           name: this.state.pant.name,
           price: this.state.pant.price,
@@ -143,8 +105,10 @@ class Pants extends Component {
                     </h3>
                     <p className="mt-1 text-sm text-gray-500">{pant.describtion}</p>
                   </div>
+                  <div>
                   <p className="text-sm font-medium text-gray-500">${pant.price}</p>
-                  <p className="mt-1 text-sm text-gray-500">X{pant.inventory}</p>
+                  <p className="mt-1 text-sm text-gray-500">X{pant.inventory ? pant.inventory : <span className="text-red-600">Has Ended</span>}</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -395,10 +359,11 @@ class Pants extends Component {
               <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                 <button
                   type="button"
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => this.setmodalClose()}
+                  className={this.state.pant.inventory ? "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm" : "w-full inline-flex cursor-not-allowed justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"}
+                  onClick={() => addToCard(this.state.pant.id) && this.setmodalClose()}
+                  disabled = {this.state.pant.inventory ? '' : 'disabled'}
                 >
-                  Activate page
+                  {this.state.pant.inventory > 0 ? 'Activate page' : 'Sold Out'}
                 </button>
                 <button
                   type="button"
@@ -420,4 +385,16 @@ class Pants extends Component {
   }
 
 
- export default Pants;
+const getProducts = products => Object.keys(products).map(id => products[id])
+
+const mapStateToProps = state => {
+  return {
+    products : getProducts(state.products)
+  }
+}
+          
+const mapDispatchToProps = dispatch => ({
+  addToCard : productId => dispatch(addToCard(productId))
+})
+          
+export default connect(mapStateToProps , mapDispatchToProps)(Pants);

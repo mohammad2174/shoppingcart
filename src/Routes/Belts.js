@@ -4,7 +4,8 @@ import { XIcon } from '@heroicons/react/outline';
 import { StarIcon } from '@heroicons/react/solid';
 import Navigation from "../components/Navigation";
 import tickLogo from '../assests/icons8-done.gif';
-
+import { connect } from "react-redux";
+import { addToCard } from "../actions";
 
 
 class Belts extends Component {
@@ -57,51 +58,11 @@ class Belts extends Component {
     }))
   }
     render() {
+      const { products , addToCard } = this.props;
       function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
-        const belts = [
-          {
-            id: 1,
-            name: 'Full Nelson',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1608842374156-bb287e644f5c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGJlbHRzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://images.unsplash.com/photo-1624222247344-550fb60583dc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YmVsdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-            imageAlt: "Full Nelson.",
-            describtion: 'Shop Now',
-            price: 114
-          },
-          {
-            id: 2,
-            name: 'Re-Arranged',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1603986255978-9d197868c547?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjh8fGJlbHRzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://images.unsplash.com/photo-1479064555552-3ef4979f8908?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGJlbHRzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            imageAlt: "Re-Arranged.",
-            describtion: 'Shop Now',
-            price: 87
-          },
-          {
-            id: 3,
-            name: 'My Way',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1577343373199-9a3ac36689e1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8YmVsdHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://images.unsplash.com/photo-1549654929-e63d34779e41?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmVsdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-            imageAlt: "My Way.",
-            describtion: 'Shop Now',
-            price: 96
-          },
-          {
-            id: 4,
-            name: 'Counterfeit',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1611778115319-30500f2e1002?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fGJlbHRzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://images.unsplash.com/photo-1631160246898-58192f971b5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8YmVsdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-            imageAlt: "Counterfeit.",
-            describtion: 'Shop Now',
-            price: 102
-          },
-        ]
+        const belts = products.slice(48, 52)
         const product = {
           name: this.state.belt.name,
           price: this.state.belt.price,
@@ -143,8 +104,10 @@ class Belts extends Component {
                     </h3>
                     <p className="mt-1 text-sm text-gray-500">{belt.describtion}</p>
                   </div>
+                  <div>
                   <p className="text-sm font-medium text-gray-500">${belt.price}</p>
-                  <p className="mt-1 text-sm text-gray-500">X{belt.inventory}</p>
+                  <p className="mt-1 text-sm text-gray-500">X{belt.inventory ? belt.inventory : <span className="text-red-600">Has Ended</span>}</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -395,10 +358,11 @@ class Belts extends Component {
               <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                 <button
                   type="button"
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => this.setmodalClose()}
+                  className={this.state.belt.inventory ? "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm" : "w-full inline-flex cursor-not-allowed justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"}
+                  onClick={() => addToCard(this.state.belt.id) && this.setmodalClose()}
+                  disabled = {this.state.belt.inventory ? '' : 'disabled'}
                 >
-                  Activate page
+                  {this.state.belt.inventory > 0 ? 'Activate page' : 'Sold Out'}
                 </button>
                 <button
                   type="button"
@@ -420,4 +384,16 @@ class Belts extends Component {
   }
 
 
- export default Belts;
+const getProducts = products => Object.keys(products).map(id => products[id])
+
+const mapStateToProps = state => {
+  return {
+    products : getProducts(state.products)
+  }
+}
+                    
+const mapDispatchToProps = dispatch => ({
+  addToCard : productId => dispatch(addToCard(productId))
+})
+                    
+export default connect(mapStateToProps , mapDispatchToProps)(Belts);
