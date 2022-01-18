@@ -4,7 +4,8 @@ import { XIcon } from '@heroicons/react/outline';
 import { StarIcon } from '@heroicons/react/solid';
 import Navigation from "../components/Navigation";
 import tickLogo from '../assests/icons8-done.gif';
-
+import { connect } from "react-redux";
+import { addToCard } from "../actions";
 
 
 class Activewear extends Component {
@@ -57,51 +58,11 @@ class Activewear extends Component {
     }))
   }
     render() {
+      const { products , addToCard } = this.props;
       function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
-        const activewears = [
-          {
-            id: 1,
-            name: 'Full Nelson',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1538805060514-97d9cc17730c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXwxMTY4MjEyN3x8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://media.istockphoto.com/photos/clothes-make-running-picture-id466367844?b=1&k=20&m=466367844&s=170667a&w=0&h=UCZTwrAOn3ffct8Edo7PMfY4RJBDVIkBcs1xey8skYI=',
-            imageAlt: "Full Nelson.",
-            describtion: 'Shop Now',
-            price: 360
-          },
-          {
-            id: 2,
-            name: 'Re-Arranged',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1596646912242-80d82d06c463?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MnwxOTg0NTczMHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://media.istockphoto.com/photos/mannequin-at-fashion-store-picture-id155601795?b=1&k=20&m=155601795&s=170667a&w=0&h=5-n5--57wo7sdS6UMtBLD7wNvxkZkCrDwnT0Sz335vI=',
-            imageAlt: "Re-Arranged.",
-            describtion: 'Shop Now',
-            price: 342
-          },
-          {
-            id: 3,
-            name: 'My Way',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1470468969717-61d5d54fd036?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTB8NDYwNzE2N3x8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://images.unsplash.com/photo-1595909315417-2edd382a56dc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YWN0aXZld2VhcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-            imageAlt: "My Way.",
-            describtion: 'Shop Now',
-            price: 299
-          },
-          {
-            id: 4,
-            name: 'Counterfeit',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1500468756762-a401b6f17b46?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXwxMTMxNTk0fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://media.istockphoto.com/photos/flat-lay-with-sportswear-with-sneakers-fitness-tracker-and-sports-picture-id818706894?b=1&k=20&m=818706894&s=170667a&w=0&h=Wa8_cUQmTFRs9RJq1k0nDiY1gLRc6L-N5lcQWa1QlBw=',
-            imageAlt: "Counterfeit.",
-            describtion: 'Shop Now',
-            price: 286
-          },
-        ]
+        const activewears = products.slice(56, 60)
         const product = {
           name: this.state.activewear.name,
           price: this.state.activewear.price,
@@ -143,8 +104,10 @@ class Activewear extends Component {
                     </h3>
                     <p className="mt-1 text-sm text-gray-500">{activewear.describtion}</p>
                   </div>
+                  <div>
                   <p className="text-sm font-medium text-gray-500">${activewear.price}</p>
-                  <p className="mt-1 text-sm text-gray-500">X{activewear.inventory}</p>
+                  <p className="mt-1 text-sm text-gray-500">X{activewear.inventory ? activewear.inventory : <span className="text-red-600">Has Ended</span>}</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -395,10 +358,11 @@ class Activewear extends Component {
               <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                 <button
                   type="button"
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => this.setmodalClose()}
+                  className={this.state.activewear.inventory ? "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm" : "w-full inline-flex cursor-not-allowed justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"}
+                  onClick={() => addToCard(this.state.activewear.id) && this.setmodalClose()}
+                  disabled = {this.state.activewear.inventory ? '' : 'disabled'}
                 >
-                  Activate page
+                  {this.state.activewear.inventory > 0 ? 'Activate page' : 'Sold Out'}
                 </button>
                 <button
                   type="button"
@@ -420,4 +384,16 @@ class Activewear extends Component {
   }
 
 
- export default Activewear;
+const getProducts = products => Object.keys(products).map(id => products[id])
+
+const mapStateToProps = state => {
+  return {
+    products : getProducts(state.products)
+  }
+}
+                      
+const mapDispatchToProps = dispatch => ({
+  addToCard : productId => dispatch(addToCard(productId))
+})
+                      
+export default connect(mapStateToProps , mapDispatchToProps)(Activewear);

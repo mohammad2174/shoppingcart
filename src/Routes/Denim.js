@@ -4,7 +4,8 @@ import { XIcon } from '@heroicons/react/outline';
 import { StarIcon } from '@heroicons/react/solid';
 import Navigation from "../components/Navigation";
 import tickLogo from '../assests/icons8-done.gif';
-
+import { connect } from "react-redux";
+import { addToCard } from "../actions";
 
 
 class Denim extends Component {
@@ -57,51 +58,12 @@ class Denim extends Component {
     }))
   }
     render() {
-      function classNames(...classes) {
+      const { products , addToCard } = this.props;
+      function 
+      classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
-        const denims = [
-          {
-            id: 1,
-            name: 'Full Nelson',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1516756587022-7891ad56a8cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZGVuaW0lMjBqYWNrZXR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://media.istockphoto.com/photos/blue-denim-jacket-for-background-close-up-of-the-front-of-a-denim-picture-id1317351339?b=1&k=20&m=1317351339&s=170667a&w=0&h=0WbP8ZS3TrjLji9foKjFsO2rx87zeK1537Gif89HYfY=',
-            imageAlt: "Full Nelson.",
-            describtion: 'Shop Now',
-            price: 240
-          },
-          {
-            id: 2,
-            name: 'Re-Arranged',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1545912656-922de67c0b36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGRlbmltJTIwc2tpcnR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://media.istockphoto.com/photos/denim-skirt-isolated-picture-id1162100585?b=1&k=20&m=1162100585&s=170667a&w=0&h=ydqi0U7vYxc3jnmQ_0KUc1QtFjw4_SoNp4Ca_LaMRQo=',
-            imageAlt: "Re-Arranged.",
-            describtion: 'Shop Now',
-            price: 263
-          },
-          {
-            id: 3,
-            name: 'My Way',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1570099424905-94ee2997ae4a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGRlbmltJTIwc2hvcnRzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://media.istockphoto.com/photos/one-short-blue-jeans-isolated-on-white-picture-id695708092?b=1&k=20&m=695708092&s=170667a&w=0&h=L0-lYNMeryKtjAZOGiOWRiYRgGCSOdqjh_gwNmJxfWU=',
-            imageAlt: "My Way.",
-            describtion: 'Shop Now',
-            price: 275
-          },
-          {
-            id: 4,
-            name: 'Counterfeit',
-            href: '#',
-            imageSrc: 'https://images.unsplash.com/photo-1535821768496-80f6b2bd573a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGRlbmltJTIwamVhbnN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            catimageSrc: 'https://images.unsplash.com/photo-1572689535562-3c54a15292d3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGRlbmltJTIwamVhbnN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            imageAlt: "Counterfeit.",
-            describtion: 'Shop Now',
-            price: 261
-          },
-        ]
+        const denims = products.slice(44, 48)
         const product = {
           name: this.state.denim.name,
           price: this.state.denim.price,
@@ -143,9 +105,10 @@ class Denim extends Component {
                     </h3>
                     <p className="mt-1 text-sm text-gray-500">{denim.describtion}</p>
                   </div>
+                  <div>
                   <p className="text-sm font-medium text-gray-500">${denim.price}</p>
-                  <p className="mt-1 text-sm text-gray-500">X{denim.inventory}</p>
-
+                  <p className="mt-1 text-sm text-gray-500">X{denim.inventory ? denim.inventory : <span className="text-red-600">Has Ended</span>}</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -396,10 +359,11 @@ class Denim extends Component {
               <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                 <button
                   type="button"
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => this.setmodalClose()}
+                  className={this.state.denim.inventory ? "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm" : "w-full inline-flex cursor-not-allowed justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"}
+                  onClick={() => addToCard(this.state.denim.id) && this.setmodalClose()}
+                  disabled = {this.state.denim.inventory ? '' : 'disabled'}
                 >
-                  Activate page
+                  {this.state.denim.inventory > 0 ? 'Activate page' : 'Sold Out'}
                 </button>
                 <button
                   type="button"
@@ -421,4 +385,16 @@ class Denim extends Component {
   }
 
 
- export default Denim;
+const getProducts = products => Object.keys(products).map(id => products[id])
+
+const mapStateToProps = state => {
+  return {
+    products : getProducts(state.products)
+  }
+}
+                  
+const mapDispatchToProps = dispatch => ({
+  addToCard : productId => dispatch(addToCard(productId))
+})
+                  
+export default connect(mapStateToProps , mapDispatchToProps)(Denim);
