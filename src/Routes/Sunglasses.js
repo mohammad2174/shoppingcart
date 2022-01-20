@@ -8,11 +8,11 @@ import { connect } from "react-redux";
 import { addToCard } from "../actions";
 
 
-class Denim extends Component {
+class Sunglasses extends Component {
   state = {
     open : false,
     modalopen : false,
-    denim : '',
+    sunglass: '',
     selectedColor : [
       { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
       { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
@@ -30,8 +30,8 @@ class Denim extends Component {
     ],
   }
 
-  setOpen = (denim) => {
-    this.setState({open : true, denim : denim})
+  setOpen = (sunglass) => {
+    this.setState({open : true, sunglass : sunglass})
   }
 
   setClose = () => {
@@ -59,55 +59,54 @@ class Denim extends Component {
   }
     render() {
       const { products , addToCard } = this.props;
-      function 
-      classNames(...classes) {
+      function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
-        const denims = products.slice(44, 48)
+        const sunglasses = products.slice(24, 28)
         const product = {
-          name: this.state.denim.name,
-          price: this.state.denim.price,
+          name: this.state.sunglass.name,
+          price: this.state.sunglass.price,
           rating: 3.9,
           reviewCount: 117,
           href: '#',
-          imageSrc: (this.state.denim.id === 45 || this.state.denim.id === 46 || this.state.denim.id === 47 || this.state.denim.id === 48 ? this.state.denim.catimageSrc : this.state.denim.imageSrc),
-          imageAlt: this.state.denim.imageAlt,
+          imageSrc: (this.state.sunglass.id === 25 || this.state.sunglass.id === 26 || this.state.sunglass.id === 27 || this.state.sunglass.id === 28 ? this.state.sunglass.catimageSrc : this.state.sunglass.imageSrc),
+          imageAlt: this.state.sunglass.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,
         }
         const cancelButtonRef = this.state.setmodalClose
-        
+
       return (
         <>
         <Navigation />
         <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-          <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">Denim</h2>
+          <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">sunglasses</h2>
           <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-            {denims.map((denim) => (
-              <div key={denim.id} className="group relative">
+            {sunglasses.map((sunglass) => (
+              <div key={sunglass.id} className="group relative">
                 <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-80">
                   <img
-                    src={denim.imageSrc}
-                    alt={denim.imageAlt}
+                    src={sunglass.imageSrc}
+                    alt={sunglass.imageAlt}
                     className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                   />
                 <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen(denim)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
+                <button onClick={() => this.setOpen(sunglass)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
                 </div>  
                 </div>
                 <div className="mt-4 flex justify-between">
                   <div>
                     <h3 className="text-sm text-gray-700">
-                      <a href={denim.href}>
+                      <a href={sunglass.href}>
                         <span aria-hidden="true" className="absolute inset-0" />
-                        {denim.name}
+                        {sunglass.name}
                       </a>
                     </h3>
-                    <p className="mt-1 text-sm text-gray-500">{denim.describtion}</p>
+                    <p className="mt-1 text-sm text-gray-500">{sunglass.describtion}</p>
                   </div>
                   <div>
-                  <p className="text-sm font-medium text-gray-500">${denim.price}</p>
-                  <p className="mt-1 text-sm text-gray-500">X{denim.inventory ? denim.inventory : <span className="text-red-600">Has Ended</span>}</p>
+                  <p className="text-sm font-medium text-gray-500">${sunglass.price}</p>
+                  <p className="mt-1 text-sm text-gray-500">X{sunglass.inventory ? sunglass.inventory : <span className="text-red-600">Has Ended</span>}</p>
                   </div>
                 </div>
               </div>
@@ -196,7 +195,7 @@ class Denim extends Component {
                         Product options
                       </h3>
 
-                      
+                     
                         {/* Colors */}
                         <div>
                           <h4 className="text-sm text-gray-900 font-medium">Color</h4>
@@ -308,7 +307,7 @@ class Denim extends Component {
           </Transition.Child>
         </div>
       </Dialog>
-    </Transition.Root> 
+    </Transition.Root>
     {/* modals */}
     <Transition.Root show={this.state.modalopen} as={Fragment}>
       <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={this.setmodalOpen}>
@@ -359,11 +358,11 @@ class Denim extends Component {
               <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                 <button
                   type="button"
-                  className={this.state.denim.inventory ? "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm" : "w-full inline-flex cursor-not-allowed justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"}
-                  onClick={() => addToCard(this.state.denim.id) && this.setmodalClose()}
-                  disabled = {this.state.denim.inventory ? '' : 'disabled'}
+                  className={this.state.sunglass.inventory ? "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm" : "w-full inline-flex cursor-not-allowed justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"}
+                  onClick={() => addToCard(this.state.sunglass.id) && this.setmodalClose()}
+                  disabled = {this.state.sunglass.inventory ? '' : 'disabled'}
                 >
-                  {this.state.denim.inventory > 0 ? 'Activate page' : 'Sold Out'}
+                  {this.state.sunglass.inventory > 0 ? 'Activate page' : 'Sold Out'}
                 </button>
                 <button
                   type="button"
@@ -378,7 +377,7 @@ class Denim extends Component {
           </Transition.Child>
         </div>
       </Dialog>
-    </Transition.Root>   
+    </Transition.Root>     
         </>
       )
     }
@@ -392,9 +391,9 @@ const mapStateToProps = state => {
     products : getProducts(state.products)
   }
 }
-                  
+          
 const mapDispatchToProps = dispatch => ({
   addToCard : productId => dispatch(addToCard(productId))
 })
-                  
-export default connect(mapStateToProps , mapDispatchToProps)(Denim);
+          
+export default connect(mapStateToProps , mapDispatchToProps)(Sunglasses);

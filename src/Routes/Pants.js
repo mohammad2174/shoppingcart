@@ -8,7 +8,6 @@ import { connect } from "react-redux";
 import { addToCard } from "../actions";
 
 
-
 class Pants extends Component {
   state = {
     open : false,
@@ -70,7 +69,7 @@ class Pants extends Component {
           rating: 3.9,
           reviewCount: 117,
           href: '#',
-          imageSrc: (this.state.pant.id === 1 || this.state.pant.id === 2 || this.state.pant.id === 3 || this.state.pant.id === 4 ? this.state.pant.catimageSrc : this.state.pant.imageSrc),
+          imageSrc: (this.state.pant.id === 29 || this.state.pant.id === 30 || this.state.pant.id === 31 || this.state.pant.id === 32 ? this.state.pant.catimageSrc : this.state.pant.imageSrc),
           imageAlt: this.state.pant.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,

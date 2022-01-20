@@ -69,7 +69,7 @@ class Sweaters extends Component {
           rating: 3.9,
           reviewCount: 117,
           href: '#',
-          imageSrc: (this.state.sweater.id === 1 || this.state.sweater.id === 2 || this.state.sweater.id === 3 || this.state.sweater.id === 4 ? this.state.sweater.catimageSrc : this.state.sweater.imageSrc),
+          imageSrc: (this.state.sweater.id === 21 || this.state.sweater.id === 22 || this.state.sweater.id === 23 || this.state.sweater.id === 24 ? this.state.sweater.catimageSrc : this.state.sweater.imageSrc),
           imageAlt: this.state.sweater.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,

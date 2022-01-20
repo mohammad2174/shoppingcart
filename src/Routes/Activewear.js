@@ -69,7 +69,7 @@ class Activewear extends Component {
           rating: 3.9,
           reviewCount: 117,
           href: '#',
-          imageSrc: (this.state.activewear.id === 1 || this.state.activewear.id === 2 || this.state.activewear.id === 3 || this.state.activewear.id === 4 ? this.state.activewear.catimageSrc : this.state.activewear.imageSrc),
+          imageSrc: (this.state.activewear.id === 57 || this.state.activewear.id === 58 || this.state.activewear.id === 59 || this.state.activewear.id === 60 ? this.state.activewear.catimageSrc : this.state.activewear.imageSrc),
           imageAlt: this.state.activewear.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,

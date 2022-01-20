@@ -69,7 +69,7 @@ class Belts extends Component {
           rating: 3.9,
           reviewCount: 117,
           href: '#',
-          imageSrc: (this.state.belt.id === 1 || this.state.belt.id === 2 || this.state.belt.id === 3 || this.state.belt.id === 4 ? this.state.belt.catimageSrc : this.state.belt.imageSrc),
+          imageSrc: (this.state.belt.id === 49 || this.state.belt.id === 50 || this.state.belt.id === 51 || this.state.belt.id === 52 ? this.state.belt.catimageSrc : this.state.belt.imageSrc),
           imageAlt: this.state.belt.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,

@@ -69,7 +69,7 @@ class Jackets extends Component {
           rating: 3.9,
           reviewCount: 117,
           href: '#',
-          imageSrc: (this.state.jacket.id === 1 || this.state.jacket.id === 2 || this.state.jacket.id === 3 || this.state.jacket.id === 4 ? this.state.jacket.catimageSrc : this.state.jacket.imageSrc),
+          imageSrc: (this.state.jacket.id === 33 || this.state.jacket.id === 34 || this.state.jacket.id === 35 || this.state.jacket.id === 36 ? this.state.jacket.catimageSrc : this.state.jacket.imageSrc),
           imageAlt: this.state.jacket.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,

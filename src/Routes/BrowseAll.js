@@ -79,14 +79,13 @@ class BrowseAll extends Component {
       const tshirts = products.slice(16, 20)
       const jackets = products.slice(32, 36)
       const Activewears = products.slice(56, 60)
-
       const product = {
         name: this.state.womantop.name || this.state.mantop.name || this.state.dress.name || this.state.pant.name || this.state.denim.name || this.state.sweater.name || this.state.tshirt.name || this.state.jacket.name || this.state.Activewear.name,
         price: this.state.womantop.price || this.state.mantop.price || this.state.dress.price || this.state.pant.price || this.state.denim.price || this.state.sweater.price || this.state.tshirt.price || this.state.jacket.price || this.state.Activewear.price,
         rating: 3.9,
         reviewCount: 117,
         href: '#',
-        imageSrc: (this.state.womantop.id === 1 || this.state.womantop.id === 2 || this.state.womantop.id === 3 || this.state.womantop.id === 4 ? this.state.womantop.catimageSrc : this.state.womantop.imageSrc) || (this.state.mantop.id === 1 || this.state.mantop.id === 2 || this.state.mantop.id === 3 || this.state.mantop.id === 4 ? this.state.mantop.catimageSrc : this.state.mantop.imageSrc) || (this.state.dress.id === 1 || this.state.dress.id === 2 || this.state.dress.id === 3 || this.state.dress.id === 4 ? this.state.dress.catimageSrc : this.state.dress.imageSrc) || (this.state.pant.id === 1 || this.state.pant.id === 2 || this.state.pant.id === 3 || this.state.pant.id === 4 ? this.state.pant.catimageSrc : this.state.pant.imageSrc) || (this.state.denim.id === 1 || this.state.denim.id === 2 || this.state.denim.id === 3 || this.state.denim.id === 4 ? this.state.denim.catimageSrc : this.state.denim.imageSrc) || (this.state.sweater.id === 1 || this.state.sweater.id === 2 || this.state.sweater.id === 3 || this.state.sweater.id === 4 ? this.state.sweater.catimageSrc : this.state.sweater.imageSrc) || (this.state.tshirt.id === 1 || this.state.tshirt.id === 2 || this.state.tshirt.id === 3 || this.state.tshirt.id === 4 ? this.state.tshirt.catimageSrc : this.state.tshirt.imageSrc) || (this.state.jacket.id === 1 || this.state.jacket.id === 2 || this.state.jacket.id === 3 || this.state.jacket.id === 4 ? this.state.jacket.catimageSrc : this.state.jacket.imageSrc) || (this.state.Activewear.id === 1 || this.state.Activewear.id === 2 || this.state.Activewear.id === 3 || this.state.Activewear.id === 4 ? this.state.Activewear.catimageSrc : this.state.Activewear.imageSrc),
+        imageSrc: (this.state.womantop.id === 5 || this.state.womantop.id === 6 || this.state.womantop.id === 7 || this.state.womantop.id === 8 ? this.state.womantop.catimageSrc : this.state.womantop.imageSrc) || (this.state.mantop.id === 1 || this.state.mantop.id === 2 || this.state.mantop.id === 3 || this.state.mantop.id === 4 ? this.state.mantop.catimageSrc : this.state.mantop.imageSrc) || (this.state.dress.id === 41 || this.state.dress.id === 42 || this.state.dress.id === 43 || this.state.dress.id === 44 ? this.state.dress.catimageSrc : this.state.dress.imageSrc) || (this.state.pant.id === 29 || this.state.pant.id === 30 || this.state.pant.id === 31 || this.state.pant.id === 32 ? this.state.pant.catimageSrc : this.state.pant.imageSrc) || (this.state.denim.id === 45 || this.state.denim.id === 46 || this.state.denim.id === 47 || this.state.denim.id === 48 ? this.state.denim.catimageSrc : this.state.denim.imageSrc) || (this.state.sweater.id === 21 || this.state.sweater.id === 22 || this.state.sweater.id === 23 || this.state.sweater.id === 24 ? this.state.sweater.catimageSrc : this.state.sweater.imageSrc) || (this.state.tshirt.id === 17 || this.state.tshirt.id === 18 || this.state.tshirt.id === 19 || this.state.tshirt.id === 20 ? this.state.tshirt.catimageSrc : this.state.tshirt.imageSrc) || (this.state.jacket.id === 33 || this.state.jacket.id === 34 || this.state.jacket.id === 35 || this.state.jacket.id === 36 ? this.state.jacket.catimageSrc : this.state.jacket.imageSrc) || (this.state.Activewear.id === 57 || this.state.Activewear.id === 58 || this.state.Activewear.id === 59 || this.state.Activewear.id === 60 ? this.state.Activewear.catimageSrc : this.state.Activewear.imageSrc),
         imageAlt: this.state.womantop.imageAlt || this.state.mantop.imageAlt || this.state.dress.imageAlt || this.state.pant.imageAlt || this.state.denim.imageAlt || this.state.sweater.imageAlt || this.state.tshirt.imageAlt || this.state.jacket.imageAlt || this.state.Activewear.imageAlt,
         colors: this.state.selectedColor,
         sizes: this.state.selectedSize,
@@ -654,6 +653,7 @@ class BrowseAll extends Component {
     )
   }
 }
+
 
 const getProducts = products => Object.keys(products).map(id => products[id])
 
