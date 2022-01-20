@@ -69,7 +69,7 @@ class Hats extends Component {
           rating: 3.9,
           reviewCount: 117,
           href: '#',
-          imageSrc: (this.state.hat.id === 1 || this.state.hat.id === 2 || this.state.hat.id === 3 || this.state.hat.id === 4 ? this.state.hat.catimageSrc : this.state.hat.imageSrc),
+          imageSrc: (this.state.hat.id === 37 || this.state.hat.id === 38 || this.state.hat.id === 39 || this.state.hat.id === 40 ? this.state.hat.catimageSrc : this.state.hat.imageSrc),
           imageAlt: this.state.hat.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,

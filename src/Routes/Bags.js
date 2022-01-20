@@ -69,7 +69,7 @@ class Bags extends Component {
           rating: 3.9,
           reviewCount: 117,
           href: '#',
-          imageSrc: (this.state.bag.id === 1 || this.state.bag.id === 2 || this.state.bag.id === 3 || this.state.bag.id === 4 ? this.state.bag.catimageSrc : this.state.bag.imageSrc),
+          imageSrc: (this.state.bag.id === 53 || this.state.bag.id === 54 || this.state.bag.id === 55 || this.state.bag.id === 56 ? this.state.bag.catimageSrc : this.state.bag.imageSrc),
           imageAlt: this.state.bag.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,
@@ -395,5 +395,5 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   addToCard : productId => dispatch(addToCard(productId))
 })
-                      
+
 export default connect(mapStateToProps , mapDispatchToProps)(Bags);

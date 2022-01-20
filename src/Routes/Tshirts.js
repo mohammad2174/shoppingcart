@@ -8,7 +8,6 @@ import { connect } from "react-redux";
 import { addToCard } from "../actions";
 
 
-
 class Tshirts extends Component {
   state = {
     open : false,
@@ -71,7 +70,7 @@ class Tshirts extends Component {
             rating: 3.9,
             reviewCount: 117,
             href: '#',
-            imageSrc: (this.state.tshirt.id === 1 || this.state.tshirt.id === 2 || this.state.tshirt.id === 3 || this.state.tshirt.id === 4 ? this.state.tshirt.catimageSrc : this.state.tshirt.imageSrc),
+            imageSrc: (this.state.tshirt.id === 17 || this.state.tshirt.id === 18 || this.state.tshirt.id === 19 || this.state.tshirt.id === 20 ? this.state.tshirt.catimageSrc : this.state.tshirt.imageSrc),
             imageAlt: this.state.tshirt.imageAlt,
             colors: this.state.selectedColor,
             sizes: this.state.selectedSize,
@@ -397,5 +396,5 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   addToCard : productId => dispatch(addToCard(productId))
 })
-      
+
 export default connect(mapStateToProps , mapDispatchToProps)(Tshirts);
