@@ -69,7 +69,7 @@ class Wallets extends Component {
           rating: 3.9,
           reviewCount: 117,
           href: '#',
-          imageSrc: (this.state.wallet.id === 1 || this.state.wallet.id === 2 || this.state.wallet.id === 3 || this.state.wallet.id === 4 ? this.state.wallet.catimageSrc : this.state.wallet.imageSrc),
+          imageSrc: (this.state.wallet.id === 13 || this.state.wallet.id === 14 || this.state.wallet.id === 15 || this.state.wallet.id === 16 ? this.state.wallet.catimageSrc : this.state.wallet.imageSrc),
           imageAlt: this.state.wallet.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,

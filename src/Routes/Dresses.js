@@ -69,7 +69,7 @@ class Dresses extends Component {
           rating: 3.9,
           reviewCount: 117,
           href: '#',
-          imageSrc: (this.state.dress.id === 1 || this.state.dress.id === 2 || this.state.dress.id === 3 || this.state.dress.id === 4 ? this.state.dress.catimageSrc : this.state.dress.imageSrc),
+          imageSrc: (this.state.dress.id === 41 || this.state.dress.id === 42 || this.state.dress.id === 43 || this.state.dress.id === 44 ? this.state.dress.catimageSrc : this.state.dress.imageSrc),
           imageAlt: this.state.dress.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,

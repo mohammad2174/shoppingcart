@@ -69,7 +69,7 @@ class Watches extends Component {
           rating: 3.9,
           reviewCount: 117,
           href: '#',
-          imageSrc: (this.state.watch.id === 1 || this.state.watch.id === 2 || this.state.watch.id === 3 || this.state.watch.id === 4 ? this.state.watch.catimageSrc : this.state.watch.imageSrc),
+          imageSrc: (this.state.watch.id === 9 || this.state.watch.id === 10 || this.state.watch.id === 11 || this.state.watch.id === 12 ? this.state.watch.catimageSrc : this.state.watch.imageSrc),
           imageAlt: this.state.watch.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,
@@ -357,6 +357,7 @@ class Watches extends Component {
               </div>
               <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                 <button
+                  type="button"
                   className={this.state.watch.inventory ? "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm" : "w-full inline-flex cursor-not-allowed justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"}
                   onClick={() => addToCard(this.state.watch.id) && this.setmodalClose()}
                   disabled = {this.state.watch.inventory ? '' : 'disabled'}
@@ -390,9 +391,9 @@ const mapStateToProps = state => {
     products : getProducts(state.products)
   }
 }
-  
+    
 const mapDispatchToProps = dispatch => ({
   addToCard : productId => dispatch(addToCard(productId))
 })
-  
+    
 export default connect(mapStateToProps , mapDispatchToProps)(Watches);
