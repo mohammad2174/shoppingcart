@@ -5,8 +5,8 @@ import { checkout } from "../actions";
 class Shop extends Component {
 
   render() {
-      const {  id, title, price, quantity, color ,imageAlt ,imageSrc, checkout } = this.props;
-
+      const {  id, title, price, quantity, color ,imageAlt ,catimageSrc, checkout } = this.props;
+      
     return (
         <div className="mt-8">
         <div className="flow-root">
@@ -14,7 +14,7 @@ class Shop extends Component {
             <li key={id} className="py-6 flex">
               <div className="flex-shrink-0 w-24 h-24 border border-gray-200 rounded-md overflow-hidden">
                 <img
-                  src={imageSrc}
+                  src={catimageSrc}
                   alt={imageAlt}
                   className="w-full h-full object-center object-cover"
                 />
@@ -39,7 +39,7 @@ class Shop extends Component {
                 </div>
               </div>
             </li>
-        </ul> 
+          </ul> 
         </div>
       </div>
     )

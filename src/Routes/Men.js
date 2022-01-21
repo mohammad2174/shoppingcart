@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
-import Cardlist from "../components/Cardlist";
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 
@@ -341,12 +340,6 @@ class Men extends Component {
                 ))}
               </div>
             </Popover.Group>
-
-            <div className="ml-auto flex items-center">
-              <div className="ml-4 flow-root lg:ml-6">
-                <Cardlist products />
-              </div>
-            </div>
           </div>
         </div>
       </nav>

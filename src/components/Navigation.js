@@ -1,12 +1,19 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Cardlist from "../components/Cardlist";
+import Card from "../components/Card";
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
+import { ShoppingBagIcon } from '@heroicons/react/outline'
 
 
 class Navigation extends Component {
-
+  state = {
+    setopen : false
+  }
+  setOpen = () => this.setState(prevState => ({
+    setopen : !prevState.setopen
+  }))
+  
     render() {
         const products = [
           {
@@ -124,6 +131,9 @@ class Navigation extends Component {
             ]
           }
         ]
+        const count = this.props.product.map(item => item.count)
+        const total = count.reduce((prev, curr) => (prev + curr), 0)
+        console.log(total);
         function classNames(...classes) {
           return classes.filter(Boolean).join(' ')
         }
@@ -212,7 +222,17 @@ class Navigation extends Component {
   
               <div className="ml-auto flex items-center">
                 <div className="ml-4 flow-root lg:ml-6">
-                  <Cardlist products />
+                  <button onClick={() => this.setOpen()} className="group -m-2 p-2 flex items-center">
+                  <ShoppingBagIcon
+                    className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                    aria-hidden="true"
+                  />
+                   <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{total}</span>
+                   <span className="sr-only">items in cart, view bag</span>
+                  </button>
+                  {
+                    (this.state.setopen) ? <Card  open={this.state.setopen} /> : ''
+                  }
                 </div>
               </div>
             </div>
