@@ -18,7 +18,8 @@ const products = (state = {}, action) => {
                 ...state,
                 [productId] : {
                     ...product,
-                    inventory : product.inventory - 1
+                    inventory : product.inventory - 1,
+                    count : product.count + 1
                 }
             }    
 

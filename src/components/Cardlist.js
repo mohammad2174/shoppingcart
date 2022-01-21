@@ -11,6 +11,7 @@ class Cardlist extends Component {
       }))
   render(){
       const { products } = this.props;
+
     return (
       <div>
            <button onClick={() => this.setOpen()} className="group -m-2 p-2 flex items-center">
