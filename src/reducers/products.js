@@ -12,14 +12,16 @@ const products = (state = {}, action) => {
                 }, {})
             }
         case ADD_TO_CARD:
-            let { productId } = action;
+            let { productId, color, size } = action;
             let product = state[productId];
             return {
                 ...state,
                 [productId] : {
                     ...product,
                     inventory : product.inventory - 1,
-                    count : product.count + 1
+                    count : product.count + 1,
+                    color : color,
+                    size : size
                 }
             }    
 

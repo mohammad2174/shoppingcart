@@ -41,7 +41,7 @@ const card = (state = initialState, action) => {
                 addedIds: subIds(state.addedIds, action),
                 quantityById: quantityById(state.quantityById, action)
             }
-        case ADD_TO_CARD: 
+        case ADD_TO_CARD:
             return {
                 addedIds: addedIds(state.addedIds, action),
                 quantityById: quantityById(state.quantityById, action)

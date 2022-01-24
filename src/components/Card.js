@@ -25,11 +25,11 @@ class Card extends Component {
     const {products, total, checkout} = this.props
     const hasProducts = products.length > 0
     const nodes = hasProducts ? (
-      products.map(product => <Shop key={product.id} {...product} />)
+      products.map(product => <Shop {...product} />)
     ) : (
-      <h3>Please add to the Shopping cart</h3>
+      <h3>Please add to the Shopping bag</h3>
     )
-
+      
     return (
         <Transition.Root show={this.state.open} as={Fragment}>
         <Dialog as="div" className="fixed inset-0 overflow-hidden" onClose={this.setOpen}>

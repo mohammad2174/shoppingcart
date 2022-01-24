@@ -133,7 +133,7 @@ class Navigation extends Component {
         ]
         const count = this.props.product.map(item => item.count)
         const total = count.reduce((prev, curr) => (prev + curr), 0)
-        console.log(total);
+       
         function classNames(...classes) {
           return classes.filter(Boolean).join(' ')
         }
@@ -231,7 +231,7 @@ class Navigation extends Component {
                    <span className="sr-only">items in cart, view bag</span>
                   </button>
                   {
-                    (this.state.setopen) ? <Card  open={this.state.setopen} /> : ''
+                    (this.state.setopen) ? <Card open={this.state.setopen} /> : ''
                   }
                 </div>
               </div>
