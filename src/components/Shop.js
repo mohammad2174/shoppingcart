@@ -5,7 +5,7 @@ import { checkout } from "../actions";
 class Shop extends Component {
 
   render() {
-      const {  id, title, price, quantity, color ,imageAlt ,catimageSrc, checkout } = this.props;
+      const {  id, title, price, quantity, color, size, imageAlt, catimageSrc, checkout } = this.props;
       
     return (
         <div className="mt-8">
@@ -27,6 +27,7 @@ class Shop extends Component {
                     <p className="ml-4">${price}</p>
                   </div>
                   <p className="mt-1 text-sm text-gray-500">{color}</p>
+                  <p className="mt-1 text-sm text-gray-500">{size}</p>
                 </div>
                 <div className="flex-1 flex items-end justify-between text-sm">
                   <p className="text-gray-500">Qty x {quantity}</p>
