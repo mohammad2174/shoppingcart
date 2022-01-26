@@ -34,12 +34,20 @@ const quantityById = (state = initialState.quantityById, action) => {
     }
 }
 
+const subById = (state = initialState.subById, action) => {
+    const { productId } = action;
+    return {
+        ...state,
+        [productId] : 0
+    }
+}
+
 const card = (state = initialState, action) => {
     switch (action.type) {
         case CHECKOUT_REQUEST:
             return {
                 addedIds: subIds(state.addedIds, action),
-                quantityById: quantityById(state.quantityById, action)
+                quantityById: subById(state.quantityById, action)
             }
         case ADD_TO_CARD:
             return {
