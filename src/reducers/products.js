@@ -1,4 +1,4 @@
-import { ADD_TO_CARD, RECIEVE_PRODUCTS } from "../constants/actionTypes";
+import { ADD_TO_CARD, RECIEVE_PRODUCTS, CHECKOUT_REQUEST } from "../constants/actionTypes";
 
 const products = (state = {}, action) => {
 
@@ -12,8 +12,8 @@ const products = (state = {}, action) => {
                 }, {})
             }
         case ADD_TO_CARD:
-            let { productId, color, size } = action;
-            let product = state[productId];
+            var { productId, color, size } = action;
+            var product = state[productId];
             return {
                 ...state,
                 [productId] : {
@@ -22,6 +22,17 @@ const products = (state = {}, action) => {
                     count : product.count + 1,
                     color : color,
                     size : size
+                }
+            }
+            case CHECKOUT_REQUEST:
+            var { productId } = action;
+            var product = state[productId];
+            return {
+                ...state,
+                [productId] : {
+                    ...product,
+                    inventory : (product.inventory >= 2) ? product.inventory + product.count : product.inventory + 1,
+                    count : (product.count >= 2) ? 0 : product.count - 1,
                 }
             }    
 
