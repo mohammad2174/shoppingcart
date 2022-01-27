@@ -24,6 +24,7 @@ import BrowseAll from "../Routes/BrowseAll";
 import Mantops from "../Routes/Mantops";
 import Womentops from "../Routes/Womentops";
 import Company from "../Routes/Company";
+import Checkout from "./Checkout";
 
 
 class Header extends Component {
@@ -50,6 +51,7 @@ class Header extends Component {
           </div>
           <hr />
           <Routes>
+          <Route path="checkout" element={<Checkout />} />
           <Route path="signin" element={<SignIn />} />
           <Route path="register" element={<Register />} />
           <Route path="store" element={<ProductList />} />
