@@ -80,12 +80,15 @@ class Card extends Component {
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                       <div className="mt-6">
-                        <button onClick={checkout}
+                      <Link to="/checkout">
+                        <button
                           disabled = {hasProducts ? '' : 'disabled'}
                           className={hasProducts ? "flex justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700" : "flex cursor-not-allowed justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"}
                         >
-                          {hasProducts ? <nav><Link to="signin">Checkout</Link></nav> : 'Checkout'}
+                          {/* {hasProducts ? <nav><Link to="signin">Checkout</Link></nav> : 'Checkout'} */}
+                          Checkout
                         </button>
+                        </Link>
                       </div>
                       <div className="mt-6 flex justify-center text-sm text-center text-gray-500">
                         <p>

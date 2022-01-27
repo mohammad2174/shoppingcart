@@ -66,7 +66,7 @@ class Tops extends Component {
           rating: 3.9,
           reviewCount: 117,
           href: '#',
-          imageSrc: (this.state.top.id === 5 || this.state.top.id === 6 || this.state.top.id === 7 || this.state.top.id === 8 ? this.state.top.catimageSrc : this.state.top.imageSrc),
+          imageSrc: (this.state.top.id === 1 || this.state.top.id === 2 || this.state.top.id === 3 || this.state.top.id === 4 ? this.state.top.catimageSrc : this.state.top.imageSrc),
           imageAlt: this.state.top.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,
