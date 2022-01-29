@@ -22,7 +22,7 @@ class Card extends Component {
   }
 
   render() {
-    const {products, total, checkout} = this.props
+    const {products, total } = this.props
     const hasProducts = products.length > 0
     const nodes = hasProducts ? (
       products.map(product => <Shop {...product} />)
@@ -128,8 +128,4 @@ const mapStateToProps = state => ({
   total: getTotal(state) 
 })
 
-const mapDispatchToProps = dispatch => ({
-  checkout : () => dispatch(checkout())
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Card);
+export default connect(mapStateToProps, null)(Card);
