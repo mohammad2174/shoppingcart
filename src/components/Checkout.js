@@ -1,12 +1,25 @@
 import React, { Component, Fragment } from "react";
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
+import { connect } from "react-redux";
+import { checkout } from "../actions";
 
 class Checkout extends Component {
 
   render() {
-      const {  id, title, price, quantity, color, size, imageAlt, catimageSrc, checkout } = this.props;
-      // console.log(id);
+      const { checkout } = this.props;
+      const products = this.props.products
+      const subtotal = this.props.total
+      const shipping = 5.00
+      const taxes = 5.52
+      const total = subtotal + shipping + taxes
+        const fib = (n) => {
+            let options = [];   
+            for (var i = 1; i <= n; i++) {
+              options.push(i);
+           }
+           return options
+        }
       function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
@@ -240,11 +253,12 @@ class Checkout extends Component {
                 <div className="mt-4 p-6 border border-gray-300 rounded-md">
                 <div className="flow-root">
         <ul role="list" className="-my-6 divide-y divide-gray-200">
-            <li key={id} className="py-6 flex">
+        {products.map((product) => (
+            <li key={product.id} className="py-6 flex">
               <div className="flex-shrink-0 w-24 h-24 border border-gray-200 rounded-md overflow-hidden">
                 <img
-                  src={catimageSrc}
-                  alt={imageAlt}
+                  src={product.catimageSrc}
+                  alt={product.imageAlt}
                   className="w-full h-full object-center object-cover"
                 />
               </div>
@@ -252,19 +266,21 @@ class Checkout extends Component {
               <div className="ml-4 flex-1 flex flex-col">
                 <div>
                   <div className="flex justify-between text-base font-medium text-gray-900">
-                    <h3>Basic Tee</h3>
+                    <h3>{product.name}</h3>
+                    <button type="button" onClick={() => checkout(product.id)}>
                     <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M19 24h-14c-1.104 0-2-.896-2-2v-16h18v16c0 1.104-.896 2-2 2m-9-14c0-.552-.448-1-1-1s-1 .448-1 1v9c0 .552.448 1 1 1s1-.448 1-1v-9zm6 0c0-.552-.448-1-1-1s-1 .448-1 1v9c0 .552.448 1 1 1s1-.448 1-1v-9zm6-5h-20v-2h6v-1.5c0-.827.673-1.5 1.5-1.5h5c.825 0 1.5.671 1.5 1.5v1.5h6v2zm-12-2h4v-1h-4v1z"/></svg>
+                    </button>
                   </div>
-                  <p className="mt-1 text-sm text-gray-500">blue</p>
-                  <p className="mt-1 text-sm text-gray-500">M</p>
+                  <p className="mt-1 text-sm text-gray-500">{product.color}</p>
+                  <p className="mt-1 text-sm text-gray-500">{product.size}</p>
                 </div>
                 <div className="flex-1 flex items-end justify-between text-sm">
-                  <p className="text-gray-500">$32.00</p>
+                  <p className="text-gray-500">${product.price}</p>
 
                   <Menu as="div" className="relative inline-block text-left">
       <div>
         <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
-          Options
+          {product.count}
           <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
         </Menu.Button>
       </div>
@@ -289,51 +305,10 @@ class Checkout extends Component {
                     'block px-4 py-2 text-sm'
                   )}
                 >
-                  Account settings
+                  {fib(product.inventory).map((fi) => (<h1>{fi}</h1>))}
                 </a>
               )}
             </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="#"
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
-                  )}
-                >
-                  Support
-                </a>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="#"
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
-                  )}
-                >
-                  License
-                </a>
-              )}
-            </Menu.Item>
-            <form method="POST" action="#">
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    type="submit"
-                    className={classNames(
-                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block w-full text-left px-4 py-2 text-sm'
-                    )}
-                  >
-                    Sign out
-                  </button>
-                )}
-              </Menu.Item>
-            </form>
           </div>
         </Menu.Items>
       </Transition>
@@ -341,125 +316,25 @@ class Checkout extends Component {
                 </div>
               </div>
             </li>
-            <li key={id} className="py-6 flex">
-              <div className="flex-shrink-0 w-24 h-24 border border-gray-200 rounded-md overflow-hidden">
-                <img
-                  src={catimageSrc}
-                  alt={imageAlt}
-                  className="w-full h-full object-center object-cover"
-                />
-              </div>
-
-              <div className="ml-4 flex-1 flex flex-col">
-                <div>
-                  <div className="flex justify-between text-base font-medium text-gray-900">
-                    <h3>Basic Tee</h3>
-                    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M19 24h-14c-1.104 0-2-.896-2-2v-16h18v16c0 1.104-.896 2-2 2m-9-14c0-.552-.448-1-1-1s-1 .448-1 1v9c0 .552.448 1 1 1s1-.448 1-1v-9zm6 0c0-.552-.448-1-1-1s-1 .448-1 1v9c0 .552.448 1 1 1s1-.448 1-1v-9zm6-5h-20v-2h6v-1.5c0-.827.673-1.5 1.5-1.5h5c.825 0 1.5.671 1.5 1.5v1.5h6v2zm-12-2h4v-1h-4v1z"/></svg>
-                  </div>
-                  <p className="mt-1 text-sm text-gray-500">blue</p>
-                  <p className="mt-1 text-sm text-gray-500">M</p>
-                </div>
-                <div className="flex-1 flex items-end justify-between text-sm">
-                  <p className="text-gray-500">$32.00</p>
-
-                  <Menu as="div" className="relative inline-block text-left">
-      <div>
-        <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
-          Options
-          <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-        </Menu.Button>
-      </div>
-
-      <Transition
-        as={Fragment}
-        enter="transition ease-out duration-100"
-        enterFrom="transform opacity-0 scale-95"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95"
-      >
-        <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="py-1">
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="#"
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
-                  )}
-                >
-                  Account settings
-                </a>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="#"
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
-                  )}
-                >
-                  Support
-                </a>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="#"
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
-                  )}
-                >
-                  License
-                </a>
-              )}
-            </Menu.Item>
-            <form method="POST" action="#">
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    type="submit"
-                    className={classNames(
-                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block w-full text-left px-4 py-2 text-sm'
-                    )}
-                  >
-                    Sign out
-                  </button>
-                )}
-              </Menu.Item>
-            </form>
-          </div>
-        </Menu.Items>
-      </Transition>
-                  </Menu>
-                </div>
-              </div>
-            </li>
+            ))}
           </ul> 
         </div>
         <div className="mt-6 border-t border-gray-200 py-6 px-4 sm:px-6">                   
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>$64.00</p>
+                        <p>${subtotal}</p>
                       </div>
                       <div className="flex mt-6 justify-between text-base font-medium text-gray-900">
                         <p>Shipping</p>
-                        <p>$5.00</p>
+                        <p>${shipping}</p>
                       </div>
                       <div className="flex mt-6 justify-between text-base font-medium text-gray-900">
                         <p>Taxes</p>
-                        <p>$5.52</p>
+                        <p>${taxes}</p>
                       </div>
                       <div className="flex mt-6 border-t border-gray-200 justify-between text-base font-medium text-gray-900">
                         <p>Total</p>
-                        <p>$75.52</p>
+                        <p>${total}</p>
                       </div>
 
                       <div className="mt-6">
@@ -479,4 +354,8 @@ class Checkout extends Component {
   }
 }
 
-export default Checkout;
+const mapDispatchToProps = dispatch => ({
+  checkout: productId => dispatch(checkout(productId))
+})
+
+export default connect(null, mapDispatchToProps)(Checkout);

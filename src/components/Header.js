@@ -25,11 +25,13 @@ import Mantops from "../Routes/Mantops";
 import Womentops from "../Routes/Womentops";
 import Company from "../Routes/Company";
 import Checkout from "./Checkout";
-
+import { connect } from "react-redux";
 
 class Header extends Component {
-
+  
   render() {
+    const {products , total} = this.props
+    // console.log(products);
     return (
       <header className="relative bg-white">
        <div className="lg:flex lg:justify-between">
@@ -51,7 +53,7 @@ class Header extends Component {
           </div>
           <hr />
           <Routes>
-          <Route path="checkout" element={<Checkout />} />
+          <Route path="checkout" element={<Checkout products={products} total={total} />} />
           <Route path="signin" element={<SignIn />} />
           <Route path="register" element={<Register />} />
           <Route path="store" element={<ProductList />} />
@@ -83,5 +85,19 @@ class Header extends Component {
   }
 }
 
+const getCardProducts = state => {
+  return state.card.addedIds.map(id => ({
+    ...state.products[id],
+    quantity : (state.card.quantityById[id] || 0)
+  }))
+}
 
-export default Header;
+const getTotal = state => state.card.addedIds.reduce((total, id) => total + state.products[id].price * (state.card.quantityById[id] || 0), 0)
+
+const mapStateToProps = state => ({
+  products: getCardProducts(state),
+  total: getTotal(state) 
+})
+export default connect(mapStateToProps, null)(Header);
+
+// export default Header;
