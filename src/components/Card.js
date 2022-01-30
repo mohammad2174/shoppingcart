@@ -5,7 +5,6 @@ import { XIcon } from '@heroicons/react/outline';
 import { connect } from "react-redux";
 import Shop from "./Shop";
 import { Link } from "react-router-dom";
-import {checkout} from "../actions";
 
 
 class Card extends Component {
