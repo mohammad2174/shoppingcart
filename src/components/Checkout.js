@@ -5,14 +5,35 @@ import { connect } from "react-redux";
 import { checkout } from "../actions";
 
 class Checkout extends Component {
+state = {
+  exclass: "p-4 mt-1 h-32 border border-gray-300 block w-full shadow-sm sm:text-sm rounded-md",
+  stclass: "p-4 mt-1 h-32 border-2 border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+  stfill: "#2f2ff7",
+  exfill: "gray",
+  shipping: 5
+}
 
+setSTClass = () => {
+  this.setState({exclass : "p-4 mt-1 h-32 border-2 border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"})
+  this.setState({stclass : "p-4 mt-1 h-32 border border-gray-300 block w-full shadow-sm sm:text-sm rounded-md"})
+  this.setState({stfill : "gray"})
+  this.setState({exfill : "#2f2ff7"})
+  this.setState({shipping: 16})
+}
+
+setEXClass = () => {
+  this.setState({stclass : "p-4 mt-1 h-32 border-2 border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"})
+  this.setState({exclass : "p-4 mt-1 h-32 border border-gray-300 block w-full shadow-sm sm:text-sm rounded-md"})
+  this.setState({exfill : "gray"})
+  this.setState({stfill : "#2f2ff7"})
+  this.setState({shipping : 5})
+}
   render() {
       const { checkout } = this.props;
       const products = this.props.products
       const subtotal = this.props.total
-      const shipping = 5.00
-      const taxes = 5.52
-      const total = subtotal + shipping + taxes
+      const taxes = 5.25
+      const total = Math.ceil(subtotal + this.state.shipping + taxes)
         const fib = (n) => {
             let options = [];   
             for (var i = 1; i <= n; i++) {
@@ -156,24 +177,24 @@ class Checkout extends Component {
                       <hr className="mt-10" />
                       <h2 className="mt-10 text-xl font-extrabold text-gray-800">Delivery method</h2>
                       <div className="flex mt-6 grid grid-cols-6 gap-6">
-                      <div className="col-span-6 sm:col-span-3">
-                      <div className="p-4 mt-1 h-32 border-2 border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                      <div className="col-span-6 sm:col-span-3 cursor-pointer">
+                      <div className={this.state.stclass} onClick={this.setEXClass}>
                       <div className="flex justify-between">
                       <p className="font-bold text-gray-800">Standard</p>
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="#2f2ff7" width="16" height="16" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.25 17.292l-4.5-4.364 1.857-1.858 2.643 2.506 5.643-5.784 1.857 1.857-7.5 7.643z"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill={this.state.stfill} width="16" height="16" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.25 17.292l-4.5-4.364 1.857-1.858 2.643 2.506 5.643-5.784 1.857 1.857-7.5 7.643z"/></svg>
                       </div>
                       <p className="mt-1 font-medium text-gray-500">4-10 business days</p>
-                      <p className="mt-8 font-bold text-gray-800">$5.00</p>
+                      <p className="mt-8 font-bold text-gray-800">$5</p>
                       </div>
                       </div>
-                      <div className="col-span-6 sm:col-span-3">
-                      <div className="p-4 mt-1 h-32 border border-gray-300 block w-full shadow-sm sm:text-sm rounded-md">
+                      <div className="col-span-6 sm:col-span-3 cursor-pointer">
+                      <div className={this.state.exclass} onClick={this.setSTClass}>
                       <div className="flex justify-between">
                       <p className="font-bold text-gray-800">Express</p>
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="#2f2ff7" width="16" height="16" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.25 17.292l-4.5-4.364 1.857-1.858 2.643 2.506 5.643-5.784 1.857 1.857-7.5 7.643z"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill={this.state.exfill} width="16" height="16" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.25 17.292l-4.5-4.364 1.857-1.858 2.643 2.506 5.643-5.784 1.857 1.857-7.5 7.643z"/></svg>
                       </div>
                       <p className="mt-1 font-medium text-gray-500">2-5 business days</p>
-                      <p className="mt-8 font-bold text-gray-800">$16.00</p>
+                      <p className="mt-8 font-bold text-gray-800">$16</p>
                       </div>
                       </div>
                       </div>
@@ -246,6 +267,13 @@ class Checkout extends Component {
                       />
                     </div>
                     </div>
+                    <div className="mt-6">
+                        <button
+                          className="flex justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                        >
+                          {`${'Pay $' + total}`}
+                        </button>
+                      </div>
                   </div>
                 </div>
                 <div className="relative md:row-span-1">
@@ -294,21 +322,23 @@ class Checkout extends Component {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="origin-top-right absolute right-0 mt-2 w-24 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
+          {fib(product.inventory).map((num) =>
             <Menu.Item>
               {({ active }) => (
                 <a
                   href="#"
                   className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                    active ? 'bg-gray-200 text-gray-900' : 'text-gray-700',
                     'block px-4 py-2 text-sm'
                   )}
                 >
-                  {fib(product.inventory).map((fi) => (<h1>{fi}</h1>))}
+                {num}
                 </a>
               )}
             </Menu.Item>
+            )}
           </div>
         </Menu.Items>
       </Transition>
@@ -326,7 +356,7 @@ class Checkout extends Component {
                       </div>
                       <div className="flex mt-6 justify-between text-base font-medium text-gray-900">
                         <p>Shipping</p>
-                        <p>${shipping}</p>
+                        <p>${this.state.shipping}</p>
                       </div>
                       <div className="flex mt-6 justify-between text-base font-medium text-gray-900">
                         <p>Taxes</p>
@@ -336,20 +366,12 @@ class Checkout extends Component {
                         <p>Total</p>
                         <p>${total}</p>
                       </div>
-
-                      <div className="mt-6">
-                        <button
-                          className="flex justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-                        >
-                          Confirm order
-                        </button>
-                      </div>
                     </div>
                 </div>
                 </div>
            </div>
       </div>
-    </div>  
+    </div> 
     )
   }
 }
