@@ -17,3 +17,9 @@ export const checkout = productId => ({
         type : types.CHECKOUT_REQUEST,
         productId
 })
+
+export const item = (productId, num) => ({
+        type : types.ITEM_REQUEST,
+        productId,
+        num
+})

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { connect } from "react-redux";
-import { checkout } from "../actions";
+import { checkout, item } from "../actions";
 
 class Checkout extends Component {
 state = {
@@ -10,7 +10,8 @@ state = {
   stclass: "p-4 mt-1 h-32 border-2 border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
   stfill: "#2f2ff7",
   exfill: "gray",
-  shipping: 5
+  shipping: 5,
+  count: this.props.products.map((product) => product.count)
 }
 
 setSTClass = () => {
@@ -28,12 +29,13 @@ setEXClass = () => {
   this.setState({stfill : "#2f2ff7"})
   this.setState({shipping : 5})
 }
+
   render() {
-      const { checkout } = this.props;
+      const { checkout, item, total } = this.props;
       const products = this.props.products
       const subtotal = this.props.total
       const taxes = 5.25
-      const total = Math.ceil(subtotal + this.state.shipping + taxes)
+      const totalamount = Math.ceil(subtotal + this.state.shipping + taxes)
         const fib = (n) => {
             let options = [];   
             for (var i = 1; i <= n; i++) {
@@ -44,6 +46,7 @@ setEXClass = () => {
       function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
+
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto py-9 sm:py-16 lg:py-20 lg:max-w-none">
@@ -243,7 +246,7 @@ setEXClass = () => {
                     </div>
                     <div className="flex gap-4">
                     <div className="w-10/12 mt-8 col-span-6 sm:col-span-3">
-                      <label htmlFor="expiration" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="expiration" className="block text-xs font-medium text-gray-700 md:text-sm">
                         Expiration date (MM/YY)
                       </label>
                       <input
@@ -255,7 +258,7 @@ setEXClass = () => {
                       />
                     </div>
                     <div className="mt-8 col-span-6 sm:col-span-3">
-                      <label htmlFor="cvc" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="cvc" className="block text-xs font-medium text-gray-700 md:text-sm">
                         CVC
                       </label>
                       <input
@@ -271,7 +274,7 @@ setEXClass = () => {
                         <button
                           className="flex justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
                         >
-                          {`${'Pay $' + total}`}
+                          {`${'Pay $' + totalamount}`}
                         </button>
                       </div>
                   </div>
@@ -283,7 +286,7 @@ setEXClass = () => {
         <ul role="list" className="-my-6 divide-y divide-gray-200">
         {products.map((product) => (
             <li key={product.id} className="py-6 flex">
-              <div className="flex-shrink-0 w-24 h-24 border border-gray-200 rounded-md overflow-hidden">
+              <div className="flex-shrink-0 w-28 h-28 border border-gray-200 rounded-md overflow-hidden">
                 <img
                   src={product.catimageSrc}
                   alt={product.imageAlt}
@@ -327,15 +330,16 @@ setEXClass = () => {
           {fib(product.inventory).map((num) =>
             <Menu.Item>
               {({ active }) => (
-                <a
-                  href="#"
+                <button
+                  value={num}
+                  onClick={() => item(product.id, num)}
                   className={classNames(
-                    active ? 'bg-gray-200 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
+                    active ? 'w-24 bg-gray-200 text-gray-900 cursor-pointer' : 'w-24 text-gray-700 cursor-pointer',
+                    'w-24 block px-4 py-2 text-sm cursor-pointer'
                   )}
                 >
                 {num}
-                </a>
+                </button>
               )}
             </Menu.Item>
             )}
@@ -364,7 +368,7 @@ setEXClass = () => {
                       </div>
                       <div className="flex mt-6 border-t border-gray-200 justify-between text-base font-medium text-gray-900">
                         <p>Total</p>
-                        <p>${total}</p>
+                        <p>${totalamount}</p>
                       </div>
                     </div>
                 </div>
@@ -376,8 +380,23 @@ setEXClass = () => {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  checkout: productId => dispatch(checkout(productId))
+const getCardProducts = state => {
+  return state.card.addedIds.map(id => ({
+    ...state.products[id],
+    quantity : (state.card.quantityById[id] || 0)
+  }))
+}
+
+const getTotal = state => state.card.addedIds.reduce((total, id) => total + state.products[id].price * (state.card.quantityById[id] || 0), 0)
+
+const mapStateToProps = state => ({
+  products: getCardProducts(state),
+  total: getTotal(state) 
 })
 
-export default connect(null, mapDispatchToProps)(Checkout);
+const mapDispatchToProps = dispatch => ({
+  checkout: productId => dispatch(checkout(productId)),
+  item: (productId, num) => dispatch(item(productId, num))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

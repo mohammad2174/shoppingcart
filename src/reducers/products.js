@@ -1,4 +1,4 @@
-import { ADD_TO_CARD, RECIEVE_PRODUCTS, CHECKOUT_REQUEST } from "../constants/actionTypes";
+import { ADD_TO_CARD, RECIEVE_PRODUCTS, CHECKOUT_REQUEST, ITEM_REQUEST } from "../constants/actionTypes";
 
 const products = (state = {}, action) => {
 
@@ -34,7 +34,18 @@ const products = (state = {}, action) => {
                     inventory : (product.inventory >= 2) ? product.inventory + product.count : product.inventory + 1,
                     count : (product.count >= 2) ? 0 : product.count - 1,
                 }
-            }    
+            }
+            case ITEM_REQUEST:
+            var { productId, num } = action;
+            var product = state[productId];
+            return {
+                ...state,
+                [productId] : {
+                    ...product,
+                    count : num,
+                    inventory: product.inventory - product.count
+                }
+            }     
 
         default: 
         return state
