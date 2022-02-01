@@ -1,4 +1,4 @@
-import { ADD_TO_CARD, CHECKOUT_REQUEST } from "../constants/actionTypes";
+import { ADD_TO_CARD, CHECKOUT_REQUEST, ITEM_REQUEST } from "../constants/actionTypes";
 
 
 const initialState = {
@@ -34,6 +34,14 @@ const quantityById = (state = initialState.quantityById, action) => {
     }
 }
 
+const countById = (state = initialState.quantityById, action) => {
+    const { productId, num } = action;
+    return {
+        ...state,
+        [productId] : num
+    }
+}
+
 const subById = (state = initialState.subById, action) => {
     const { productId } = action;
     return {
@@ -54,6 +62,11 @@ const card = (state = initialState, action) => {
                 addedIds: addedIds(state.addedIds, action),
                 quantityById: quantityById(state.quantityById, action)
             }
+        case ITEM_REQUEST:
+            return {
+                addedIds: addedIds(state.addedIds, action),
+                quantityById: countById(state.quantityById, action)
+            }    
         default:
             return state;
     }

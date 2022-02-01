@@ -98,6 +98,6 @@ const mapStateToProps = state => ({
   products: getCardProducts(state),
   total: getTotal(state) 
 })
-export default connect(mapStateToProps, null)(Header);
 
-// export default Header;
+
+export default connect(mapStateToProps, null)(Header);
