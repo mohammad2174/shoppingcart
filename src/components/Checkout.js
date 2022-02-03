@@ -10,8 +10,7 @@ state = {
   stclass: "p-4 mt-1 h-32 border-2 border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
   stfill: "#2f2ff7",
   exfill: "gray",
-  shipping: 5,
-  count: this.props.products.map((product) => product.count)
+  shipping: 5
 }
 
 setSTClass = () => {
@@ -33,7 +32,7 @@ setEXClass = () => {
   render() {
       const { checkout, item, total } = this.props;
       const products = this.props.products
-      const subtotal = this.props.total
+      const subtotal = total
       const taxes = 5.25
       const totalamount = Math.ceil(subtotal + this.state.shipping + taxes)
         const fib = (n) => {
@@ -50,7 +49,7 @@ setEXClass = () => {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto py-9 sm:py-16 lg:py-20 lg:max-w-none">
-          <div class="space-y-12 rounded-lg grid grid-cols-1 gap-16 md:grid-cols-2">
+          <div class="rounded-lg grid grid-cols-1 gap-16 md:grid-cols-2">
                 <div className="relative md:row-span-3">
                 <h2 className="text-xl font-extrabold text-gray-800">Contact information</h2>
                   <div className="col-span-6 sm:col-span-4">

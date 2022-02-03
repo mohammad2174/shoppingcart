@@ -25,13 +25,15 @@ import Mantops from "../Routes/Mantops";
 import Womentops from "../Routes/Womentops";
 import Company from "../Routes/Company";
 import Checkout from "./Checkout";
+import Product from "./Product";
 import { connect } from "react-redux";
 
 class Header extends Component {
   
   render() {
     const {products , total} = this.props
-    // console.log(products);
+    const totalproduct = this.props.totalproduct
+    
     return (
       <header className="relative bg-white">
        <div className="lg:flex lg:justify-between">
@@ -54,6 +56,7 @@ class Header extends Component {
           <hr />
           <Routes>
           <Route path="checkout" element={<Checkout products={products} total={total} />} />
+          <Route path="product/:id" element={<Product products={totalproduct} />} />
           <Route path="signin" element={<SignIn />} />
           <Route path="register" element={<Register />} />
           <Route path="store" element={<ProductList />} />

@@ -11,9 +11,11 @@ class App extends Component {
     shop.getProducts((products) => this.props.recieveProducts(products))
   }
   render() {
+    const { products } = this.props;
+
     return (
       <Router>
-        <Header />         
+        <Header totalproduct={products} />  
       </Router>      
     );
   }
@@ -23,4 +25,13 @@ const mapDispatchToProps = dispatch => ({
     recieveProducts : products => dispatch(recieveProducts(products))
 })
 
-export default connect(null, mapDispatchToProps)(App);
+const getProducts = products => Object.keys(products).map(id => products[id])
+
+const mapStateToProps = state => {
+  
+  return {
+    products : getProducts(state.products)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
