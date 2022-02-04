@@ -1,8 +1,9 @@
-import React, { Component, Fragment } from "react";
-import { Dialog, RadioGroup, Transition } from '@headlessui/react';
-import { XIcon } from '@heroicons/react/outline';
+import React, { Component } from "react";
+import { RadioGroup } from '@headlessui/react';
 import { StarIcon } from '@heroicons/react/solid'
 import Navigation from "../components/Navigation";
+import { connect } from "react-redux";
+import { addToCard } from "../actions";
 import { Link } from "react-router-dom";
 
 class Product extends Component {
@@ -41,9 +42,14 @@ class Product extends Component {
     })
   }
   render() {
+    const { addToCard } = this.props;
     const pathname = window.location.pathname.split('')
-    const id =  pathname[pathname.length - 1]
+    const id = pathname.length - 1 <= 9 ? pathname[pathname.length - 1] : pathname[(pathname.length - 2)].concat(pathname[(pathname.length - 1)])
     const products = this.props.products
+    const staricon = {
+      rating: 3.9,
+      reviewCount: 117
+    }
     function classNames(...classes) {
       return classes.filter(Boolean).join(' ')
     }
@@ -73,12 +79,12 @@ class Product extends Component {
                     <img
                     src={product.imageSrc}
                     alt={product.imageAlt}
-                    className="w-full rounded-lg object-center object-cover xl:h-56 lg:h-44 md:h-28"
+                    className="w-full rounded-lg object-center object-cover xl:h-80 lg:h-44 md:h-44"
                     />
                     <img
                     src={product.catimageSrc}
                     alt={product.imageAlt}
-                    className="mt-3 w-full rounded-lg object-center object-cover xl:h-56 lg:h-44 md:h-28"
+                    className="mt-3 w-full rounded-lg object-center object-cover xl:h-80 lg:h-44 md:h-44"
                     />
                   </div>
                   <div className="relative md:row-span-1">
@@ -92,7 +98,7 @@ class Product extends Component {
           <div className="max-w-2xl mx-auto py-4 lg:max-w-none">
             <h2 className="text-2xl lg:text-5xl md:text-4xl font-black text-gray-900">{product.name}</h2>
               <div class="mt-6 rounded-lg grid grid-cols-1 gap-1 md:grid-cols-3">
-                <div className="relative col-span-2">
+                <div className="relative w-fit col-span-2 border-r border-gray-200">
                   <span className="text-lg text-gray-800">{product.title}</span>
                   <h2 className="mt-12 text-base lg:text-lg md:text-lg col-span-2 font-black text-gray-900">Highlights</h2>
                 <div className="mt-8 relative col-span-2">
@@ -107,7 +113,34 @@ class Product extends Component {
                 <div className="mt-8 relative col-span-2">
                   <span className="text-lg text-gray-800">{product.detail}</span> 
                 </div>
-  
+                <div className="mt-12 grid grid-cols-4 gap-1">
+          <div className="col-span-1 -space-x-1 overflow-hidden">
+          <img
+          className="inline-block h-12 w-12 rounded-full ring-2 ring-white"
+          src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+          alt=""
+          />
+            <p className="mt-6 pl-0.5 text-sm lg:text-base md:text-base font-black text-gray-900">Emilia Russel</p>
+            <div className="mt-2 pl-0.5 flex items-center">
+            {[0, 1, 2, 3, 4].map((rating) => (
+            <StarIcon
+            key={rating}
+            className={classNames(
+            staricon.rating > rating ? 'text-gray-900' : 'text-gray-200',
+            'h-5 w-5 flex-shrink-0'
+            )}
+            aria-hidden="true"
+            />
+            ))}
+            </div>
+          </div>
+          <div class="col-span-3">
+            <h2 className="text-sm lg:text-base md:text-base font-black text-gray-700">This is the best white</h2>
+            <p className="mt-4 text-xs lg:text-sm md:text-sm text-gray-500">
+            The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming 'Charcoal Gray' limited release.
+            </p>
+          </div>
+          </div>
                 </div>
                 <div className="w-full items-start">
                     <h2 className="text-xl lg:text-4xl md:text-2xl font-black text-gray-900">${product.price}</h2>
@@ -119,16 +152,16 @@ class Product extends Component {
                               <StarIcon
                                 key={rating}
                                 className={classNames(
-                                  product.rating > rating ? 'text-gray-900' : 'text-gray-200',
+                                  staricon.rating > rating ? 'text-gray-900' : 'text-gray-200',
                                   'h-5 w-5 flex-shrink-0'
                                 )}
                                 aria-hidden="true"
                               />
                             ))}
                           </div>
-                          <p className="sr-only">{product.rating} out of 5 stars</p>
+                          <p className="sr-only">{staricon.rating} out of 5 stars</p>
                           <a href="#" className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                            {product.reviewCount} reviews
+                            {staricon.reviewCount} reviews
                           </a>
                         </div>
                     </div>
@@ -225,7 +258,8 @@ class Product extends Component {
                     </div>
                     <button
                       type="submit"
-                      className="mt-6 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"             
+                      className="mt-6 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      onClick={() => addToCard(product.id, this.state.selectedColor, this.state.selectedSize)}              
                     >
                       Add to bag
                     </button>                
@@ -241,6 +275,13 @@ class Product extends Component {
     )
   }
 }
-export default Product;
+
+const mapDispatchToProps = dispatch => ({
+  addToCard : (productId, color, size) => dispatch(addToCard(productId, color, size))
+})
+  
+export default connect(null , mapDispatchToProps)(Product);
+
+// export default Product;
 
   

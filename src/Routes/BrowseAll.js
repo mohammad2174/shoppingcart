@@ -5,6 +5,7 @@ import { StarIcon } from '@heroicons/react/solid';
 import Navigation from "../components/Navigation";
 import { connect } from "react-redux";
 import { addToCard } from "../actions";
+import { Link } from "react-router-dom";
 
 
 class BrowseAll extends Component {
@@ -106,10 +107,10 @@ class BrowseAll extends Component {
               <div className="mt-4 flex justify-between">
                 <div>
                   <h3 className="text-sm text-gray-700">
-                    <a href={womantop.href}>
-                      <span aria-hidden="true" className="absolute inset-0" />
-                      {womantop.name}
-                    </a>
+                  <Link to={`/product/${womantop.id}`}>
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {womantop.name}
+                      </Link>
                   </h3>
                   <p className="mt-1 text-sm text-gray-500">{womantop.describtion}</p>
                 </div>
@@ -137,10 +138,10 @@ class BrowseAll extends Component {
               <div className="mt-4 flex justify-between">
                 <div>
                   <h3 className="text-sm text-gray-700">
-                    <a href={mantop.href}>
-                      <span aria-hidden="true" className="absolute inset-0" />
-                      {mantop.name}
-                    </a>
+                  <Link to={`/product/${mantop.id}`}>
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {mantop.name}
+                      </Link>
                   </h3>
                   <p className="mt-1 text-sm text-gray-500">{mantop.describtion}</p>
                 </div>
@@ -169,10 +170,10 @@ class BrowseAll extends Component {
               <div className="mt-4 flex justify-between">
                 <div>
                   <h3 className="text-sm text-gray-700">
-                    <a href={dress.href}>
-                      <span aria-hidden="true" className="absolute inset-0" />
-                      {dress.name}
-                    </a>
+                    <Link to={`/product/${dress.id}`}>
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {dress.name}
+                      </Link>
                   </h3>
                   <p className="mt-1 text-sm text-gray-500">{dress.describtion}</p>
                 </div>
@@ -201,10 +202,10 @@ class BrowseAll extends Component {
               <div className="mt-4 flex justify-between">
                 <div>
                   <h3 className="text-sm text-gray-700">
-                    <a href={pant.href}>
-                      <span aria-hidden="true" className="absolute inset-0" />
-                      {pant.name}
-                    </a>
+                    <Link to={`/product/${pant.id}`}>
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {pant.name}
+                      </Link>
                   </h3>
                   <p className="mt-1 text-sm text-gray-500">{pant.describtion}</p>
                 </div>
@@ -233,10 +234,10 @@ class BrowseAll extends Component {
               <div className="mt-4 flex justify-between">
                 <div>
                   <h3 className="text-sm text-gray-700">
-                    <a href={denim.href}>
-                      <span aria-hidden="true" className="absolute inset-0" />
-                      {denim.name}
-                    </a>
+                    <Link to={`/product/${denim.id}`}>
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {denim.name}
+                      </Link>
                   </h3>
                   <p className="mt-1 text-sm text-gray-500">{denim.describtion}</p>
                 </div>
@@ -265,10 +266,10 @@ class BrowseAll extends Component {
               <div className="mt-4 flex justify-between">
                 <div>
                   <h3 className="text-sm text-gray-700">
-                    <a href={sweater.href}>
-                      <span aria-hidden="true" className="absolute inset-0" />
-                      {sweater.name}
-                    </a>
+                    <Link to={`/product/${sweater.id}`}>
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {sweater.name}
+                      </Link>
                   </h3>
                   <p className="mt-1 text-sm text-gray-500">{sweater.describtion}</p>
                 </div>
@@ -297,10 +298,10 @@ class BrowseAll extends Component {
               <div className="mt-4 flex justify-between">
                 <div>
                   <h3 className="text-sm text-gray-700">
-                    <a href={tshirt.href}>
-                      <span aria-hidden="true" className="absolute inset-0" />
-                      {tshirt.name}
-                    </a>
+                    <Link to={`/product/${tshirt.id}`}>
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {tshirt.name}
+                      </Link>
                   </h3>
                   <p className="mt-1 text-sm text-gray-500">{tshirt.describtion}</p>
                 </div>
@@ -329,10 +330,10 @@ class BrowseAll extends Component {
               <div className="mt-4 flex justify-between">
                 <div>
                   <h3 className="text-sm text-gray-700">
-                    <a href={jacket.href}>
-                      <span aria-hidden="true" className="absolute inset-0" />
-                      {jacket.name}
-                    </a>
+                    <Link to={`/product/${jacket.id}`}>
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {jacket.name}
+                      </Link>
                   </h3>
                   <p className="mt-1 text-sm text-gray-500">{jacket.describtion}</p>
                 </div>
@@ -361,10 +362,10 @@ class BrowseAll extends Component {
               <div className="mt-4 flex justify-between">
                 <div>
                   <h3 className="text-sm text-gray-700">
-                    <a href={Activewear.href}>
-                      <span aria-hidden="true" className="absolute inset-0" />
-                      {Activewear.name}
-                    </a>
+                    <Link to={`/product/${Activewear.id}`}>
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {Activewear.name}
+                      </Link>
                   </h3>
                   <p className="mt-1 text-sm text-gray-500">{Activewear.describtion}</p>
                 </div>
