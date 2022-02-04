@@ -5,6 +5,7 @@ import { StarIcon } from '@heroicons/react/solid';
 import Navigation from "../components/Navigation";
 import { connect } from "react-redux";
 import { addToCard } from "../actions";
+import { Link } from "react-router-dom";
 
 
 class Tshirts extends Component {
@@ -77,7 +78,11 @@ class Tshirts extends Component {
         <>
         <Navigation product={products} />
         <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-          <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">Tshirts</h2>
+        <div className="flex gap-2 text-base font-extrabold tracking-tight text-gray-900 sm:gap-5">
+          <Link to="/">Men</Link><span className="text-gray-400">\</span>
+          <Link to="/men">Clothing</Link><span className="text-gray-400">\</span>
+          <Link to="/t-shirts" className="text-gray-400">Tshirts</Link>
+          </div>
           <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             {tshirts.map((tshirt) => (
               <div key={tshirt.id} className="group relative">
@@ -94,10 +99,10 @@ class Tshirts extends Component {
                 <div className="mt-4 flex justify-between">
                   <div>
                     <h3 className="text-sm text-gray-700">
-                      <a href={tshirt.href}>
+                      <Link to={`/product/${tshirt.id}`}>
                         <span aria-hidden="true" className="absolute inset-0" />
                         {tshirt.name}
-                      </a>
+                      </Link>
                     </h3>
                     <p className="mt-1 text-sm text-gray-500">{tshirt.describtion}</p>
                   </div>
