@@ -84,7 +84,6 @@ class Card extends Component {
                           disabled = {hasProducts ? '' : 'disabled'}
                           className={hasProducts ? "flex justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700" : "flex cursor-not-allowed justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"}
                         >
-                          {/* {hasProducts ? <nav><Link to="signin">Checkout</Link></nav> : 'Checkout'} */}
                           Checkout
                         </button>
                         </Link>
