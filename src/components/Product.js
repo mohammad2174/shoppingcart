@@ -5,6 +5,8 @@ import Navigation from "../components/Navigation";
 import { connect } from "react-redux";
 import { addToCard } from "../actions";
 import { Link } from "react-router-dom";
+import { recieveProducts } from "../actions";
+
 
 class Product extends Component {
   state = {
@@ -42,17 +44,23 @@ class Product extends Component {
     })
   }
   render() {
-    const { addToCard } = this.props;
+    const { addToCard, recieveProducts } = this.props;
     const pathname = window.location.pathname.split('')
     const id = pathname.length - 1 <= 9 ? pathname[pathname.length - 1] : pathname[(pathname.length - 2)].concat(pathname[(pathname.length - 1)])
     const products = this.props.products
+    const index = (id - 1 === 0) || (id - 1 === 4) || (id - 1 === 8)|| (id - 1 === 12) || (id - 1 === 16)|| (id - 1 === 20) || (id - 1 === 24) || (id - 1 === 28) || (id - 1 === 32) || (id - 1 === 36) || (id - 1 === 40) || (id - 1 === 44) || (id - 1 === 48) || (id - 1 === 52) || (id - 1 === 56) || (id - 1 === 60)
+    const index1 = (id - 1 === 1) || (id - 1 === 5) || (id - 1 === 9)|| (id - 1 === 13) || (id - 1 === 17)|| (id - 1 === 21) || (id - 1 === 22) || (id - 1 === 23) || (id - 1 === 33) || (id - 1 === 37) || (id - 1 === 41) || (id - 1 === 45) || (id - 1 === 49) || (id - 1 === 53) || (id - 1 === 57) || (id - 1 === 61)
+    const index2 = (id - 1 === 2) || (id - 1 === 6) || (id - 1 === 10)|| (id - 1 === 14) || (id - 1 === 18)|| (id - 1 === 22) || (id - 1 === 23) || (id - 1 === 24) || (id - 1 === 34) || (id - 1 === 38) || (id - 1 === 42) || (id - 1 === 46) || (id - 1 === 50) || (id - 1 === 54) || (id - 1 === 58) || (id - 1 === 62)
+    const suggestions = index ? products.slice(id - 1, (id -1) + 4) : products.slice(id - 4, (id -1) + 1) && index1 ? products.slice(id - 2, (id -1) + 3) : products.slice(id - 3, (id -1) + 2) && index2 ? products.slice(id - 3, (id -1) + 2) : products.slice(id - 4, (id -1) + 1)
     const staricon = {
       rating: 3.9,
       reviewCount: 117
     }
+    
     function classNames(...classes) {
       return classes.filter(Boolean).join(' ')
     }
+
     return (
       <>
       <Navigation product={products} />
@@ -99,7 +107,7 @@ class Product extends Component {
             <h2 className="text-2xl lg:text-5xl md:text-4xl font-black text-gray-900">{product.name}</h2>
               <div class="mt-6 rounded-lg grid grid-cols-1 gap-1 md:grid-cols-3">
                 <div className="relative w-fit col-span-2 border-r border-gray-200">
-                  <span className="text-lg text-gray-800">{product.title}</span>
+                  <span className="text-base text-gray-800 md:text-lg">{product.title}</span>
                   <h2 className="mt-12 text-base lg:text-lg md:text-lg col-span-2 font-black text-gray-900">Highlights</h2>
                 <div className="mt-8 relative col-span-2">
                   <ul className="ml-4 text-base text-gray-400 list-disc">
@@ -111,9 +119,9 @@ class Product extends Component {
                 </div>
                 <h2 className="mt-8 text-base lg:text-lg md:text-lg col-span-2 font-black text-gray-900">Details</h2>
                 <div className="mt-8 relative col-span-2">
-                  <span className="text-lg text-gray-800">{product.detail}</span> 
+                  <span className="text-base text-gray-800 md:text-lg">{product.detail}</span> 
                 </div>
-                <div className="mt-12 grid grid-cols-4 gap-1">
+                <div className="mt-12 grid grid-cols-3 gap-1 md:grid-cols-4">
           <div className="col-span-1 -space-x-1 overflow-hidden">
           <img
           className="inline-block h-12 w-12 rounded-full ring-2 ring-white"
@@ -142,7 +150,7 @@ class Product extends Component {
           </div>
           </div>
                 </div>
-                <div className="w-full items-start">
+                <div className="w-full mt-8 items-start md:mt-0">
                     <h2 className="text-xl lg:text-4xl md:text-2xl font-black text-gray-900">${product.price}</h2>
                     <div className="mt-6">
                         <h4 className="sr-only">Reviews</h4>
@@ -266,6 +274,35 @@ class Product extends Component {
                 </div>
               </div>
           </div>
+          <div className="bg-white">
+      <div className="max-w-2xl mx-auto py-16 pr-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 md:pr-16">
+        <h2 className="text-lg font-extrabold tracking-tight text-gray-900 md:text-2xl">Customers also purchased</h2>
+        <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+          {suggestions.map((suggest) => (
+            <div key={suggest.id} className="group relative">
+              <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+                <img
+                  src={suggest.imageSrc}
+                  alt={suggest.imageAlt}
+                  className="w-full h-full object-center object-cover lg:w-full lg:h-full"
+                />
+              </div>
+              <div className="mt-4 flex justify-between">
+                <div>
+                  <h3 className="text-sm text-gray-700">
+                      <Link to={`/product/${suggest.id}`} onClick={() => recieveProducts(products)}>
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {suggest.name}
+                      </Link>
+                  </h3>
+                </div>
+                <p className="text-sm font-medium text-gray-900">${suggest.price}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
           </>  
           : 
           ""}
@@ -277,11 +314,10 @@ class Product extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  addToCard : (productId, color, size) => dispatch(addToCard(productId, color, size))
+  addToCard : (productId, color, size) => dispatch(addToCard(productId, color, size)),
+  recieveProducts : (products) => dispatch(recieveProducts(products))
 })
   
 export default connect(null , mapDispatchToProps)(Product);
-
-// export default Product;
 
   
