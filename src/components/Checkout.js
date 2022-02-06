@@ -34,6 +34,7 @@ setEXClass = () => {
       const products = this.props.products
       const subtotal = total
       const taxes = 5.25
+      const date = new Date((new Date()).toJSON()).toDateString().slice(4,10).concat(',').concat(new Date((new Date()).toJSON()).toDateString().slice(10,15))
       const totalamount = Math.ceil(subtotal + this.state.shipping + taxes)
         const fib = (n) => {
             let options = [];   
@@ -47,9 +48,21 @@ setEXClass = () => {
       }
 
     return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="max-w-2xl mx-auto py-9 sm:py-16 lg:py-20 lg:max-w-none">
-          <div class="rounded-lg grid grid-cols-1 gap-16 md:grid-cols-2">
+      <div className="max-w-7xl mt-16 mx-auto px-4 sm:px-6 lg:px-8">
+        <div>
+        <p className="mb-6 text-base font-extrabold text-gray-800">Preparing to ship on {date}</p>
+        <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+          <div class="bg-indigo-600 h-2.5 w-2/5 lg:w-2/6 rounded-full"></div>
+          <div className="mt-6 grid grid-cols-4 gap-14 md:gap-60 text-xs md:text-sm font-bold">
+            <p className="text-indigo-500">Order&nbsp;placed</p>
+            <p className="text-indigo-500">Processing</p>
+            <p className="text-gray-500">Shipped</p>
+            <p className="text-gray-500 justify-self-end">Delivered</p>
+          </div>
+        </div>
+        </div>
+      <div className="max-w-2xl mx-auto py-9 sm:py-16 lg:mt-50 lg:max-w-none">
+          <div class="mt-16 rounded-lg grid grid-cols-1 gap-16 md:grid-cols-2">
                 <div className="relative md:row-span-3">
                 <h2 className="text-xl font-extrabold text-gray-800">Contact information</h2>
                   <div className="col-span-6 sm:col-span-4">
