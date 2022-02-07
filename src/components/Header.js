@@ -27,6 +27,7 @@ import Company from "../Routes/Company";
 import Checkout from "./Checkout";
 import Product from "./Product";
 import { connect } from "react-redux";
+import Order from "./Order";
 
 class Header extends Component {
   
@@ -57,6 +58,7 @@ class Header extends Component {
           <Routes>
           <Route path="checkout" element={<Checkout products={products} total={total} />} />
           <Route path="product/:id" element={<Product products={totalproduct} />} />
+          <Route path="order" element={<Order products={products} total={total} />} />
           <Route path="signin" element={<SignIn />} />
           <Route path="register" element={<Register />} />
           <Route path="store" element={<ProductList />} />
