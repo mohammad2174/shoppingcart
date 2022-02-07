@@ -13,7 +13,8 @@
         "inventory": 4,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 2,
@@ -29,7 +30,8 @@
         "inventory": 3,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 3,
@@ -45,7 +47,8 @@
         "inventory": 5,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 4,
@@ -61,7 +64,8 @@
         "inventory": 2,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 5,
@@ -77,7 +81,8 @@
         "inventory": 10,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 6,
@@ -93,7 +98,8 @@
         "inventory": 6,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 7,
@@ -109,7 +115,8 @@
         "inventory": 6,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 8,
@@ -125,7 +132,8 @@
         "inventory": 4,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 9,
@@ -141,7 +149,8 @@
         "inventory": 2,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 10,
@@ -157,7 +166,8 @@
         "inventory": 9,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 11,
@@ -173,7 +183,8 @@
         "inventory": 14,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 12,
@@ -189,7 +200,8 @@
         "inventory": 8,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 13,
@@ -205,7 +217,8 @@
         "inventory": 14,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 14,
@@ -221,7 +234,8 @@
         "inventory": 5,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 15,
@@ -237,7 +251,8 @@
         "inventory": 9,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 16,
@@ -253,7 +268,8 @@
         "inventory": 2,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 17,
@@ -269,7 +285,8 @@
         "inventory": 6,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 18,
@@ -285,7 +302,8 @@
         "inventory": 5,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 19,
@@ -301,7 +319,8 @@
         "inventory": 1,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 20,
@@ -317,7 +336,8 @@
         "inventory": 9,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 21,
@@ -333,7 +353,8 @@
         "inventory": 6,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 22,
@@ -349,7 +370,8 @@
         "inventory": 3,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 23,
@@ -365,7 +387,8 @@
         "inventory": 7,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 24,
@@ -381,7 +404,8 @@
         "inventory": 8,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 25,
@@ -397,7 +421,8 @@
         "inventory": 2,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 26,
@@ -413,7 +438,8 @@
         "inventory": 12,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 27,
@@ -429,7 +455,8 @@
         "inventory": 19,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 28,
@@ -445,7 +472,8 @@
         "inventory": 25,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 29,
@@ -461,7 +489,8 @@
         "inventory": 12,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 30,
@@ -477,7 +506,8 @@
         "inventory": 17,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 31,
@@ -493,7 +523,8 @@
         "inventory": 19,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 32,
@@ -509,7 +540,8 @@
         "inventory": 10,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 33,
@@ -525,7 +557,8 @@
         "inventory": 6,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 34,
@@ -541,7 +574,8 @@
         "inventory": 7,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 35,
@@ -557,7 +591,8 @@
         "inventory": 14,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 36,
@@ -573,7 +608,8 @@
         "inventory": 3,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 37,
@@ -589,7 +625,8 @@
         "inventory": 9,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 38,
@@ -605,7 +642,8 @@
         "inventory": 14,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 39,
@@ -621,7 +659,8 @@
         "inventory": 11,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 40,
@@ -637,7 +676,8 @@
         "inventory": 7,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 41,
@@ -653,7 +693,8 @@
         "inventory": 5,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 42,
@@ -669,7 +710,8 @@
         "inventory": 17,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 43,
@@ -685,7 +727,8 @@
         "inventory": 6,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 44,
@@ -701,7 +744,8 @@
         "inventory": 10,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 45,
@@ -717,7 +761,8 @@
         "inventory": 6,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 46,
@@ -733,7 +778,8 @@
         "inventory": 8,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 47,
@@ -749,7 +795,8 @@
         "inventory": 11,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 48,
@@ -765,7 +812,8 @@
         "inventory": 4,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 49,
@@ -781,7 +829,8 @@
         "inventory": 11,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 50,
@@ -797,7 +846,8 @@
         "inventory": 15,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 51,
@@ -813,7 +863,8 @@
         "inventory": 8,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 52,
@@ -829,7 +880,8 @@
         "inventory": 6,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 53,
@@ -845,7 +897,8 @@
         "inventory": 2,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 54,
@@ -861,7 +914,8 @@
         "inventory": 9,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 55,
@@ -877,7 +931,8 @@
         "inventory": 15,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 56,
@@ -893,7 +948,8 @@
         "inventory": 7,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 57,
@@ -909,7 +965,8 @@
         "inventory": 7,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 58,
@@ -925,7 +982,8 @@
         "inventory": 13,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 59,
@@ -941,7 +999,8 @@
         "inventory": 6,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       },
       {
         "id": 60,
@@ -957,7 +1016,8 @@
         "inventory": 9,
         "count": 0,
         "color": "White",
-        "size": "M"
+        "size": "M",
+        "shipping": 5
       }
 ]
 

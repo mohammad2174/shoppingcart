@@ -23,3 +23,9 @@ export const item = (productId, num) => ({
         productId,
         num
 })
+
+export const order = (productId, shipping) => ({
+        type : types.ORDER_REQUEST,
+        productId,
+        shipping
+})

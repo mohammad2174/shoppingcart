@@ -2,7 +2,8 @@ import React, { Component, Fragment } from "react";
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { connect } from "react-redux";
-import { checkout, item } from "../actions";
+import { checkout, item, order } from "../actions";
+import { Link } from "react-router-dom";
 
 class Checkout extends Component {
 state = {
@@ -10,7 +11,7 @@ state = {
   stclass: "p-4 mt-1 h-32 border-2 border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
   stfill: "#2f2ff7",
   exfill: "gray",
-  shipping: 5
+  shipping: this.props.products.find(product => {return product.shipping}).shipping
 }
 
 setSTClass = () => {
@@ -30,10 +31,11 @@ setEXClass = () => {
 }
 
   render() {
-      const { checkout, item, total } = this.props;
+      const { checkout, item, total, order } = this.props;
       const products = this.props.products
       const subtotal = total
       const taxes = 5.25
+      const id = products.find(product => {return product.id}).id
       const date = new Date((new Date()).toJSON()).toDateString().slice(4,10).concat(',').concat(new Date((new Date()).toJSON()).toDateString().slice(10,15))
       const totalamount = Math.ceil(subtotal + this.state.shipping + taxes)
         const fib = (n) => {
@@ -46,7 +48,6 @@ setEXClass = () => {
       function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
-
     return (
       <div className="max-w-7xl mt-16 mx-auto px-4 sm:px-6 lg:px-8">
         <div>
@@ -64,7 +65,7 @@ setEXClass = () => {
       <div className="max-w-2xl mx-auto py-9 sm:py-16 lg:mt-50 lg:max-w-none">
           <div class="mt-16 rounded-lg grid grid-cols-1 gap-16 md:grid-cols-2">
                 <div className="relative md:row-span-3">
-                <h2 className="text-xl font-extrabold text-gray-800">Contact information</h2>
+                <h2 className="text-xl font-extrabold text-gray-800">Contact information</h2>    
                   <div className="col-span-6 sm:col-span-4">
                       <label htmlFor="email-address" className="mt-6 block text-sm font-medium text-gray-700">
                         Email address
@@ -283,11 +284,14 @@ setEXClass = () => {
                     </div>
                     </div>
                     <div className="mt-6">
+                      <Link to="/order">
                         <button
+                          onClick={() => order(id, this.state.shipping)}
                           className="flex justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
                         >
                           {`${'Pay $' + totalamount}`}
                         </button>
+                        </Link>  
                       </div>
                   </div>
                 </div>
@@ -342,6 +346,7 @@ setEXClass = () => {
           {fib(product.inventory).map((num) =>
             <Menu.Item>
               {({ active }) => (
+                
                 <button
                   value={num}
                   onClick={() => item(product.id, num)}
@@ -365,7 +370,7 @@ setEXClass = () => {
             ))}
           </ul> 
         </div>
-        <div className="mt-6 border-t border-gray-200 py-6 px-4 sm:px-6">                   
+                <div className="mt-6 border-t border-gray-200 py-6 px-4 sm:px-6">                   
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
                         <p>${subtotal}</p>
@@ -382,7 +387,7 @@ setEXClass = () => {
                         <p>Total</p>
                         <p>${totalamount}</p>
                       </div>
-                    </div>
+                </div>
                 </div>
                 </div>
            </div>
@@ -408,7 +413,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   checkout: productId => dispatch(checkout(productId)),
-  item: (productId, num) => dispatch(item(productId, num))
+  item: (productId, num) => dispatch(item(productId, num)),
+  order: (productId, shipping) => dispatch(order(productId, shipping))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
