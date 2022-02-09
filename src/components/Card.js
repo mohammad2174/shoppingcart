@@ -5,6 +5,10 @@ import { XIcon } from '@heroicons/react/outline';
 import { connect } from "react-redux";
 import Shop from "./Shop";
 import { Link } from "react-router-dom";
+import {  RadioGroup } from '@headlessui/react';
+import { StarIcon } from '@heroicons/react/solid';
+import Navigation from "../components/Navigation";
+import { addToCard } from "../actions";
 
 
 class Card extends Component {

@@ -353,7 +353,7 @@ class Men extends Component {
                     {category.featured.map((item) => (
                       <>
                       {item.name === 'New Arrivals' ? 
-                      <Link to="/">
+                      <Link to="/store">
                       <div key={item.name} className="group relative text-base sm:text-sm">
                         <div className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
                           <img
@@ -373,7 +373,7 @@ class Men extends Component {
                       </Link>
                        : ''}
                        {item.name === 'Artwork Tees' ? 
-                      <Link to="/">
+                      <Link to="/store">
                       <div key={item.name} className="group relative text-base sm:text-sm">
                         <div className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
                           <img
