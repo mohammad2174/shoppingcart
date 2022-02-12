@@ -28,13 +28,17 @@ import Checkout from "./Checkout";
 import Product from "./Product";
 import { connect } from "react-redux";
 import Order from "./Order";
+import FullNelson from "../Routes/Full-Nelson";
+import MyWay from "../Routes/My-Way";
+import ReArranged from "../Routes/Re-Arranged";
+import Counterfeit from "../Routes/Counterfeit";
 
 class Header extends Component {
   
   render() {
     const {products , total} = this.props
     const totalproduct = this.props.totalproduct
-    
+
     return (
       <header className="relative bg-white">
        <div className="lg:flex lg:justify-between">
@@ -59,6 +63,10 @@ class Header extends Component {
           <Route path="checkout" element={<Checkout products={products} total={total} />} />
           <Route path="product/:id" element={<Product products={totalproduct} />} />
           <Route path="order" element={<Order products={products} total={total} />} />
+          <Route path="full-nelson" element={<FullNelson />} />
+          <Route path="my-way" element={<MyWay />} />
+          <Route path="re-arranged" element={<ReArranged />} />
+          <Route path="counterfeit" element={<Counterfeit />} />
           <Route path="signin" element={<SignIn />} />
           <Route path="register" element={<Register />} />
           <Route path="store" element={<ProductList />} />
