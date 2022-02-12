@@ -422,10 +422,11 @@ class Men extends Component {
                                 {item.name === 'Sunglasses' ? <Link to="/sunglasses">{item.name}</Link> : ''}
                                 {item.name === 'Hats' ? <Link to="/hats">{item.name}</Link> : ''}
                                 {item.name === 'Belts' ? <Link to="/belts">{item.name}</Link> : ''}
-                                {item.name === 'Full Nelson' ? <Link to="/">{item.name}</Link> : ''}
-                                {item.name === 'My Way' ? <Link to="/">{item.name}</Link> : ''}
-                                {item.name === 'Re-Arranged' ? <Link to="/">{item.name}</Link> : ''}
-                                {item.name === 'Counterfeit' ? <Link to="/">{item.name}</Link> : ''}
+                                {item.name === 'Full Nelson' ? <Link to="/full-nelson">{item.name}</Link> : ''}
+                                {item.name === 'My Way' ? <Link to="/my-way">{item.name}</Link> : ''}
+                                {item.name === 'Re-Arranged' ? <Link to="/re-arranged">{item.name}</Link> : ''}
+                                {item.name === 'Counterfeit' ? <Link to="/counterfeit">{item.name}</Link> : ''}
+                                {item.name === 'Significant Other' ? <Link to="/store">{item.name}</Link> : ''}
                               </a>
                             </li>
                           ))}

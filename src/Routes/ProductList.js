@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 
 class ProductsList extends Component {
@@ -11,10 +12,10 @@ class ProductsList extends Component {
         <p className="mt-8 text-gray-700">Organize is a system to kepp your desk tidy and photo-worthy all day long. Procrastinate your work while you<br /> meticulously arrange items into dedicated trays.</p>
         </div>
         <div class="mt-8 rounded-lg grid grid-cols-1 gap-16 md:grid-cols-2 justify-items-center">
-          <div><p className="font-bold text-indigo-700">Full Nelson</p><p className="mt-4">Made from natural materials. Grain and color vary with each team.</p></div>
-          <div><p className="font-bold text-indigo-700">My Way</p><p className="mt-4">Solid walnut base with rare earth magnets and polycarbonate add-ons.</p></div>
-          <div><p className="font-bold text-indigo-700">Re-Arranged</p><p className="mt-4">Designed by My Way, Includes Small Tray, Large Tray, Pen Tray ,Inc.</p></div>
-          <div><p className="font-bold text-indigo-700">Counterfeit</p><p className="mt-4">Everything you need, nothing you don't, made real close need you are.</p></div>
+          <div><Link to="/full-nelson"><p className="font-bold text-indigo-700">Full Nelson</p></Link><p className="mt-4">Made from natural materials. Grain and color vary with each team.</p></div>
+          <div><Link to="/my-way"><p className="font-bold text-indigo-700">My Way</p></Link><p className="mt-4">Solid walnut base with rare earth magnets and polycarbonate add-ons.</p></div>
+          <div><Link to="/re-arranged"><p className="font-bold text-indigo-700">Re-Arranged</p></Link><p className="mt-4">Designed by My Way, Includes Small Tray, Large Tray, Pen Tray ,Inc.</p></div>
+          <div><Link to="/counterfeit"><p className="font-bold text-indigo-700">Counterfeit</p></Link><p className="mt-4">Everything you need, nothing you don't, made real close need you are.</p></div>
         </div>
       </>
     )
