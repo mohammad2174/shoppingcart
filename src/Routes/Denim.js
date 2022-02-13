@@ -174,7 +174,7 @@ class Denim extends Component {
                               <StarIcon
                                 key={rating}
                                 className={classNames(
-                                  product.rating > rating ? 'text-gray-900' : 'text-gray-200',
+                                  product.rating > rating ? 'text-yellow-400' : 'text-gray-200',
                                   'h-5 w-5 flex-shrink-0'
                                 )}
                                 aria-hidden="true"

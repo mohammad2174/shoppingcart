@@ -1,5 +1,6 @@
-import React, { Component } from "react";
-import { RadioGroup } from '@headlessui/react';
+import React, { Component, Fragment } from "react";
+import { Dialog, RadioGroup, Transition } from '@headlessui/react';
+import { XIcon } from '@heroicons/react/outline';
 import { StarIcon } from '@heroicons/react/solid'
 import Navigation from "../components/Navigation";
 import { connect } from "react-redux";
@@ -26,10 +27,43 @@ class Product extends Component {
       { name: 'XXXL', inStock: false },
     ],
     open : false,
+    star : {
+      rating: 0,
+      reviewCount: 0
+    },
+    message : '',
+    subject : '',
     modalopen : false,
     top : '',
     selectedColor : '',
     selectedSize : ''
+  }
+
+  setOpen = () => {
+    this.setState({open : true})
+  }
+
+  setClose = () => {
+    this.setState({open : false})
+  }
+
+  setStar = () => {
+    this.setState({star : {
+      rating: this.state.star.rating >= 5 ? 0 : this.state.star.rating + 1,
+      reviewCount: 0 + 1
+    }})
+  }
+
+  messageChange = (e) => {
+    this.setState({
+      message : e.target.value
+    })
+  }
+
+  subjectChange = (e) => {
+    this.setState({
+      subject : e.target.value
+    })
   }
 
   setSelectedColor = (e) => {
@@ -43,6 +77,14 @@ class Product extends Component {
       selectedSize : e.name 
     })
   }
+
+  scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
   render() {
     const { addToCard, recieveProducts } = this.props;
     const pathname = window.location.pathname.split('')
@@ -56,7 +98,7 @@ class Product extends Component {
       rating: 3.9,
       reviewCount: 117
     }
-    
+
     function classNames(...classes) {
       return classes.filter(Boolean).join(' ')
     }
@@ -122,6 +164,7 @@ class Product extends Component {
                   <span className="text-base text-gray-800 md:text-lg">{product.detail}</span> 
                 </div>
                 <div className="mt-12 grid grid-cols-3 gap-1 md:grid-cols-4">
+          {this.state.message && this.state.subject ?       
           <div className="col-span-1 -space-x-1 overflow-hidden">
           <img
           className="inline-block h-12 w-12 rounded-full ring-2 ring-white"
@@ -134,7 +177,7 @@ class Product extends Component {
             <StarIcon
             key={rating}
             className={classNames(
-            staricon.rating > rating ? 'text-gray-900' : 'text-gray-200',
+            this.state.star.rating > rating ? 'text-yellow-400' : 'text-gray-200',
             'h-5 w-5 flex-shrink-0'
             )}
             aria-hidden="true"
@@ -142,11 +185,123 @@ class Product extends Component {
             ))}
             </div>
           </div>
+          : '' }
+          {this.state.message && this.state.subject ? 
           <div class="col-span-3">
-            <h2 className="text-sm lg:text-base md:text-base font-black text-gray-700">This is the best white</h2>
-            <p className="mt-4 text-xs lg:text-sm md:text-sm text-gray-500">
-            The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming 'Charcoal Gray' limited release.
-            </p>
+          <h2 className="text-sm lg:text-base md:text-base font-black text-gray-700">{this.state.subject}</h2>
+          <p className="mt-4 text-xs lg:text-sm md:text-sm text-gray-500">
+          {this.state.message}
+          </p>
+          </div>
+          : '' }
+          <div className="col-span-3">
+          <h2 className="mt-8 text-base lg:text-lg md:text-lg col-span-2 font-black text-gray-900">Share your thoughts</h2>
+          <p className="mt-2 text-sm lg:text-base md:text-base text-gray-500">
+            if you've used this poducts, share your thoughts with other customers
+          </p>
+          <button
+            type="submit"
+            className="mt-6 w-3/4 h-10 border border-gray-300 rounded-md py-3 px-8 flex items-center justify-center text-base font-medium hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+            onClick={() => this.setOpen()}              
+          >
+            Write a review
+          </button>
+          <Transition.Root show={this.state.open} as={Fragment}>
+      <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={this.setOpen}>
+        <div className="flex min-h-screen text-center md:block md:px-2 lg:px-4" style={{ fontSize: 0 }}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <Dialog.Overlay className="hidden fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity md:block" />
+          </Transition.Child>
+
+          {/* This element is to trick the browser into centering the modal contents. */}
+          <span className="hidden md:inline-block md:align-middle md:h-screen" aria-hidden="true">
+            &#8203;
+          </span>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
+            enterTo="opacity-100 translate-y-0 md:scale-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100 translate-y-0 md:scale-100"
+            leaveTo="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
+          >
+            <div className="flex text-base text-left transform transition w-full md:inline-block md:max-w-2xl md:px-4 md:my-8 md:align-middle lg:max-w-4xl">
+              <div className="w-full relative flex items-center bg-white px-4 pt-14 pb-8 overflow-hidden shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
+                <button
+                  type="button"
+                  className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8"
+                  onClick={() => this.setClose()}
+                >
+                  <span className="sr-only">Close</span>
+                  <XIcon className="h-6 w-6" aria-hidden="true" />
+                </button>
+
+                <div className="w-full cursor-pointer grid grid-cols-1 gap-y-8 gap-x-6 items-start sm:grid-cols-12 lg:gap-x-8">
+                  <div className="sm:col-span-full lg:col-span-full">
+                    <h2 className="text-2xl font-extrabold text-gray-900 sm:pr-12">{product.name}</h2>
+                    <div className="mt-2 pl-0.5 flex items-center">
+                      {[0, 1, 2, 3, 4].map((rating) => (
+                      <StarIcon
+                        key={rating}
+                        className={classNames(
+                        this.state.star.rating > rating ? 'text-yellow-400' : 'text-gray-200',
+                        'h-5 w-5 flex-shrink-0'
+                      )}
+                        aria-hidden="true"
+                        onClick={() => this.setStar()}
+                      />
+                      ))}
+                    </div>
+                    <label htmlFor="street-address" className="mt-4 block text-sm font-medium text-gray-700">
+                      Subject
+                    </label>
+                    <input
+                      type="text"
+                      name="subject"
+                      value={this.state.subject}
+                      id="subject"
+                      autoComplete="subject"
+                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      onChange={this.subjectChange} 
+                    />
+                      <label htmlFor="message" className="mt-4 block text-sm font-medium text-gray-700">
+                        Message
+                      </label>
+                      <textarea
+                        type="text"
+                        name="message"
+                        value={this.state.message}
+                        id="message"
+                        autoComplete="address-level2"
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        onChange={this.messageChange}  
+                      />
+                      <div className="mt-8">
+                      <button
+                        type="submit"
+                        className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        onClick={() => this.setClose()}
+                      >
+                        Submit
+                      </button>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Transition.Child>
+        </div>
+      </Dialog>
+    </Transition.Root> 
           </div>
           </div>
                 </div>
@@ -160,16 +315,16 @@ class Product extends Component {
                               <StarIcon
                                 key={rating}
                                 className={classNames(
-                                  staricon.rating > rating ? 'text-gray-900' : 'text-gray-200',
+                                  this.state.star.rating > rating ? 'text-yellow-400' : 'text-gray-200',
                                   'h-5 w-5 flex-shrink-0'
                                 )}
                                 aria-hidden="true"
                               />
                             ))}
                           </div>
-                          <p className="sr-only">{staricon.rating} out of 5 stars</p>
+                          <p className="sr-only">{product.rating} out of 5 stars</p>
                           <a href="#" className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                            {staricon.reviewCount} reviews
+                            {this.state.star.reviewCount} reviews
                           </a>
                         </div>
                     </div>
@@ -290,7 +445,7 @@ class Product extends Component {
               <div className="mt-4 flex justify-between">
                 <div>
                   <h3 className="text-sm text-gray-700">
-                      <Link to={`/product/${suggest.id}`} onClick={() => recieveProducts(products)}>
+                      <Link to={`/product/${suggest.id}`} onClick={() => recieveProducts(products) && this.scrollToTop()}>
                         <span aria-hidden="true" className="absolute inset-0" />
                         {suggest.name}
                       </Link>
