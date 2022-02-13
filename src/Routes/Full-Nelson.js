@@ -68,8 +68,7 @@ class FullNelson extends Component {
                   </div>
                 </div>
               </div>
-              </Link>  
-              
+              </Link>    
               : 
               ''}
               </>

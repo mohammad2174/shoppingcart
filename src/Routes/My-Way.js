@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { StarIcon } from '@heroicons/react/solid';
 import { connect } from "react-redux";
 import Navigation from "../components/Navigation";
+import { Link } from "react-router-dom";
 
 
 class MyWay extends Component {
@@ -26,7 +27,8 @@ class MyWay extends Component {
           <div className="m-16 grid grid-cols-1 gap-y-10 gap-x-1 sm:grid-cols-2 lg:grid-cols-4">
             {products.map((product) => (
               <>
-              {product.name === 'My Way' ?  
+              {product.name === 'My Way' ?
+              <Link to={`/product/${product.id}`}> 
               <div key={product.id} className="group relative">
                 <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-80">
                   <img
@@ -66,6 +68,7 @@ class MyWay extends Component {
                   </div>
                 </div>
               </div>
+              </Link> 
               : 
               ''}
               </>
