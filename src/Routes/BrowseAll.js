@@ -6,6 +6,8 @@ import Navigation from "../components/Navigation";
 import { connect } from "react-redux";
 import { addToCard } from "../actions";
 import { Link } from "react-router-dom";
+import ReactPaginate from 'react-paginate';
+import '../index.css'
 
 
 class BrowseAll extends Component {
@@ -37,7 +39,68 @@ class BrowseAll extends Component {
     jacket : '',
     Activewear : '',
     selectedColor : '',
-    selectedSize : ''
+    selectedSize : '',
+    offset: 0,
+    data: [],
+    perPage: 4,
+    currentPage: 0,
+    products: this.props.products 
+  }
+
+  receivedData() {
+    const data = this.state.products;
+    const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
+    const postData = slice.map(pd => <React.Fragment>
+            <div key={pd.id} className="group relative">
+              <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-80">
+                <img
+                  src={pd.imageSrc}
+                  alt={pd.imageAlt}
+                  className="w-full h-full object-center object-cover lg:w-full lg:h-full"
+                />
+              <div className="flex items-end p-4">
+                <button onClick={() => this.setOpen(pd)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
+                </div>  
+              </div>
+              <div className="mt-4 flex justify-between">
+                <div>
+                  <h3 className="text-sm text-gray-700">
+                  <Link to={`/product/${pd.id}`}>
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {pd.name}
+                  </Link>
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">{pd.describtion}</p>
+                </div>
+                <div>
+                <p className="text-sm font-medium text-gray-500">${pd.price}</p>
+                <p className="mt-1 text-sm text-gray-500">X{pd.inventory ? pd.inventory : <span className="text-red-600">Has Ended</span>}</p>
+                </div>
+              </div>
+            </div>
+    </React.Fragment>)
+  
+    this.setState({
+        pageCount: Math.ceil(data.length / this.state.perPage),
+       
+        postData
+    })
+  }
+  handlePageClick = (e) => {
+      const selectedPage = e.selected;
+      const offset = selectedPage * this.state.perPage;
+  
+      this.setState({
+          currentPage: selectedPage,
+          offset: offset
+      }, () => {
+          this.receivedData()
+      });
+  
+  };
+  
+  componentDidMount() {
+      this.receivedData()
   }
 
   setOpen = (womantop,mantop,dress,pant,denim,sweater,tshirt,jacket,Activewear) => {
@@ -65,15 +128,6 @@ class BrowseAll extends Component {
     function classNames(...classes) {
       return classes.filter(Boolean).join(' ')
     }
-      const mantops = products.slice(0, 4)
-      const womantops = products.slice(4, 8)
-      const dresses = products.slice(40, 44)
-      const pants = products.slice(28, 32)
-      const denims = products.slice(44, 48)
-      const sweaters = products.slice(20, 24)
-      const tshirts = products.slice(16, 20)
-      const jackets = products.slice(32, 36)
-      const Activewears = products.slice(56, 60)
       const product = {
         name: this.state.womantop.name || this.state.mantop.name || this.state.dress.name || this.state.pant.name || this.state.denim.name || this.state.sweater.name || this.state.tshirt.name || this.state.jacket.name || this.state.Activewear.name,
         price: this.state.womantop.price || this.state.mantop.price || this.state.dress.price || this.state.pant.price || this.state.denim.price || this.state.sweater.price || this.state.tshirt.price || this.state.jacket.price || this.state.Activewear.price,
@@ -90,293 +144,24 @@ class BrowseAll extends Component {
       <>
       <Navigation product={products} />
       <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-        <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">Tops</h2>
-        <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {womantops.map((womantop) => (
-            <div key={womantop.id} className="group relative">
-              <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-80">
-                <img
-                  src={womantop.imageSrc}
-                  alt={womantop.imageAlt}
-                  className="w-full h-full object-center object-cover lg:w-full lg:h-full"
-                />
-              <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen(womantop)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
-                </div>  
-              </div>
-              <div className="mt-4 flex justify-between">
-                <div>
-                  <h3 className="text-sm text-gray-700">
-                  <Link to={`/product/${womantop.id}`}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {womantop.name}
-                      </Link>
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-500">{womantop.describtion}</p>
-                </div>
-                <div>
-                <p className="text-sm font-medium text-gray-500">${womantop.price}</p>
-                <p className="mt-1 text-sm text-gray-500">X{womantop.inventory ? womantop.inventory : <span className="text-red-600">Has Ended</span>}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {mantops.map((mantop) => (
-            <div key={mantop.id} className="group relative">
-              <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-80">
-                <img
-                  src={mantop.imageSrc}
-                  alt={mantop.imageAlt}
-                  className="w-full h-full object-center object-cover lg:w-full lg:h-full"
-                />
-              <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen(mantop)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
-                </div>  
-              </div>
-              <div className="mt-4 flex justify-between">
-                <div>
-                  <h3 className="text-sm text-gray-700">
-                  <Link to={`/product/${mantop.id}`}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {mantop.name}
-                      </Link>
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-500">{mantop.describtion}</p>
-                </div>
-                <div>
-                <p className="text-sm font-medium text-gray-500">${mantop.price}</p>
-                <p className="mt-1 text-sm text-gray-500">X{mantop.inventory ? mantop.inventory : <span className="text-red-600">Has Ended</span>}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-       <h2 className="mt-6 text-2xl font-extrabold tracking-tight text-gray-900">Dresses</h2>
-        <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {dresses.map((dress) => (
-            <div key={dress.id} className="group relative">
-              <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-80">
-                <img
-                  src={dress.imageSrc}
-                  alt={dress.imageAlt}
-                  className="w-full h-full object-center object-cover lg:w-full lg:h-full"
-                />
-              <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen(dress)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
-                </div>  
-              </div>
-              <div className="mt-4 flex justify-between">
-                <div>
-                  <h3 className="text-sm text-gray-700">
-                    <Link to={`/product/${dress.id}`}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {dress.name}
-                      </Link>
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-500">{dress.describtion}</p>
-                </div>
-                <div>
-                <p className="text-sm font-medium text-gray-500">${dress.price}</p>
-                <p className="mt-1 text-sm text-gray-500">X{dress.inventory ? dress.inventory : <span className="text-red-600">Has Ended</span>}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        <h2 className="mt-6 text-2xl font-extrabold tracking-tight text-gray-900">Pants</h2>
-        <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {pants.map((pant) => (
-            <div key={pant.id} className="group relative">
-              <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-80">
-                <img
-                  src={pant.imageSrc}
-                  alt={pant.imageAlt}
-                  className="w-full h-full object-center object-cover lg:w-full lg:h-full"
-                />
-              <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen(pant)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
-                </div>  
-              </div>
-              <div className="mt-4 flex justify-between">
-                <div>
-                  <h3 className="text-sm text-gray-700">
-                    <Link to={`/product/${pant.id}`}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {pant.name}
-                      </Link>
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-500">{pant.describtion}</p>
-                </div>
-                <div>
-                <p className="text-sm font-medium text-gray-500">${pant.price}</p>
-                <p className="mt-1 text-sm text-gray-500">X{pant.inventory ? pant.inventory : <span className="text-red-600">Has Ended</span>}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        <h2 className="mt-6 text-2xl font-extrabold tracking-tight text-gray-900">Denim</h2>
-        <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {denims.map((denim) => (
-            <div key={denim.id} className="group relative">
-              <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-80">
-                <img
-                  src={denim.imageSrc}
-                  alt={denim.imageAlt}
-                  className="w-full h-full object-center object-cover lg:w-full lg:h-full"
-                />
-              <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen(denim)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
-                </div>  
-              </div>
-              <div className="mt-4 flex justify-between">
-                <div>
-                  <h3 className="text-sm text-gray-700">
-                    <Link to={`/product/${denim.id}`}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {denim.name}
-                      </Link>
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-500">{denim.describtion}</p>
-                </div>
-                <div>
-                <p className="text-sm font-medium text-gray-500">${denim.price}</p>
-                <p className="mt-1 text-sm text-gray-500">X{denim.inventory ? denim.inventory : <span className="text-red-600">Has Ended</span>}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        <h2 className="mt-6 text-2xl font-extrabold tracking-tight text-gray-900">Sweaters</h2>
-        <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {sweaters.map((sweater) => (
-            <div key={sweater.id} className="group relative">
-              <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-80">
-                <img
-                  src={sweater.imageSrc}
-                  alt={sweater.imageAlt}
-                  className="w-full h-full object-center object-cover lg:w-full lg:h-full"
-                />
-              <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen(sweater)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
-                </div>  
-              </div>
-              <div className="mt-4 flex justify-between">
-                <div>
-                  <h3 className="text-sm text-gray-700">
-                    <Link to={`/product/${sweater.id}`}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {sweater.name}
-                      </Link>
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-500">{sweater.describtion}</p>
-                </div>
-                <div>
-                <p className="text-sm font-medium text-gray-500">${sweater.price}</p>
-                <p className="mt-1 text-sm text-gray-500">X{sweater.inventory ? sweater.inventory : <span className="text-red-600">Has Ended</span>}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        <h2 className="mt-6 text-2xl font-extrabold tracking-tight text-gray-900">T-Shirts</h2>
-        <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {tshirts.map((tshirt) => (
-            <div key={tshirt.id} className="group relative">
-              <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-80">
-                <img
-                  src={tshirt.imageSrc}
-                  alt={tshirt.imageAlt}
-                  className="w-full h-full object-center object-cover lg:w-full lg:h-full"
-                />
-              <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen(tshirt)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
-                </div>  
-              </div>
-              <div className="mt-4 flex justify-between">
-                <div>
-                  <h3 className="text-sm text-gray-700">
-                    <Link to={`/product/${tshirt.id}`}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {tshirt.name}
-                      </Link>
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-500">{tshirt.describtion}</p>
-                </div>
-                <div>
-                <p className="text-sm font-medium text-gray-500">${tshirt.price}</p>
-                <p className="mt-1 text-sm text-gray-500">X{tshirt.inventory ? tshirt.inventory : <span className="text-red-600">Has Ended</span>}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        <h2 className="mt-6 text-2xl font-extrabold tracking-tight text-gray-900">Jackets</h2>
-        <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {jackets.map((jacket) => (
-            <div key={jacket.id} className="group relative">
-              <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-80">
-                <img
-                  src={jacket.imageSrc}
-                  alt={jacket.imageAlt}
-                  className="w-full h-full object-center object-cover lg:w-full lg:h-full"
-                />
-              <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen(jacket)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
-                </div>  
-              </div>
-              <div className="mt-4 flex justify-between">
-                <div>
-                  <h3 className="text-sm text-gray-700">
-                    <Link to={`/product/${jacket.id}`}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {jacket.name}
-                      </Link>
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-500">{jacket.describtion}</p>
-                </div>
-                <div>
-                <p className="text-sm font-medium text-gray-500">${jacket.price}</p>
-                <p className="mt-1 text-sm text-gray-500">X{jacket.inventory ? jacket.inventory : <span className="text-red-600">Has Ended</span>}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        <h2 className="mt-6 text-2xl font-extrabold tracking-tight text-gray-900">Activewear</h2>
-        <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {Activewears.map((Activewear) => (
-            <div key={Activewear.id} className="group relative">
-              <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-80">
-                <img
-                  src={Activewear.imageSrc}
-                  alt={Activewear.imageAlt}
-                  className="w-full h-full object-center object-cover lg:w-full lg:h-full"
-                />
-              <div className="flex items-end p-4">
-                <button onClick={() => this.setOpen(Activewear)} class="relative z-10 w-full bg-white bg-opacity-75 py-2 px-4 rounded-md text-sm text-gray-900 opacity-0 group-hover:opacity-100 focus:opacity-100">Quick View</button>
-                </div>  
-              </div>
-              <div className="mt-4 flex justify-between">
-                <div>
-                  <h3 className="text-sm text-gray-700">
-                    <Link to={`/product/${Activewear.id}`}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {Activewear.name}
-                      </Link>
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-500">{Activewear.describtion}</p>
-                </div>
-                <div>
-                <p className="text-sm font-medium text-gray-500">${Activewear.price}</p>
-                <p className="mt-1 text-sm text-gray-500">X{Activewear.inventory ? Activewear.inventory : <span className="text-red-600">Has Ended</span>}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+      <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">BrowseAll</h2>
+      <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+      {this.state.postData} 
+        </div>              
+      </div>
+      <div className="bg-white pl-96 py-3 flex border-t border-gray-200">
+        <ReactPaginate
+          previousLabel={"prev"}
+          nextLabel={"next"}
+          breakLabel={"..."}
+          breakClassName={"break-me"}
+          pageCount={this.state.pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={this.handlePageClick}
+          containerClassName={"pagination"}
+          subContainerClassName={"pages pagination"}
+          activeClassName={"active"}/>
       </div>
       <Transition.Root show={this.state.open} as={Fragment}>
       <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={this.setOpen}>
@@ -572,7 +357,7 @@ class BrowseAll extends Component {
           </Transition.Child>
         </div>
       </Dialog>
-    </Transition.Root>   
+    </Transition.Root>
       </>
     )
   }
