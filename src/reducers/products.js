@@ -43,7 +43,7 @@ const products = (state = {}, action) => {
                 [productId] : {
                     ...product,
                     count : num,
-                    inventory: product.inventory - product.count
+                    inventory: product.count === num ? product.inventory : (product.inventory + product.count) - num
                 }
             }
             case ORDER_REQUEST:

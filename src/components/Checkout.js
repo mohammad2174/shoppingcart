@@ -35,7 +35,7 @@ setEXClass = () => {
       const products = this.props.products
       const subtotal = total
       const taxes = 5.25
-      const id = products.find(product => {return product.id}).id
+      const id = products.length === 0 ? 0 : products.find(product => {return product.id}).id
       const date = new Date((new Date()).toJSON()).toDateString().slice(4,10).concat(',').concat(new Date((new Date()).toJSON()).toDateString().slice(10,15))
       const totalamount = Math.ceil(subtotal + this.state.shipping + taxes)
         const fib = (n) => {
@@ -48,15 +48,16 @@ setEXClass = () => {
       function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
+
     return (
       <div className="max-w-7xl mt-16 mx-auto px-4 sm:px-6 lg:px-8">
         <div>
         <p className="mb-6 text-base font-extrabold text-gray-800">Preparing to ship on {date}</p>
-        <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-          <div class="bg-indigo-600 h-2.5 w-2/5 lg:w-2/6 rounded-full"></div>
+        <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+          <div className={id ? "bg-indigo-600 h-2.5 w-2/5 lg:w-2/6 rounded-full" : "h-2.5 w-2/5 lg:w-2/6 rounded-full"}></div>
           <div className="mt-6 grid grid-cols-4 gap-14 md:gap-60 text-xs md:text-sm font-bold">
-            <p className="text-indigo-500">Order&nbsp;placed</p>
-            <p className="text-indigo-500">Processing</p>
+            <p className={id ? "text-indigo-500" : "text-gray-500"}>Order&nbsp;placed</p>
+            <p className={id ? "text-indigo-500" : "text-gray-500"}>Processing</p>
             <p className="text-gray-500">Shipped</p>
             <p className="text-gray-500 justify-self-end">Delivered</p>
           </div>
@@ -283,6 +284,7 @@ setEXClass = () => {
                       />
                     </div>
                     </div>
+                    {id ? 
                     <div className="mt-6">
                       <Link to="/order">
                         <button
@@ -291,12 +293,14 @@ setEXClass = () => {
                         >
                           {`${'Pay $' + totalamount}`}
                         </button>
-                        </Link>  
-                      </div>
+                      </Link>  
+                    </div>
+                    : ''}
                   </div>
                 </div>
                 <div className="relative md:row-span-1">
                 <h2 className="text-xl font-extrabold text-gray-800">Order summary</h2>
+                {id ?
                 <div className="mt-4 p-6 border border-gray-300 rounded-md">
                 <div className="flow-root">
         <ul role="list" className="-my-6 divide-y divide-gray-200">
@@ -343,7 +347,7 @@ setEXClass = () => {
       >
         <Menu.Items className="origin-top-right absolute right-0 mt-2 w-24 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-          {fib(product.inventory).map((num) =>
+          {fib(product.inventory + product.count).map((num) =>
             <Menu.Item>
               {({ active }) => (
                 
@@ -369,7 +373,7 @@ setEXClass = () => {
             </li>
             ))}
           </ul> 
-        </div>
+                </div>
                 <div className="mt-6 border-t border-gray-200 py-6 px-4 sm:px-6">                   
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
@@ -389,6 +393,11 @@ setEXClass = () => {
                       </div>
                 </div>
                 </div>
+                : 
+                <Link className="text-lg font-extrabold text-indigo-500" to="/">
+                  Please add the product to your card
+                </Link>
+                }
                 </div>
            </div>
       </div>
