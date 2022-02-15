@@ -38,6 +38,7 @@ class BrowseAll extends Component {
     tshirt : '',
     jacket : '',
     Activewear : '',
+    catimageSrc : '',
     selectedColor : '',
     selectedSize : '',
     offset: 0,
@@ -86,6 +87,7 @@ class BrowseAll extends Component {
         postData
     })
   }
+
   handlePageClick = (e) => {
       const selectedPage = e.selected;
       const offset = selectedPage * this.state.perPage;
@@ -103,8 +105,8 @@ class BrowseAll extends Component {
       this.receivedData()
   }
 
-  setOpen = (womantop,mantop,dress,pant,denim,sweater,tshirt,jacket,Activewear) => {
-    this.setState({open : true, womantop : womantop, mantop : mantop, dress : dress, pant : pant, denim : denim, sweater : sweater, tshirt : tshirt, jacket : jacket, Activewear : Activewear})
+  setOpen = (womantop,mantop,dress,pant,denim,sweater,tshirt,jacket,Activewear,catimageSrc) => {
+    this.setState({open : true, womantop : womantop, mantop : mantop, dress : dress, pant : pant, denim : denim, sweater : sweater, tshirt : tshirt, jacket : jacket, Activewear : Activewear, catimageSrc : catimageSrc})
   }
 
   setClose = () => {
@@ -134,12 +136,12 @@ class BrowseAll extends Component {
         rating: 3.9,
         reviewCount: 117,
         href: '#',
-        imageSrc: (this.state.womantop.id === 5 || this.state.womantop.id === 6 || this.state.womantop.id === 7 || this.state.womantop.id === 8 ? this.state.womantop.catimageSrc : this.state.womantop.imageSrc) || (this.state.mantop.id === 1 || this.state.mantop.id === 2 || this.state.mantop.id === 3 || this.state.mantop.id === 4 ? this.state.mantop.catimageSrc : this.state.mantop.imageSrc) || (this.state.dress.id === 41 || this.state.dress.id === 42 || this.state.dress.id === 43 || this.state.dress.id === 44 ? this.state.dress.catimageSrc : this.state.dress.imageSrc) || (this.state.pant.id === 29 || this.state.pant.id === 30 || this.state.pant.id === 31 || this.state.pant.id === 32 ? this.state.pant.catimageSrc : this.state.pant.imageSrc) || (this.state.denim.id === 45 || this.state.denim.id === 46 || this.state.denim.id === 47 || this.state.denim.id === 48 ? this.state.denim.catimageSrc : this.state.denim.imageSrc) || (this.state.sweater.id === 21 || this.state.sweater.id === 22 || this.state.sweater.id === 23 || this.state.sweater.id === 24 ? this.state.sweater.catimageSrc : this.state.sweater.imageSrc) || (this.state.tshirt.id === 17 || this.state.tshirt.id === 18 || this.state.tshirt.id === 19 || this.state.tshirt.id === 20 ? this.state.tshirt.catimageSrc : this.state.tshirt.imageSrc) || (this.state.jacket.id === 33 || this.state.jacket.id === 34 || this.state.jacket.id === 35 || this.state.jacket.id === 36 ? this.state.jacket.catimageSrc : this.state.jacket.imageSrc) || (this.state.Activewear.id === 57 || this.state.Activewear.id === 58 || this.state.Activewear.id === 59 || this.state.Activewear.id === 60 ? this.state.Activewear.catimageSrc : this.state.Activewear.imageSrc),
+        imageSrc: this.state.womantop.catimageSrc || this.state.mantop.catimageSrc || this.state.dress.catimageSrc || this.state.pant.catimageSrc || this.state.denim.catimageSrc || this.state.sweater.catimageSrc || this.state.tshirt.catimageSrc || this.state.jacket.catimageSrc || this.state.Activewear.catimageSrc,
         imageAlt: this.state.womantop.imageAlt || this.state.mantop.imageAlt || this.state.dress.imageAlt || this.state.pant.imageAlt || this.state.denim.imageAlt || this.state.sweater.imageAlt || this.state.tshirt.imageAlt || this.state.jacket.imageAlt || this.state.Activewear.imageAlt,
         colors: this.state.selectedColor,
         sizes: this.state.selectedSize,
       }
-
+      console.log(this.state.womantop.id === 1 || this.state.womantop.id === 2 ? this.state.womantop.catimageSrc : 'false');
     return (
       <>
       <Navigation product={products} />
