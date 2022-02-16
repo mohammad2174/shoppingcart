@@ -61,8 +61,8 @@ class Activewear extends Component {
         const product = {
           name: this.state.activewear.name,
           price: this.state.activewear.price,
-          rating: 3.9,
-          reviewCount: 117,
+          rating: this.state.activewear.rating,
+          reviewCount: this.state.activewear.reviewCount,
           href: '#',
           imageSrc: (this.state.activewear.id === 57 || this.state.activewear.id === 58 || this.state.activewear.id === 59 || this.state.activewear.id === 60 ? this.state.activewear.catimageSrc : this.state.activewear.imageSrc),
           imageAlt: this.state.activewear.imageAlt,

@@ -61,8 +61,8 @@ class Hats extends Component {
         const product = {
           name: this.state.hat.name,
           price: this.state.hat.price,
-          rating: 3.9,
-          reviewCount: 117,
+          rating: this.state.hat.rating,
+          reviewCount: this.state.hat.reviewCount,
           href: '#',
           imageSrc: (this.state.hat.id === 37 || this.state.hat.id === 38 || this.state.hat.id === 39 || this.state.hat.id === 40 ? this.state.hat.catimageSrc : this.state.hat.imageSrc),
           imageAlt: this.state.hat.imageAlt,

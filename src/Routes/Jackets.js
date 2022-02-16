@@ -61,8 +61,8 @@ class Jackets extends Component {
         const product = {
           name: this.state.jacket.name,
           price: this.state.jacket.price,
-          rating: 3.9,
-          reviewCount: 117,
+          rating: this.state.jacket.rating,
+          reviewCount: this.state.jacket.reviewCount,
           href: '#',
           imageSrc: (this.state.jacket.id === 33 || this.state.jacket.id === 34 || this.state.jacket.id === 35 || this.state.jacket.id === 36 ? this.state.jacket.catimageSrc : this.state.jacket.imageSrc),
           imageAlt: this.state.jacket.imageAlt,

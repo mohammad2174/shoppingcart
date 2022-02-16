@@ -61,8 +61,8 @@ class Dresses extends Component {
         const product = {
           name: this.state.dress.name,
           price: this.state.dress.price,
-          rating: 3.9,
-          reviewCount: 117,
+          rating: this.state.dress.rating,
+          reviewCount: this.state.dress.reviewCount,
           href: '#',
           imageSrc: (this.state.dress.id === 41 || this.state.dress.id === 42 || this.state.dress.id === 43 || this.state.dress.id === 44 ? this.state.dress.catimageSrc : this.state.dress.imageSrc),
           imageAlt: this.state.dress.imageAlt,

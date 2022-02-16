@@ -61,8 +61,8 @@ class Belts extends Component {
         const product = {
           name: this.state.belt.name,
           price: this.state.belt.price,
-          rating: 3.9,
-          reviewCount: 117,
+          rating: this.state.belt.rating,
+          reviewCount: this.state.belt.reviewCount,
           href: '#',
           imageSrc: (this.state.belt.id === 49 || this.state.belt.id === 50 || this.state.belt.id === 51 || this.state.belt.id === 52 ? this.state.belt.catimageSrc : this.state.belt.imageSrc),
           imageAlt: this.state.belt.imageAlt,

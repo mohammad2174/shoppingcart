@@ -65,8 +65,8 @@ class Tshirts extends Component {
           {
             name: this.state.tshirt.name,
             price: this.state.tshirt.price,
-            rating: 3.9,
-            reviewCount: 117,
+            rating: this.state.tshirt.rating,
+            reviewCount: this.state.tshirt.reviewCount,
             href: '#',
             imageSrc: (this.state.tshirt.id === 17 || this.state.tshirt.id === 18 || this.state.tshirt.id === 19 || this.state.tshirt.id === 20 ? this.state.tshirt.catimageSrc : this.state.tshirt.imageSrc),
             imageAlt: this.state.tshirt.imageAlt,

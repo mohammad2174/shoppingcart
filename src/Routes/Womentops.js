@@ -64,15 +64,15 @@ class Tops extends Component {
           inventory: this.state.top.inventory,
           id: this.state.top.id,
           count: this.state.top.count,
-          rating: 3.9,
-          reviewCount: 117,
+          rating: this.state.top.rating,
+          reviewCount: this.state.top.reviewCount,
           href: '#',
           imageSrc: (this.state.top.id === 5 || this.state.top.id === 6 || this.state.top.id === 7 || this.state.top.id === 8 ? this.state.top.catimageSrc : this.state.top.imageSrc),
           imageAlt: this.state.top.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,
         }
-        
+
       return (
         <>
         <Navigation product={products} />

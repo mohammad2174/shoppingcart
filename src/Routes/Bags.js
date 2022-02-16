@@ -61,8 +61,8 @@ class Bags extends Component {
         const product = {
           name: this.state.bag.name,
           price: this.state.bag.price,
-          rating: 3.9,
-          reviewCount: 117,
+          rating: this.state.bag.rating,
+          reviewCount: this.state.bag.reviewCount,
           href: '#',
           imageSrc: (this.state.bag.id === 53 || this.state.bag.id === 54 || this.state.bag.id === 55 || this.state.bag.id === 56 ? this.state.bag.catimageSrc : this.state.bag.imageSrc),
           imageAlt: this.state.bag.imageAlt,

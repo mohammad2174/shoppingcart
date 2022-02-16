@@ -6,7 +6,7 @@ import Navigation from "../components/Navigation";
 import { connect } from "react-redux";
 import { addToCard } from "../actions";
 import { Link } from "react-router-dom";
-import { recieveProducts } from "../actions";
+import { recieveProducts, recieveReview } from "../actions";
 
 
 class Product extends Component {
@@ -86,7 +86,7 @@ class Product extends Component {
   }
 
   render() {
-    const { addToCard, recieveProducts } = this.props;
+    const { addToCard, recieveProducts, recieveReview } = this.props;
     const pathname = window.location.pathname.split('')
     const id = pathname.length - 1 <= 9 ? pathname[pathname.length - 1] : pathname[(pathname.length - 2)].concat(pathname[(pathname.length - 1)])
     const products = this.props.products
@@ -94,10 +94,6 @@ class Product extends Component {
     const index1 = (id - 1 === 1) || (id - 1 === 5) || (id - 1 === 9)|| (id - 1 === 13) || (id - 1 === 17)|| (id - 1 === 21) || (id - 1 === 22) || (id - 1 === 23) || (id - 1 === 33) || (id - 1 === 37) || (id - 1 === 41) || (id - 1 === 45) || (id - 1 === 49) || (id - 1 === 53) || (id - 1 === 57) || (id - 1 === 61)
     const index2 = (id - 1 === 2) || (id - 1 === 6) || (id - 1 === 10)|| (id - 1 === 14) || (id - 1 === 18)|| (id - 1 === 22) || (id - 1 === 23) || (id - 1 === 24) || (id - 1 === 34) || (id - 1 === 38) || (id - 1 === 42) || (id - 1 === 46) || (id - 1 === 50) || (id - 1 === 54) || (id - 1 === 58) || (id - 1 === 62)
     const suggestions = index ? products.slice(id - 1, (id -1) + 4) : products.slice(id - 4, (id -1) + 1) && index1 ? products.slice(id - 2, (id -1) + 3) : products.slice(id - 3, (id -1) + 2) && index2 ? products.slice(id - 3, (id -1) + 2) : products.slice(id - 4, (id -1) + 1)
-    const staricon = {
-      rating: 3.9,
-      reviewCount: 117
-    }
 
     function classNames(...classes) {
       return classes.filter(Boolean).join(' ')
@@ -164,7 +160,7 @@ class Product extends Component {
                   <span className="text-base text-gray-800 md:text-lg">{product.detail}</span> 
                 </div>
                 <div className="mt-12 grid grid-cols-3 gap-1 md:grid-cols-4">
-          {this.state.message && this.state.subject ?       
+          {product.message && product.subject ?       
           <div className="col-span-1 -space-x-1 overflow-hidden">
           <img
           className="inline-block h-12 w-12 rounded-full ring-2 ring-white"
@@ -177,7 +173,7 @@ class Product extends Component {
             <StarIcon
             key={rating}
             className={classNames(
-            this.state.star.rating > rating ? 'text-yellow-400' : 'text-gray-200',
+            product.rating > rating ? 'text-yellow-400' : 'text-gray-200',
             'h-5 w-5 flex-shrink-0'
             )}
             aria-hidden="true"
@@ -186,11 +182,11 @@ class Product extends Component {
             </div>
           </div>
           : '' }
-          {this.state.message && this.state.subject ? 
+          {product.message && product.subject ? 
           <div class="col-span-3">
-          <h2 className="text-sm lg:text-base md:text-base font-black text-gray-700">{this.state.subject}</h2>
+          <h2 className="text-sm lg:text-base md:text-base font-black text-gray-700">{product.subject}</h2>
           <p className="mt-4 text-xs lg:text-sm md:text-sm text-gray-500">
-          {this.state.message}
+          {product.message}
           </p>
           </div>
           : '' }
@@ -289,7 +285,7 @@ class Product extends Component {
                       <button
                         type="submit"
                         className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        onClick={() => this.setClose()}
+                        onClick={() => recieveReview(product.id, this.state.star.rating, this.state.star.reviewCount, this.state.message, this.state.subject) && this.setClose()}
                       >
                         Submit
                       </button>
@@ -315,7 +311,7 @@ class Product extends Component {
                               <StarIcon
                                 key={rating}
                                 className={classNames(
-                                  this.state.star.rating > rating ? 'text-yellow-400' : 'text-gray-200',
+                                  product.rating > rating ? 'text-yellow-400' : 'text-gray-200',
                                   'h-5 w-5 flex-shrink-0'
                                 )}
                                 aria-hidden="true"
@@ -324,7 +320,7 @@ class Product extends Component {
                           </div>
                           <p className="sr-only">{product.rating} out of 5 stars</p>
                           <a href="#" className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                            {this.state.star.reviewCount} reviews
+                            {product.reviewCount} reviews
                           </a>
                         </div>
                     </div>
@@ -471,7 +467,8 @@ class Product extends Component {
 
 const mapDispatchToProps = dispatch => ({
   addToCard : (productId, color, size) => dispatch(addToCard(productId, color, size)),
-  recieveProducts : (products) => dispatch(recieveProducts(products))
+  recieveProducts : (products) => dispatch(recieveProducts(products)),
+  recieveReview : (productId, rating, reviewCount, message, subject ) => dispatch(recieveReview(productId, rating, reviewCount, message, subject))
 })
   
 export default connect(null , mapDispatchToProps)(Product);

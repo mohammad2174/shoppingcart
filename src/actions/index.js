@@ -29,3 +29,12 @@ export const order = (productId, shipping) => ({
         productId,
         shipping
 })
+
+export const recieveReview = (productId, rating, reviewCount, message, subject) => ({
+        type : types.WRITE_REVIEWS,
+        productId,
+        rating,
+        reviewCount,
+        message,
+        subject
+})

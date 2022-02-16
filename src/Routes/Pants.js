@@ -65,8 +65,8 @@ class Pants extends Component {
         const product = {
           name: this.state.pant.name,
           price: this.state.pant.price,
-          rating: 3.9,
-          reviewCount: 117,
+          rating: this.state.pant.rating,
+          reviewCount: this.state.pant.reviewCount,
           href: '#',
           imageSrc: (this.state.pant.id === 29 || this.state.pant.id === 30 || this.state.pant.id === 31 || this.state.pant.id === 32 ? this.state.pant.catimageSrc : this.state.pant.imageSrc),
           imageAlt: this.state.pant.imageAlt,
