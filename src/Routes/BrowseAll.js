@@ -29,18 +29,7 @@ class BrowseAll extends Component {
     ],
     open : false,
     modalopen : false,
-    womantop : '',
-    mantop : '',
-    dress : '',
-    pant : '',
-    denim : '',
-    sweater : '',
-    tshirt : '',
-    jacket : '',
-    Activewear : '',
-    catimageSrc : '',
-    selectedColor : '',
-    selectedSize : '',
+    product : '',
     offset: 0,
     data: [],
     perPage: 4,
@@ -82,8 +71,7 @@ class BrowseAll extends Component {
     </React.Fragment>)
   
     this.setState({
-        pageCount: Math.ceil(data.length / this.state.perPage),
-       
+        pageCount: Math.ceil(data.length / this.state.perPage),   
         postData
     })
   }
@@ -105,8 +93,8 @@ class BrowseAll extends Component {
       this.receivedData()
   }
 
-  setOpen = (womantop,mantop,dress,pant,denim,sweater,tshirt,jacket,Activewear,catimageSrc) => {
-    this.setState({open : true, womantop : womantop, mantop : mantop, dress : dress, pant : pant, denim : denim, sweater : sweater, tshirt : tshirt, jacket : jacket, Activewear : Activewear, catimageSrc : catimageSrc})
+  setOpen = (product) => {
+    this.setState({open : true, product : product})
   }
 
   setClose = () => {
@@ -131,17 +119,17 @@ class BrowseAll extends Component {
       return classes.filter(Boolean).join(' ')
     }
       const product = {
-        name: this.state.womantop.name || this.state.mantop.name || this.state.dress.name || this.state.pant.name || this.state.denim.name || this.state.sweater.name || this.state.tshirt.name || this.state.jacket.name || this.state.Activewear.name,
-        price: this.state.womantop.price || this.state.mantop.price || this.state.dress.price || this.state.pant.price || this.state.denim.price || this.state.sweater.price || this.state.tshirt.price || this.state.jacket.price || this.state.Activewear.price,
-        rating: 3.9,
-        reviewCount: 117,
+        name: this.state.product.name,
+        price: this.state.product.price,
+        rating: this.state.product.rating,
+        reviewCount: this.state.product.reviewCount,
         href: '#',
-        imageSrc: this.state.womantop.catimageSrc || this.state.mantop.catimageSrc || this.state.dress.catimageSrc || this.state.pant.catimageSrc || this.state.denim.catimageSrc || this.state.sweater.catimageSrc || this.state.tshirt.catimageSrc || this.state.jacket.catimageSrc || this.state.Activewear.catimageSrc,
-        imageAlt: this.state.womantop.imageAlt || this.state.mantop.imageAlt || this.state.dress.imageAlt || this.state.pant.imageAlt || this.state.denim.imageAlt || this.state.sweater.imageAlt || this.state.tshirt.imageAlt || this.state.jacket.imageAlt || this.state.Activewear.imageAlt,
+        imageSrc: this.state.product.catimageSrc,
+        imageAlt: this.state.product.imageAlt,
         colors: this.state.selectedColor,
         sizes: this.state.selectedSize,
       }
-      console.log(this.state.womantop.id === 1 || this.state.womantop.id === 2 ? this.state.womantop.catimageSrc : 'false');
+
     return (
       <>
       <Navigation product={products} />

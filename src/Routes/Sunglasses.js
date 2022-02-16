@@ -65,8 +65,8 @@ class Sunglasses extends Component {
         const product = {
           name: this.state.sunglass.name,
           price: this.state.sunglass.price,
-          rating: 3.9,
-          reviewCount: 117,
+          rating: this.state.sunglass.rating,
+          reviewCount: this.state.sunglass.reviewCount,
           href: '#',
           imageSrc: (this.state.sunglass.id === 25 || this.state.sunglass.id === 26 || this.state.sunglass.id === 27 || this.state.sunglass.id === 28 ? this.state.sunglass.catimageSrc : this.state.sunglass.imageSrc),
           imageAlt: this.state.sunglass.imageAlt,

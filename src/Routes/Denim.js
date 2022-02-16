@@ -62,8 +62,8 @@ class Denim extends Component {
         const product = {
           name: this.state.denim.name,
           price: this.state.denim.price,
-          rating: 3.9,
-          reviewCount: 117,
+          rating: this.state.denim.rating,
+          reviewCount: this.state.denim.reviewCount,
           href: '#',
           imageSrc: (this.state.denim.id === 45 || this.state.denim.id === 46 || this.state.denim.id === 47 || this.state.denim.id === 48 ? this.state.denim.catimageSrc : this.state.denim.imageSrc),
           imageAlt: this.state.denim.imageAlt,

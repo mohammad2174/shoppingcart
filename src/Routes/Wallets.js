@@ -65,8 +65,8 @@ class Wallets extends Component {
         const product = {
           name: this.state.wallet.name,
           price: this.state.wallet.price,
-          rating: 3.9,
-          reviewCount: 117,
+          rating: this.state.wallet.rating,
+          reviewCount: this.state.wallet.reviewCount,
           href: '#',
           imageSrc: (this.state.wallet.id === 13 || this.state.wallet.id === 14 || this.state.wallet.id === 15 || this.state.wallet.id === 16 ? this.state.wallet.catimageSrc : this.state.wallet.imageSrc),
           imageAlt: this.state.wallet.imageAlt,

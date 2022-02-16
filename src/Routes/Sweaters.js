@@ -64,8 +64,8 @@ class Sweaters extends Component {
         const product = {
           name: this.state.sweater.name,
           price: this.state.sweater.price,
-          rating: 3.9,
-          reviewCount: 117,
+          rating: this.state.sweater.rating,
+          reviewCount: this.state.sweater.reviewCount,
           href: '#',
           imageSrc: (this.state.sweater.id === 21 || this.state.sweater.id === 22 || this.state.sweater.id === 23 || this.state.sweater.id === 24 ? this.state.sweater.catimageSrc : this.state.sweater.imageSrc),
           imageAlt: this.state.sweater.imageAlt,
