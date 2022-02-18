@@ -26,7 +26,7 @@ class Hats extends Component {
       { name: 'XXXL', inStock: false },
     ],
     open : false,
-    modalopen : false,
+    notifyopen : false,
     hat : '',
     selectedColor : '',
     selectedSize : ''
@@ -38,6 +38,20 @@ class Hats extends Component {
 
   setClose = () => {
     this.setState({open : false})
+  }
+
+  setNotifyOpen = () => {
+    this.setState({notifyopen : true})
+  }
+
+  setTimeout = () => {
+    setTimeout(() => {
+      this.setState({notifyopen : false})
+    },3000)
+  }
+
+  setNotifyClose = () => {
+    this.setState({notifyopen : false})
   }
   
   setSelectedColor = (e) => {
@@ -72,6 +86,34 @@ class Hats extends Component {
         
       return (
         <>
+        <Transition.Root show={this.state.notifyopen} as={Fragment}>
+         <div class="absolute pr-16 pt-4 w-full flex justify-end">
+          <div class="bg-white rounded-lg border-gray-300 border p-3 shadow-lg">
+           <div class="flex flex-row">
+            <div class="px-2">
+             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+             </svg>
+            </div>
+            <div class="ml-2 mr-6">
+             <span class="font-semibold">Successfully Saved To Bag!</span>
+             <span class="block text-gray-500">Please check your's bag for continue shopping</span>
+            </div>
+           <div>
+            <button
+              type="button"
+              className="top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8"
+              onClick={() => this.setNotifyClose()}
+             >
+             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+             </svg>
+            </button>
+           </div>
+          </div>
+         </div>
+        </div>
+        </Transition.Root>
         <Navigation product={products} />
         <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <div className="flex gap-2 text-base font-extrabold tracking-tight text-gray-900 sm:gap-5">
@@ -181,9 +223,9 @@ class Hats extends Component {
                             ))}
                           </div>
                           <p className="sr-only">{product.rating} out of 5 stars</p>
-                          <a href="#" className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                          <Link to={`/product/${product.id}`} className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
                             {product.reviewCount} reviews
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </section>
@@ -292,7 +334,7 @@ class Hats extends Component {
                         <button
                           type="submit"
                           className="mt-6 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                          onClick={() => addToCard(this.state.hat.id, this.state.selectedColor, this.state.selectedSize) && this.setClose()}
+                          onClick={() => addToCard(this.state.hat.id, this.state.selectedColor, this.state.selectedSize) && this.setClose() || this.setNotifyOpen() || this.setTimeout()}
                         >
                           Add to bag
                         </button>
