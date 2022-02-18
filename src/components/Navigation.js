@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Card from "../components/Card";
-import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
-import { MenuIcon, XIcon } from '@heroicons/react/outline'
+import { Popover } from '@headlessui/react'
 import { ShoppingBagIcon } from '@heroicons/react/outline'
 
 
@@ -149,15 +148,6 @@ class Navigation extends Component {
         <nav aria-label="Top" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="border-b border-gray-200">
             <div className="h-16 flex items-center">
-              <button
-                type="button"
-                className="bg-white p-2 rounded-md text-gray-400 lg:hidden"
-                // onClick={() => setOpen(true)}
-              >
-                <span className="sr-only">Open menu</span>
-                <MenuIcon className="h-6 w-6" aria-hidden="true" />
-              </button>
-  
               {/* Flyout menus */}
               <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
                 <div className="h-full flex space-x-8">
