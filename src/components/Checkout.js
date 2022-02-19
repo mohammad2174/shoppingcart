@@ -11,7 +11,20 @@ state = {
   stclass: "p-4 mt-1 h-32 border-2 border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
   stfill: "#2f2ff7",
   exfill: "gray",
-  shipping: this.props.products.find(product => {return product.shipping}).shipping
+  shipping: this.props.products.find(product => {return product.shipping}).shipping,
+  email: "",
+  fname: "",
+  lname: "",
+  apartment: "",
+  city: "",
+  country: "",
+  province: "",
+  postalcode: "",
+  phone: "",
+  cardnumber: "",
+  namecard: "",
+  expiredate: "",
+  cvc : ""
 }
 
 setSTClass = () => {
@@ -30,6 +43,83 @@ setEXClass = () => {
   this.setState({shipping : 5})
 }
 
+setEmail = (e) => {
+  this.setState({
+    email : e.target.value
+  })
+}
+
+setFname = (e) => {
+  this.setState({
+    fname : e.target.value
+  })
+}
+
+setLname = (e) => {
+  this.setState({
+    lname : e.target.value
+  })
+}
+
+setApartment = (e) => {
+  this.setState({
+    apartment : e.target.value
+  })
+}
+
+setCity = (e) => {
+  this.setState({
+    city : e.target.value
+  })
+}
+
+setCountry = (e) => {
+  this.setState({
+    country : e.target.value
+  })
+}
+
+setProvince = (e) => {
+  this.setState({
+    province : e.target.value
+  })
+}
+
+setPostalcode = (e) => {
+  this.setState({
+    postalcode : e.target.value
+  })
+}
+
+setPhone = (e) => {
+  this.setState({
+    phone : e.target.value
+  })
+}
+
+setCardnumber = (e) => {
+  this.setState({
+    cardnumber : e.target.value
+  })
+}
+
+setNamecard = (e) => {
+  this.setState({
+    namecard : e.target.value
+  })
+}
+
+setExpiredate = (e) => {
+  this.setState({
+    expiredate : e.target.value
+  })
+}
+
+setCvc = (e) => {
+  this.setState({
+    cvc : e.target.value
+  })
+}
   render() {
       const { checkout, item, total, order } = this.props;
       const products = this.props.products
@@ -72,8 +162,10 @@ setEXClass = () => {
                         Email address
                       </label>
                       <input
-                        type="text"
+                        type="email"
                         name="email-address"
+                        value={this.state.email}
+                        onChange={this.setEmail}
                         id="email-address"
                         autoComplete="email"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -88,6 +180,8 @@ setEXClass = () => {
                       <input
                         type="text"
                         name="first-name"
+                        value={this.state.fname}
+                        onChange={this.setFname}
                         id="first-name"
                         autoComplete="given-name"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -101,28 +195,22 @@ setEXClass = () => {
                       <input
                         type="text"
                         name="last-name"
+                        value={this.state.lname}
+                        onChange={this.setLname}
                         id="last-name"
                         autoComplete="family-name"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
                       </div>
-                      <label htmlFor="company" className="mt-6 block text-sm font-medium text-gray-700">
-                        Company
-                      </label>
-                      <input
-                        type="text"
-                        name="company"
-                        id="company"
-                        autoComplete="company"
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                      />
                       <label htmlFor="apartment" className="mt-6 block text-sm font-medium text-gray-700">
                         Apartment, suite, etc.
                       </label>
                       <input
                         type="text"
                         name="apartment"
+                        value={this.state.apartment}
+                        onChange={this.setApartment}
                         id="apartment"
                         autoComplete="apartment"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -135,6 +223,8 @@ setEXClass = () => {
                       <input
                         type="text"
                         name="city"
+                        value={this.state.city}
+                        onChange={this.setCity}
                         id="city"
                         autoComplete="city"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -148,6 +238,8 @@ setEXClass = () => {
                       <input
                         type="text"
                         name="country"
+                        value={this.state.country}
+                        onChange={this.setCountry}
                         id="country"
                         autoComplete="country"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -162,6 +254,8 @@ setEXClass = () => {
                       <input
                         type="text"
                         name="state"
+                        value={this.state.province}
+                        onChange={this.setProvince}
                         id="state"
                         autoComplete="state"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -175,6 +269,8 @@ setEXClass = () => {
                       <input
                         type="text"
                         name="postal"
+                        value={this.state.postalcode}
+                        onChange={this.setPostalcode}
                         id="postal"
                         autoComplete="postal"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -187,6 +283,8 @@ setEXClass = () => {
                       <input
                         type="text"
                         name="phone"
+                        value={this.state.phone}
+                        onChange={this.setPhone}
                         id="phone"
                         autoComplete="phone"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -241,6 +339,8 @@ setEXClass = () => {
                       <input
                         type="text"
                         name="cardnumber"
+                        value={this.state.cardnumber}
+                        onChange={this.setCardnumber}
                         id="cardnumber"
                         autoComplete="cardnumber"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -253,6 +353,8 @@ setEXClass = () => {
                       <input
                         type="text"
                         name="namecard"
+                        value={this.state.namecard}
+                        onChange={this.setNamecard}
                         id="namecard"
                         autoComplete="namecard"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -264,8 +366,10 @@ setEXClass = () => {
                         Expiration date (MM/YY)
                       </label>
                       <input
-                        type="text"
+                        type="date"
                         name="expiration"
+                        value={this.state.expiredate}
+                        onChange={this.setExpiredate}
                         id="expiration"
                         autoComplete="expiration"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -278,6 +382,8 @@ setEXClass = () => {
                       <input
                         type="text"
                         name="cvc"
+                        value={this.state.cvc}
+                        onChange={this.setCvc}
                         id="cvc"
                         autoComplete="cvc"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -288,7 +394,7 @@ setEXClass = () => {
                     <div className="mt-6">
                       <Link to="/order">
                         <button
-                          onClick={() => order(id, this.state.shipping)}
+                          onClick={() => order(id, this.state.shipping, this.state.email, this.state.fname, this.state.lname, this.state.apartment, this.state.city, this.state.country, this.state.province, this.state.postalcode, this.state.phone, this.state.cardnumber, this.state.namecard, this.state.expiredate, this.state.cvc)}
                           className="flex justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
                         >
                           {`${'Pay $' + totalamount}`}
@@ -423,7 +529,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   checkout: productId => dispatch(checkout(productId)),
   item: (productId, num) => dispatch(item(productId, num)),
-  order: (productId, shipping) => dispatch(order(productId, shipping))
+  order: (productId, shipping, email, fname, lname, apartment, city, country, province, postalcode, phone, cardnumber, namecard, expiredate, cvc) => dispatch(order(productId, shipping, email, fname, lname, apartment, city, country, province, postalcode, phone, cardnumber, namecard, expiredate, cvc))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
