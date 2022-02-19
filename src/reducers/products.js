@@ -47,13 +47,26 @@ const products = (state = {}, action) => {
                 }
             }
             case ORDER_REQUEST:
-            var { productId, shipping } = action;
+            var { productId, shipping, email, fname, lname, apartment, city, country, province, postalcode, phone, cardnumber, namecard, expiredate, cvc } = action;
             var product = state[productId];
             return {
                 ...state,
                 [productId] : {
                     ...product,
-                    shipping : shipping
+                    shipping : shipping,
+                    email : email,
+                    fname : fname,
+                    lname : lname,
+                    apartment : apartment,
+                    city : city,
+                    country : country,
+                    province : province,
+                    postalcode : postalcode,
+                    phone : phone,
+                    cardnumber : cardnumber,
+                    namecard : namecard,
+                    expiredate : expiredate,
+                    cvc : cvc
                 }
             }
             case WRITE_REVIEWS:

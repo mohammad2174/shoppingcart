@@ -24,10 +24,23 @@ export const item = (productId, num) => ({
         num
 })
 
-export const order = (productId, shipping) => ({
+export const order = (productId, shipping, email, fname, lname, apartment, city, country, province, postalcode, phone, cardnumber, namecard, expiredate, cvc) => ({
         type : types.ORDER_REQUEST,
         productId,
-        shipping
+        shipping,
+        email,
+        fname,
+        lname,
+        apartment,
+        city,
+        country,
+        province,
+        postalcode,
+        phone,
+        cardnumber,
+        namecard,
+        expiredate,
+        cvc
 })
 
 export const recieveReview = (productId, rating, reviewCount, message, subject) => ({
