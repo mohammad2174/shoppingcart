@@ -1,7 +1,39 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 class SignIn extends Component {
+  state = {
+    email: '',
+    password: ''
+  }
+
+  emailChange = e => {
+    this.setState({ email: e.target.value });
+  }
+
+  passwordChange = e => {
+    this.setState({ password: e.target.value });
+  }
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    const loginFormData = new FormData();
+    loginFormData.append("email", this.state.email)
+    loginFormData.append("password", this.state.password)
+    try {
+      const response = axios({
+        method: "post",
+        url: "http://localhost:8000/api/v1/login",
+        data: loginFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      }).then(res => console.log(res.data.status));
+    } catch(error) {
+      console.log(error)
+    }
+  }
+
   render() {
     return (
       <>
@@ -19,7 +51,7 @@ class SignIn extends Component {
               </p>
             </div>
             <div className="bg-white shadow-2xl overflow-hidden sm:rounded-lg">
-            <form className="w-10/12 m-9 space-y-6" action="#" method="POST">
+            <form className="w-10/12 m-9 space-y-6" onSubmit={this.handleSubmit}>
               <input type="hidden" name="remember" defaultValue="true" />
               <div className="rounded-md shadow-sm -space-y-px">
                 <div>
@@ -30,6 +62,7 @@ class SignIn extends Component {
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                     autoComplete="email"
                     required
+                    onChange={this.emailChange}
                     className="appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-gray-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm"
                   />
                 </div>
@@ -38,9 +71,10 @@ class SignIn extends Component {
                   <input
                     id="password"
                     name="password"
-                    pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])([a-zA-Z0-9@$!%*?&]{8,})$"
+                    // pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])([a-zA-Z0-9@$!%*?&]{8,})$"
                     autoComplete="current-password"
                     required
+                    onChange={this.passwordChange}
                     className="appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-gray-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm"
                   />
                 </div>

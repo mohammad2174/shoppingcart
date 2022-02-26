@@ -1,8 +1,50 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 
 class Register extends Component {
+  state = {
+    fname: '',
+    lname: '',
+    email: '',
+    password: ''
+  }
+
+  fnameChange = e => {
+    this.setState({ fname: e.target.value });
+  }
+
+  lnameChange = e => {
+    this.setState({ lname: e.target.value });
+  }
+
+  emailChange = e => {
+    this.setState({ email: e.target.value });
+  }
+
+  passwordChange = e => {
+    this.setState({ password: e.target.value });
+  }
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    const registerFormData = new FormData();
+    registerFormData.append("email", this.state.email)
+    registerFormData.append("password", this.state.password)
+    try {
+      const response = axios({
+        method: "post",
+        url: "http://localhost:8000/api/v1/register",
+        data: registerFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      }).then(res => res.data);
+    } catch(error) {
+      console.log(error)
+    }
+  }
+
     render() {
         return (
         <>
@@ -20,7 +62,7 @@ class Register extends Component {
               </p>
             </div>
             <div className="bg-white shadow-2xl overflow-hidden sm:rounded-lg">
-            <form className="w-10/12 m-9 space-y-6" action="#" method="POST">
+            <form className="w-10/12 m-9 space-y-6" onSubmit={this.handleSubmit}>
               <input type="hidden" name="remember" defaultValue="true" />
               <div className="rounded-md shadow-sm -space-y-px">
                 <div>
@@ -30,6 +72,7 @@ class Register extends Component {
                     name="fname"
                     autoComplete="fname"
                     required
+                    onChange={this.fnameChange}
                     className="appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-gray-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm"
                   />
                 </div>  
@@ -41,6 +84,7 @@ class Register extends Component {
                     name="lname"
                     autoComplete="lname"
                     required
+                    onChange={this.lnameChange}
                     className="appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-gray-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm"
                   />
                 </div>
@@ -53,6 +97,7 @@ class Register extends Component {
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                     autoComplete="email"
                     required
+                    onChange={this.emailChange}
                     className="appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-gray-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm"
                   />
                 </div>
@@ -62,9 +107,10 @@ class Register extends Component {
                   <input
                     id="password"
                     name="password"
-                    pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])([a-zA-Z0-9@$!%*?&]{8,})$"
+                    // pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])([a-zA-Z0-9@$!%*?&]{8,})$"
                     autoComplete="current-password"
                     required
+                    onChange={this.passwordChange}
                     className="appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-gray-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm"
                   />
                 </div>
