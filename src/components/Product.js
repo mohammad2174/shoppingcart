@@ -100,7 +100,7 @@ class Product extends Component {
   }
 
   render() {
-    const { addToCard, recieveProducts, recieveReview } = this.props;
+    const { addToCard, recieveProducts, recieveReview, user } = this.props;
     const pathname = window.location.pathname.split('')
     const id = pathname.length - 1 <= 9 ? pathname[pathname.length - 1] : pathname[(pathname.length - 2)].concat(pathname[(pathname.length - 1)])
     const products = this.props.products
@@ -237,6 +237,7 @@ class Product extends Component {
           <p className="mt-2 text-sm lg:text-base md:text-base text-gray-500">
             if you've used this poducts, share your thoughts with other customers
           </p>
+          {user.currentUser ?
           <button
             type="submit"
             className="mt-6 w-3/4 h-10 border border-gray-300 rounded-md py-3 px-8 flex items-center justify-center text-base font-medium hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
@@ -244,6 +245,8 @@ class Product extends Component {
           >
             Write a review
           </button>
+          :
+          ''}
           <Transition.Root show={this.state.open} as={Fragment}>
       <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={this.setOpen}>
         <div className="flex min-h-screen text-center md:block md:px-2 lg:px-4" style={{ fontSize: 0 }}>
@@ -507,12 +510,18 @@ class Product extends Component {
   }
 }
 
+const getUser = state => state.user
+
+const mapStateToProps = state => ({
+  user: getUser(state) 
+})
+
 const mapDispatchToProps = dispatch => ({
   addToCard : (productId, color, size) => dispatch(addToCard(productId, color, size)),
   recieveProducts : (products) => dispatch(recieveProducts(products)),
   recieveReview : (productId, rating, reviewCount, message, subject ) => dispatch(recieveReview(productId, rating, reviewCount, message, subject))
 })
   
-export default connect(null , mapDispatchToProps)(Product);
+export default connect(mapStateToProps , mapDispatchToProps)(Product);
 
   

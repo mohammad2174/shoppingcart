@@ -36,7 +36,7 @@ import Counterfeit from "../Routes/Counterfeit";
 class Header extends Component {
   
   render() {
-    const {products , total} = this.props
+    const {products , total, user} = this.props
     const totalproduct = this.props.totalproduct
 
     return (
@@ -49,12 +49,15 @@ class Header extends Component {
               <span>Shop Snazzy</span>
             </Link>  
               <div className="pr-3.5 flex flex-row justify-between">
+              {user.currentUser ?
+              <Link to="/register">
+              <span>Sign up</span>
+              </Link>
+              : 
               <Link to="signin">  
               <span className="pr-4">Sign in</span>
               </Link>
-              <Link to="/register">
-              <span>Create an account</span>
-              </Link>
+              }
               </div>
             </div>
           </div>
@@ -105,11 +108,14 @@ const getCardProducts = state => {
   }))
 }
 
+const getUser = state => state.user
+
 const getTotal = state => state.card.addedIds.reduce((total, id) => total + state.products[id].price * (state.card.quantityById[id] || 0), 0)
 
 const mapStateToProps = state => ({
   products: getCardProducts(state),
-  total: getTotal(state) 
+  total: getTotal(state),
+  user: getUser(state) 
 })
 
 

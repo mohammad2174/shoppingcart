@@ -21,7 +21,7 @@ class Card extends Component {
   }
 
   render() {
-    const {products, total } = this.props
+    const {products, total, user } = this.props
     const hasProducts = products.length > 0
     const nodes = hasProducts ? (
       products.map(product => <Shop {...product} />)
@@ -79,6 +79,7 @@ class Card extends Component {
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                       <div className="mt-6">
+                      {user.currentUser ?
                       <Link to="/checkout">
                         <button
                           disabled = {hasProducts ? '' : 'disabled'}
@@ -87,6 +88,16 @@ class Card extends Component {
                           Checkout
                         </button>
                         </Link>
+                        :
+                        <Link to="/signin">
+                        <button
+                          disabled = {hasProducts ? '' : 'disabled'}
+                          className={hasProducts ? "flex justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700" : "flex cursor-not-allowed justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"}
+                        >
+                          Checkout
+                        </button>
+                        </Link>
+                        }
                       </div>
                       <div className="mt-6 flex justify-center text-sm text-center text-gray-500">
                         <p>
@@ -119,11 +130,14 @@ const getCardProducts = state => {
   }))
 }
 
+const getUser = state => state.user
+
 const getTotal = state => state.card.addedIds.reduce((total, id) => total + state.products[id].price * (state.card.quantityById[id] || 0), 0)
 
 const mapStateToProps = state => ({
   products: getCardProducts(state),
-  total: getTotal(state) 
+  total: getTotal(state),
+  user: getUser(state) 
 })
 
 export default connect(mapStateToProps, null)(Card);

@@ -51,3 +51,8 @@ export const recieveReview = (productId, rating, reviewCount, message, subject) 
         message,
         subject
 })
+
+export const setCurrentUser = currentUser => ({
+        type: types.SET_CURRENT_USER,
+        currentUser
+})

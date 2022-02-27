@@ -1,19 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { setCurrentUser } from "../actions/index";
+import { connect } from "react-redux";
 import axios from 'axios';
 
 class SignIn extends Component {
   state = {
     email: '',
-    password: ''
-  }
-
-  emailChange = e => {
-    this.setState({ email: e.target.value });
-  }
-
-  passwordChange = e => {
-    this.setState({ password: e.target.value });
+    password: '',
+    errorMessage: []
   }
 
   handleSubmit = e => {
@@ -22,19 +17,23 @@ class SignIn extends Component {
     const loginFormData = new FormData();
     loginFormData.append("email", this.state.email)
     loginFormData.append("password", this.state.password)
-    try {
-      const response = axios({
-        method: "post",
-        url: "http://localhost:8000/api/v1/login",
-        data: loginFormData,
-        headers: { "Content-Type": "multipart/form-data" },
-      }).then(res => console.log(res.data.status));
-    } catch(error) {
-      console.log(error)
-    }
+    axios.post("http://localhost:8000/api/v1/login", loginFormData)
+    .then((response) => {
+      this.props.setCurrentUser(response.data.data)
+    })
+    .catch((err) => {
+      this.setState({ errorMessage: err.response.data });
+      console.log(err.response.data);
+    });
+  }
+
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   }
 
   render() {
+    const { setCurrentUser } = this.props;
     return (
       <>
         <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -54,6 +53,7 @@ class SignIn extends Component {
             <form className="w-10/12 m-9 space-y-6" onSubmit={this.handleSubmit}>
               <input type="hidden" name="remember" defaultValue="true" />
               <div className="rounded-md shadow-sm -space-y-px">
+                {this.state.errorMessage.email ? <p className="text-red-500">{this.state.errorMessage.email[0]}</p> : <p className="text-red-500">{this.state.errorMessage.data}</p>}
                 <div>
                     Email address
                   <input
@@ -62,8 +62,8 @@ class SignIn extends Component {
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                     autoComplete="email"
                     required
-                    onChange={this.emailChange}
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-gray-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm"
+                    onChange={this.handleChange}
+                    className={this.state.errorMessage.email || this.state.errorMessage.data ? "appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-red-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm" : "appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-gray-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm"}
                   />
                 </div>
                 <div className="pt-12">
@@ -71,11 +71,10 @@ class SignIn extends Component {
                   <input
                     id="password"
                     name="password"
-                    // pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])([a-zA-Z0-9@$!%*?&]{8,})$"
                     autoComplete="current-password"
                     required
-                    onChange={this.passwordChange}
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-gray-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm"
+                    onChange={this.handleChange}
+                    className={this.state.errorMessage.data || this.state.errorMessage.data ? "appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-red-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm" : "appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-gray-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm"}
                   />
                 </div>
               </div>
@@ -104,6 +103,10 @@ class SignIn extends Component {
                 <button
                   type="submit"
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  onClick={() => setCurrentUser({currentUser: {
+                    password: this.state.password,
+                    email: this.state.email,
+                  }})}
                 >
                   Sign in
                 </button>
@@ -117,4 +120,9 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: currentUser => dispatch(setCurrentUser(currentUser))
+});
+
+export default connect(null, mapDispatchToProps)(SignIn);
