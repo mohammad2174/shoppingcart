@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import { setCurrentUser } from "../actions/index";
+import { connect } from "react-redux";
 import axios from 'axios';
 
 
@@ -8,44 +10,34 @@ class Register extends Component {
     fname: '',
     lname: '',
     email: '',
-    password: ''
+    password: '',
+    errorMessage: []
   }
 
-  fnameChange = e => {
-    this.setState({ fname: e.target.value });
-  }
-
-  lnameChange = e => {
-    this.setState({ lname: e.target.value });
-  }
-
-  emailChange = e => {
-    this.setState({ email: e.target.value });
-  }
-
-  passwordChange = e => {
-    this.setState({ password: e.target.value });
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   }
 
   handleSubmit = e => {
     e.preventDefault();
 
-    const registerFormData = new FormData();
-    registerFormData.append("email", this.state.email)
-    registerFormData.append("password", this.state.password)
-    try {
-      const response = axios({
-        method: "post",
-        url: "http://localhost:8000/api/v1/register",
-        data: registerFormData,
-        headers: { "Content-Type": "multipart/form-data" },
-      }).then(res => res.data);
-    } catch(error) {
-      console.log(error)
-    }
+    const loginFormData = new FormData();
+    loginFormData.append("name", this.state.fname.concat(' ', this.state.lname))
+    loginFormData.append("email", this.state.email)
+    loginFormData.append("password", this.state.password)
+    axios.post("http://localhost:8000/api/v1/register", loginFormData)
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((err) => {
+      this.setState({ errorMessage: err.response.data });
+      console.log(err.response.data);
+    });
   }
 
     render() {
+      const { setCurrentUser } = this.props;
         return (
         <>
         <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -65,6 +57,7 @@ class Register extends Component {
             <form className="w-10/12 m-9 space-y-6" onSubmit={this.handleSubmit}>
               <input type="hidden" name="remember" defaultValue="true" />
               <div className="rounded-md shadow-sm -space-y-px">
+              {this.state.errorMessage.email ? <p className="text-red-500">{this.state.errorMessage.email[0]}</p> : <p className="text-red-500">{this.state.errorMessage.data}</p>}
                 <div>
                 First name
                   <input
@@ -72,7 +65,7 @@ class Register extends Component {
                     name="fname"
                     autoComplete="fname"
                     required
-                    onChange={this.fnameChange}
+                    onChange={this.handleChange}
                     className="appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-gray-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm"
                   />
                 </div>  
@@ -84,8 +77,8 @@ class Register extends Component {
                     name="lname"
                     autoComplete="lname"
                     required
-                    onChange={this.lnameChange}
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-gray-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm"
+                    onChange={this.handleChange}
+                    className={this.state.errorMessage.email || this.state.errorMessage.data ? "appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-red-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm" : "appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-gray-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm"}
                   />
                 </div>
 
@@ -97,8 +90,8 @@ class Register extends Component {
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                     autoComplete="email"
                     required
-                    onChange={this.emailChange}
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-gray-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm"
+                    onChange={this.handleChange}
+                    className={this.state.errorMessage.email || this.state.errorMessage.data ? "appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-red-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm" : "appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-gray-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm"}
                   />
                 </div>
 
@@ -107,10 +100,9 @@ class Register extends Component {
                   <input
                     id="password"
                     name="password"
-                    // pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])([a-zA-Z0-9@$!%*?&]{8,})$"
                     autoComplete="current-password"
                     required
-                    onChange={this.passwordChange}
+                    onChange={this.handleChange}
                     className="appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-gray-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm"
                   />
                 </div>
@@ -120,6 +112,7 @@ class Register extends Component {
                 <button
                   type="submit"
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  onClick={() => setCurrentUser(this.state.email, this.state.password)}
                 >
                   Sign in
                 </button>
@@ -134,4 +127,8 @@ class Register extends Component {
 }
 
 
-export default Register;
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (email, password) => dispatch(setCurrentUser(email, password)),
+});
+
+export default connect(null, mapDispatchToProps)(Register);
