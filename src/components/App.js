@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import shop from "../api/shop";
 import Header from "./Header";
-import { recieveProducts } from "../actions";
+import { recieveProducts, recieveReviews } from "../actions";
 import { BrowserRouter as Router } from "react-router-dom";
 import axios from 'axios';
 
@@ -14,6 +14,13 @@ class App extends Component {
       .then(res => this.props.recieveProducts(res.data.data))
       .catch(err => err.response.data)
   }
+
+  componentDidMount() {
+    axios.get(`http://localhost:8000/api/v1/reviews`)
+    .then(res => this.props.recieveReviews(res.data.data))
+    .catch(err => err.response.data)
+  }
+  
   render() {
     const { products } = this.props;
 
@@ -26,7 +33,8 @@ class App extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    recieveProducts : products => dispatch(recieveProducts(products))
+    recieveProducts : products => dispatch(recieveProducts(products)),
+    recieveReviews : (reviews ) => dispatch(recieveReviews(reviews))
 })
 
 const getProducts = products => Object.keys(products).map(id => products[id])

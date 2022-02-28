@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { addToCard } from "../actions";
 import { Link } from "react-router-dom";
 import { recieveProducts, recieveReview } from "../actions";
+import axios from 'axios';
 
 
 class Product extends Component {
@@ -31,6 +32,8 @@ class Product extends Component {
       rating: 0,
       reviewCount: 0
     },
+    product_id : 0,
+    errorMessage: [],
     message : '',
     subject : '',
     notifyopen : false,
@@ -68,16 +71,32 @@ class Product extends Component {
     }})
   }
 
-  messageChange = (e) => {
-    this.setState({
-      message : e.target.value
-    })
+  setproductId = (e) => {
+    this.setState({product_id : e})
   }
 
-  subjectChange = (e) => {
-    this.setState({
-      subject : e.target.value
+  handleSubmit = e => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("product_id", this.state.product_id)
+    formData.append("rating", this.state.star.rating)
+    formData.append("reviewCount", this.state.star.reviewCount)
+    formData.append("subject", this.state.subject)
+    formData.append("message", this.state.message)
+    axios.post("http://localhost:8000/api/v1/review", formData)
+    .then((response) => {
+      console.log(response.data.data)
     })
+    .catch((err) => {
+      this.setState({ errorMessage: err.response.data });
+      console.log(err.response.data);
+    });
+  }
+
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   }
 
   setSelectedColor = (e) => {
@@ -100,7 +119,7 @@ class Product extends Component {
   }
 
   render() {
-    const { addToCard, recieveProducts, recieveReview, user } = this.props;
+    const { addToCard, recieveProducts, recieveReview, user, reviews } = this.props;
     const pathname = window.location.pathname.split('')
     const id = pathname.length - 1 <= 9 ? pathname[pathname.length - 1] : pathname[(pathname.length - 2)].concat(pathname[(pathname.length - 1)])
     const products = this.props.products
@@ -201,8 +220,9 @@ class Product extends Component {
                 <div className="mt-8 relative col-span-2">
                   <span className="text-base text-gray-800 md:text-lg">{product.detail}</span> 
                 </div>
+                {reviews.reviews.map((review) => (
                 <div className="mt-12 grid grid-cols-3 gap-1 md:grid-cols-4">
-          {product.message && product.subject ?       
+          {review.product_id === product.id ?       
           <div className="col-span-1 -space-x-1 overflow-hidden">
           <img
           className="inline-block h-12 w-12 rounded-full ring-2 ring-white"
@@ -215,7 +235,7 @@ class Product extends Component {
             <StarIcon
             key={rating}
             className={classNames(
-            product.rating > rating ? 'text-yellow-400' : 'text-gray-200',
+            review.rating > rating ? 'text-yellow-400' : 'text-gray-200',
             'h-5 w-5 flex-shrink-0'
             )}
             aria-hidden="true"
@@ -224,11 +244,11 @@ class Product extends Component {
             </div>
           </div>
           : '' }
-          {product.message && product.subject ? 
+          {review.product_id === product.id ? 
           <div class="col-span-3">
-          <h2 className="text-sm lg:text-base md:text-base font-black text-gray-700">{product.subject}</h2>
+          <h2 className="text-sm lg:text-base md:text-base font-black text-gray-700">{review.subject}</h2>
           <p className="mt-4 text-xs lg:text-sm md:text-sm text-gray-500">
-          {product.message}
+          {review.message}
           </p>
           </div>
           : '' }
@@ -287,7 +307,7 @@ class Product extends Component {
                 </button>
 
                 <div className="w-full cursor-pointer grid grid-cols-1 gap-y-8 gap-x-6 items-start sm:grid-cols-12 lg:gap-x-8">
-                  <div className="sm:col-span-full lg:col-span-full">
+                  <form className="sm:col-span-full lg:col-span-full" onSubmit={this.handleSubmit}>
                     <h2 className="text-2xl font-extrabold text-gray-900 sm:pr-12">{product.name}</h2>
                     <div className="mt-2 pl-0.5 flex items-center">
                       {[0, 1, 2, 3, 4].map((rating) => (
@@ -298,44 +318,45 @@ class Product extends Component {
                         'h-5 w-5 flex-shrink-0'
                       )}
                         aria-hidden="true"
-                        onClick={() => this.setStar()}
+                        onClick={() => this.setproductId(product.id) || this.setStar()}
                       />
                       ))}
                     </div>
                     <label htmlFor="street-address" className="mt-4 block text-sm font-medium text-gray-700">
                       Subject
                     </label>
+                    {this.state.errorMessage.subject ? <p className="text-red-500">{this.state.errorMessage.subject[0]}</p> : <p className="text-red-500">{this.state.errorMessage.data}</p>}
                     <input
                       type="text"
                       name="subject"
-                      value={this.state.subject}
                       id="subject"
                       autoComplete="subject"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                      onChange={this.subjectChange} 
+                      onChange={this.handleChange}
                     />
                       <label htmlFor="message" className="mt-4 block text-sm font-medium text-gray-700">
                         Message
                       </label>
+                    {this.state.errorMessage.message ? <p className="text-red-500">{this.state.errorMessage.message[0]}</p> : <p className="text-red-500">{this.state.errorMessage.data}</p>}
                       <textarea
                         type="text"
                         name="message"
-                        value={this.state.message}
                         id="message"
                         autoComplete="address-level2"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        onChange={this.messageChange}  
+                        onChange={this.handleChange}  
                       />
                       <div className="mt-8">
                       <button
                         type="submit"
-                        className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        onClick={() => recieveReview(product.id, this.state.star.rating, this.state.star.reviewCount, this.state.message, this.state.subject) && this.setClose()}
+                        disabled = {this.state.message.length <= 0 || this.state.subject.length <= 0 || this.state.star.length <= 0 ? 'disabled' : ''}
+                        className={this.state.message.length <= 0 || this.state.subject.length <= 0 || this.state.star.length <= 0 ? "inline-flex cursor-not-allowed justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" : "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"}
+                        onClick={this.state.message.length <= 0 || this.state.subject.length <= 0 || this.state.star.length <= 0 || this.state.errorMessage.length >= 0 ? '' : () => recieveReview(product.id, this.state.star.rating, this.state.star.reviewCount, this.state.message, this.state.subject) && this.setClose()}
                       >
                         Submit
                       </button>
                       </div>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -344,12 +365,35 @@ class Product extends Component {
       </Dialog>
     </Transition.Root> 
           </div>
-          </div>
+                </div>
+                ))}
                 </div>
                 <div className="w-full mt-8 items-start md:mt-0">
                     <h2 className="text-xl lg:text-4xl md:text-2xl font-black text-gray-900">${product.price}</h2>
                     <div className="mt-6">
                         <h4 className="sr-only">Reviews</h4>
+                        {reviews.reviews.map((review) => (
+                          <>
+                        {review.product_id === product.id ? 
+                        <div className="flex items-center">
+                          <div className="flex items-center">
+                            {[0, 1, 2, 3, 4].map((rating) => (
+                              <StarIcon
+                                key={rating}
+                                className={classNames(
+                                  review.rating > rating ? 'text-yellow-400' : 'text-gray-200',
+                                  'h-5 w-5 flex-shrink-0'
+                                )}
+                                aria-hidden="true"
+                              />
+                            ))}
+                          </div>
+                          <p className="sr-only">{review.rating} out of 5 stars</p>
+                          <span className="ml-3 text-sm font-medium text-gray-600">
+                            {review.reviewCount} reviews
+                          </span>
+                        </div>
+                        : 
                         <div className="flex items-center">
                           <div className="flex items-center">
                             {[0, 1, 2, 3, 4].map((rating) => (
@@ -368,6 +412,9 @@ class Product extends Component {
                             {product.reviewCount} reviews
                           </span>
                         </div>
+                        }
+                        </>
+                        ))}
                     </div>
                     <div className="mt-6">
                           <h4 className="text-sm text-gray-900 font-medium">Color</h4>
@@ -511,9 +558,11 @@ class Product extends Component {
 }
 
 const getUser = state => state.user
+const getReview = state => state.reviews
 
 const mapStateToProps = state => ({
-  user: getUser(state) 
+  user: getUser(state),
+  reviews: getReview(state)  
 })
 
 const mapDispatchToProps = dispatch => ({
