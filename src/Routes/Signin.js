@@ -33,7 +33,8 @@ class SignIn extends Component {
   }
 
   render() {
-    const { setCurrentUser } = this.props;
+    const { setCurrentUser, user } = this.props;
+    // console.log(user.currentUser.api_token);
     return (
       <>
         <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -74,7 +75,7 @@ class SignIn extends Component {
                     autoComplete="current-password"
                     required
                     onChange={this.handleChange}
-                    className={this.state.errorMessage.data || this.state.errorMessage.data ? "appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-red-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm" : "appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-gray-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm"}
+                    className={this.state.errorMessage.email || this.state.errorMessage.data ? "appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-red-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm" : "appearance-none rounded-none relative block w-full px-3 py-2 border-b-2 border-gray-400 text-gray-900 focus:outline-none focus:border-indigo-500 focus:z-10 sm:text-sm"}
                   />
                 </div>
               </div>
@@ -98,8 +99,8 @@ class SignIn extends Component {
                   </a>
                 </div>
               </div>
-  
               <div>
+              {user.currentUser === undefined || !user.currentUser.api_token ? 
                 <button
                   type="submit"
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -110,6 +111,19 @@ class SignIn extends Component {
                 >
                   Sign in
                 </button>
+              :
+              <Link
+                  to="/checkout"
+                  type="submit"
+                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  onClick={() => setCurrentUser({currentUser: {
+                    password: this.state.password,
+                    email: this.state.email,
+                  }})}
+                >
+                  Sign in
+                </Link>  
+              }
               </div>
             </form>
             </div>
@@ -120,9 +134,14 @@ class SignIn extends Component {
   }
 }
 
+const getUser = state => state.user
+
+const mapStateToProps = state => ({
+  user: getUser(state)
+})
 
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: currentUser => dispatch(setCurrentUser(currentUser))
 });
 
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
