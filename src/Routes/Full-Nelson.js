@@ -22,6 +22,7 @@ class FullNelson extends Component {
     }
       const data = this.state.products;
       const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
+      console.log(slice);
       const postData = slice.map(pd => <React.Fragment>
               <>
               {pd.name === 'Full Nelson' ?

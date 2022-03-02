@@ -67,7 +67,7 @@ class Sunglasses extends Component {
   }
 
     render() {
-      const { products , addToCard } = this.props;
+      const { products, addToCard, reviews } = this.props;
       function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
@@ -198,7 +198,9 @@ class Sunglasses extends Component {
                   </div>
                   <div className="sm:col-span-8 lg:col-span-7">
                     <h2 className="text-2xl font-extrabold text-gray-900 sm:pr-12">{product.name}</h2>
-
+                    {reviews.reviews.map((review) => (
+                      <>
+                    {review.product_id === product.id ?
                     <section aria-labelledby="information-heading" className="mt-2">
                       <h3 id="information-heading" className="sr-only">
                         Product information
@@ -215,27 +217,29 @@ class Sunglasses extends Component {
                               <StarIcon
                                 key={rating}
                                 className={classNames(
-                                  product.rating > rating ? 'text-yellow-400' : 'text-gray-200',
+                                  review.rating > rating ? 'text-yellow-400' : 'text-gray-200',
                                   'h-5 w-5 flex-shrink-0'
                                 )}
                                 aria-hidden="true"
                               />
                             ))}
                           </div>
-                          <p className="sr-only">{product.rating} out of 5 stars</p>
+                          <p className="sr-only">{review.rating} out of 5 stars</p>
                           <Link to={`/product/${product.id}`} className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                            {product.reviewCount} reviews
+                            {review.reviewCount} reviews
                           </Link>
                         </div>
                       </div>
                     </section>
-
+                    : ''
+                    }
+                    </>
+                    ))}
                     <section aria-labelledby="options-heading" className="mt-10">
                       <h3 id="options-heading" className="sr-only">
                         Product options
                       </h3>
 
-                     
                         {/* Colors */}
                         <div>
                           <h4 className="text-sm text-gray-900 font-medium">Color</h4>
@@ -330,15 +334,15 @@ class Sunglasses extends Component {
                             </div>
                           </RadioGroup>
                         </div>
-
+                        
                         <button
                           type="submit"
                           className="mt-6 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                          onClick={() => addToCard(this.state.sunglass.id, this.state.selectedColor, this.state.selectedSize) && this.setClose() || this.setNotifyOpen() || this.setTimeout()}
+                          onClick={() => addToCard(this.state.top.id, this.state.selectedColor, this.state.selectedSize) && this.setClose() || this.setNotifyOpen() || this.setTimeout()}             
                         >
                           Add to bag
                         </button>
-                      
+
                     </section>
                   </div>
                 </div>
@@ -354,13 +358,16 @@ class Sunglasses extends Component {
   }
 
 
-const getProducts = products => Object.keys(products).map(id => products[id])
-
-const mapStateToProps = state => {
-  return {
-    products : getProducts(state.products)
+  const getProducts = products => Object.keys(products).map(id => products[id])
+  const getReview = state => state.reviews
+  
+  const mapStateToProps = state => {
+    
+    return {
+      products : getProducts(state.products),
+      reviews: getReview(state)
+    }
   }
-}
           
 const mapDispatchToProps = dispatch => ({
   addToCard : (productId, color, size) => dispatch(addToCard(productId, color, size))
