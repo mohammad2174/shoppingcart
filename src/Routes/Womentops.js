@@ -67,7 +67,7 @@ class Tops extends Component {
   }
   
     render() {
-      const { products, addToCard } = this.props;
+      const { products, addToCard, reviews } = this.props;
       function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
@@ -86,7 +86,7 @@ class Tops extends Component {
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,
         }
-
+        
       return (
         <>
         <Transition.Root show={this.state.notifyopen} as={Fragment}>
@@ -201,7 +201,9 @@ class Tops extends Component {
                   </div>
                   <div className="sm:col-span-8 lg:col-span-7">
                     <h2 className="text-2xl font-extrabold text-gray-900 sm:pr-12">{product.name}</h2>
-
+                    {reviews.reviews.map((review) => (
+                      <>
+                    {review.product_id === product.id ?
                     <section aria-labelledby="information-heading" className="mt-2">
                       <h3 id="information-heading" className="sr-only">
                         Product information
@@ -218,21 +220,24 @@ class Tops extends Component {
                               <StarIcon
                                 key={rating}
                                 className={classNames(
-                                  product.rating > rating ? 'text-yellow-400' : 'text-gray-200',
+                                  review.rating > rating ? 'text-yellow-400' : 'text-gray-200',
                                   'h-5 w-5 flex-shrink-0'
                                 )}
                                 aria-hidden="true"
                               />
                             ))}
                           </div>
-                          <p className="sr-only">{product.rating} out of 5 stars</p>
+                          <p className="sr-only">{review.rating} out of 5 stars</p>
                           <Link to={`/product/${product.id}`} className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                            {product.reviewCount} reviews
+                            {review.reviewCount} reviews
                           </Link>
                         </div>
                       </div>
                     </section>
-
+                    : ''
+                    }
+                    </>
+                    ))}
                     <section aria-labelledby="options-heading" className="mt-10">
                       <h3 id="options-heading" className="sr-only">
                         Product options
@@ -340,7 +345,6 @@ class Tops extends Component {
                         >
                           Add to bag
                         </button>
-
                     </section>
                   </div>
                 </div>
@@ -357,11 +361,13 @@ class Tops extends Component {
 
 
 const getProducts = products => Object.keys(products).map(id => products[id])
+const getReview = state => state.reviews
 
 const mapStateToProps = state => {
   
   return {
-    products : getProducts(state.products)
+    products : getProducts(state.products),
+    reviews: getReview(state)
   }
 }
   
