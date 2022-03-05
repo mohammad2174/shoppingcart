@@ -61,3 +61,8 @@ export const setCurrentUser = currentUser => ({
         type: types.SET_CURRENT_USER,
         currentUser
 })
+
+export const recieveCheckouts = (checkouts) => ({
+        type : types.RECIEVE_CHECKOUTS,
+        checkouts
+})

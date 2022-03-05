@@ -42,7 +42,7 @@ class Shop extends Component {
             </li>
           </ul> 
         </div>
-      </div>
+        </div>
     )
   }
 }
