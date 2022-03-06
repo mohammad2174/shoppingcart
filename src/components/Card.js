@@ -5,11 +5,20 @@ import { XIcon } from '@heroicons/react/outline';
 import { connect } from "react-redux";
 import Shop from "./Shop";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 
 class Card extends Component {
   state = {
-    open : this.props.open
+    open : this.props.open,
+    // user_id : this.props.user ? this.props.user.currentUser.currentUser.id : 0,
+    // name : this.props.products.find(product => {return product.name}).name,
+    // price : this.props.products.find(product => {return product.price}).price,
+    // quantity : this.props.products.find(product => {return product.quantity}).quantity,
+    // color : this.props.products.find(product => {return product.color}).color,
+    // size : this.props.products.find(product => {return product.size}).size,
+    // imageAlt : this.props.products.find(product => {return product.imageAlt}).imageAlt,
+    // catimageSrc : this.props.products.find(product => {return product.catimageSrc}).catimageSrc
   }
 
   setOpen = () => {
@@ -20,8 +29,28 @@ class Card extends Component {
     this.setState({open : false})
   }
 
+  setCheckout = () => {
+    const formData = new FormData();
+    formData.append("user_id", this.props.user.currentUser.currentUser.id)
+    formData.append("name", this.props.products.find(product => {return product.name}).name)
+    formData.append("price", this.props.products.find(product => {return product.price}).price)
+    formData.append("quantity", this.props.products.find(product => {return product.quantity}).quantity)
+    formData.append("color", this.props.products.find(product => {return product.color}).color)
+    formData.append("size", this.props.products.find(product => {return product.size}).size)
+    formData.append("imageAlt", this.props.products.find(product => {return product.imageAlt}).imageAlt)
+    formData.append("catimageSrc", this.props.products.find(product => {return product.catimageSrc}).catimageSrc)
+    axios.post("http://localhost:8000/api/v1/checkout", formData)
+    .then((response) => {
+        console.log(response);
+    })
+    .catch((err) => {
+      console.log(err.response.data);
+    });
+  }
+
   render() {
     const {products, total, user } = this.props
+    console.log(this.props.user);
     const hasProducts = products.length > 0
     const nodes = hasProducts ? (
       products.map(product => <Shop {...product} />)
@@ -84,6 +113,7 @@ class Card extends Component {
                         <button
                           disabled = {hasProducts ? '' : 'disabled'}
                           className={hasProducts ? "flex justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700" : "flex cursor-not-allowed justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"}
+                          onClick={() => this.setCheckout()}
                         >
                           Checkout
                         </button>
@@ -93,6 +123,7 @@ class Card extends Component {
                         <button
                           disabled = {hasProducts ? '' : 'disabled'}
                           className={hasProducts ? "flex justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700" : "flex cursor-not-allowed justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"}
+                          // onClick={() => this.setCheckout()}
                         >
                           Checkout
                         </button>
