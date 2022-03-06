@@ -2,19 +2,28 @@ import React, { Component, Fragment } from "react";
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { connect } from "react-redux";
-import { checkout, item, order } from "../actions";
+import { checkout, item, order, recieveCheckouts } from "../actions";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+
 
 class Checkout extends Component {
+  componentDidMount() {
+    axios.get(`http://localhost:8000/api/v1/checkouts`)
+    .then(res => this.props.recieveCheckouts(res.data.data))
+    .catch(err => err.response.data)
+  }
+
 state = {
   exclass: "p-4 mt-1 h-32 border border-gray-300 block w-full shadow-sm sm:text-sm rounded-md",
   stclass: "p-4 mt-1 h-32 border-2 border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
   stfill: "#2f2ff7",
   exfill: "gray",
-  shipping: this.props.products.find(product => {return product.shipping}).shipping,
-  email: "",
-  fname: "",
-  lname: "",
+  // shipping: this.props.products.find(product => {return product.shipping}).shipping,
+  shipping: 5,
+  email: this.props.user.currentUser.currentUser.email,
+  fname: this.props.user.currentUser.currentUser.name.slice(0, 5),
+  lname: this.props.user.currentUser.currentUser.name.slice(6, 14),
   apartment: "",
   city: "",
   country: "",
@@ -41,24 +50,6 @@ setEXClass = () => {
   this.setState({exfill : "gray"})
   this.setState({stfill : "#2f2ff7"})
   this.setState({shipping : 5})
-}
-
-setEmail = (e) => {
-  this.setState({
-    email : e.target.value
-  })
-}
-
-setFname = (e) => {
-  this.setState({
-    fname : e.target.value
-  })
-}
-
-setLname = (e) => {
-  this.setState({
-    lname : e.target.value
-  })
 }
 
 setApartment = (e) => {
@@ -121,8 +112,10 @@ setCvc = (e) => {
   })
 }
   render() {
-      const { checkout, item, total, order } = this.props;
+      const { checkout, item, total, order, user } = this.props;
       const products = this.props.products
+      const checkouts = this.props.checkouts.checkouts
+      console.log(checkouts);
       const subtotal = total
       const taxes = 5.25
       const id = products.length === 0 ? 0 : products.find(product => {return product.id}).id
@@ -138,16 +131,16 @@ setCvc = (e) => {
       function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
-
+      
     return (
       <div className="max-w-7xl mt-16 mx-auto px-4 sm:px-6 lg:px-8">
         <div>
         <p className="mb-6 text-base font-extrabold text-gray-800">Preparing to ship on {date}</p>
         <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-          <div className={id ? "bg-indigo-600 h-2.5 w-2/5 lg:w-2/6 rounded-full" : "h-2.5 w-2/5 lg:w-2/6 rounded-full"}></div>
+          <div className={checkouts ? "bg-indigo-600 h-2.5 w-2/5 lg:w-2/6 rounded-full" : "h-2.5 w-2/5 lg:w-2/6 rounded-full"}></div>
           <div className="mt-6 grid grid-cols-4 gap-14 md:gap-60 text-xs md:text-sm font-bold">
-            <p className={id ? "text-indigo-500" : "text-gray-500"}>Order&nbsp;placed</p>
-            <p className={id ? "text-indigo-500" : "text-gray-500"}>Processing</p>
+            <p className={checkouts ? "text-indigo-500" : "text-gray-500"}>Order&nbsp;placed</p>
+            <p className={checkouts ? "text-indigo-500" : "text-gray-500"}>Processing</p>
             <p className="text-gray-500">Shipped</p>
             <p className="text-gray-500 justify-self-end">Delivered</p>
           </div>
@@ -162,13 +155,13 @@ setCvc = (e) => {
                         Email address
                       </label>
                       <input
+                        disabled
                         type="email"
                         name="email-address"
                         value={this.state.email}
-                        onChange={this.setEmail}
                         id="email-address"
                         autoComplete="email"
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        className="mt-1 bg-gray-200 cursor-not-allowed block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                       <hr className="mt-10" />
                       <h2 className="mt-10 text-xl font-extrabold text-gray-800">Shipping information</h2>
@@ -178,13 +171,13 @@ setCvc = (e) => {
                         First name
                       </label>
                       <input
+                        disabled
                         type="text"
                         name="first-name"
                         value={this.state.fname}
-                        onChange={this.setFname}
                         id="first-name"
                         autoComplete="given-name"
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        className="mt-1 bg-gray-200 cursor-not-allowed block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
 
@@ -193,13 +186,13 @@ setCvc = (e) => {
                         Last name
                       </label>
                       <input
+                        disabled
                         type="text"
                         name="last-name"
                         value={this.state.lname}
-                        onChange={this.setLname}
                         id="last-name"
                         autoComplete="family-name"
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        className="mt-1 bg-gray-200 cursor-not-allowed block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
                       </div>
@@ -390,7 +383,7 @@ setCvc = (e) => {
                       />
                     </div>
                     </div>
-                    {id ? 
+                    {checkouts ? 
                     <div className="mt-6">
                       <Link to="/order">
                         <button
@@ -406,16 +399,16 @@ setCvc = (e) => {
                 </div>
                 <div className="relative md:row-span-1">
                 <h2 className="text-xl font-extrabold text-gray-800">Order summary</h2>
-                {id ?
+                {checkouts ?
                 <div className="mt-4 p-6 border border-gray-300 rounded-md">
                 <div className="flow-root">
         <ul role="list" className="-my-6 divide-y divide-gray-200">
-        {products.map((product) => (
-            <li key={product.id} className="py-6 flex">
+        {checkouts.map((checkout) => (
+            <li key={checkout.id} className="py-6 flex">
               <div className="flex-shrink-0 w-28 h-28 border border-gray-200 rounded-md overflow-hidden">
                 <img
-                  src={product.catimageSrc}
-                  alt={product.imageAlt}
+                  src={checkout.catimageSrc}
+                  alt={checkout.imageAlt}
                   className="w-full h-full object-center object-cover"
                 />
               </div>
@@ -423,21 +416,21 @@ setCvc = (e) => {
               <div className="ml-4 flex-1 flex flex-col">
                 <div>
                   <div className="flex justify-between text-base font-medium text-gray-900">
-                    <h3>{product.name}</h3>
-                    <button type="button" onClick={() => checkout(product.id)}>
+                    <h3>{checkout.name}</h3>
+                    <button type="button" onClick={() => checkout(checkout.id)}>
                     <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M19 24h-14c-1.104 0-2-.896-2-2v-16h18v16c0 1.104-.896 2-2 2m-9-14c0-.552-.448-1-1-1s-1 .448-1 1v9c0 .552.448 1 1 1s1-.448 1-1v-9zm6 0c0-.552-.448-1-1-1s-1 .448-1 1v9c0 .552.448 1 1 1s1-.448 1-1v-9zm6-5h-20v-2h6v-1.5c0-.827.673-1.5 1.5-1.5h5c.825 0 1.5.671 1.5 1.5v1.5h6v2zm-12-2h4v-1h-4v1z"/></svg>
                     </button>
                   </div>
-                  <p className="mt-1 text-sm text-gray-500">{product.color}</p>
-                  <p className="mt-1 text-sm text-gray-500">{product.size}</p>
+                  <p className="mt-1 text-sm text-gray-500">{checkout.color}</p>
+                  <p className="mt-1 text-sm text-gray-500">{checkout.size}</p>
                 </div>
                 <div className="flex-1 flex items-end justify-between text-sm">
-                  <p className="text-gray-500">${product.price}</p>
+                  <p className="text-gray-500">${checkout.price}</p>
 
                   <Menu as="div" className="relative inline-block text-left">
       <div>
         <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
-          {product.count}
+          {checkout.quantity}
           <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
         </Menu.Button>
       </div>
@@ -451,9 +444,10 @@ setCvc = (e) => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
+        {products.map((product) => (
         <Menu.Items className="origin-top-right absolute right-0 mt-2 w-24 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-          {fib(product.inventory + product.count).map((num) =>
+          {fib(product.inventory + checkout.quantity).map((num) =>
             <Menu.Item>
               {({ active }) => (
                 
@@ -472,6 +466,7 @@ setCvc = (e) => {
             )}
           </div>
         </Menu.Items>
+        ))}
       </Transition>
                   </Menu>
                 </div>
@@ -521,15 +516,22 @@ const getCardProducts = state => {
 
 const getTotal = state => state.card.addedIds.reduce((total, id) => total + state.products[id].price * (state.card.quantityById[id] || 0), 0)
 
+const getUser = state => state.user
+
+const getCheckout = state => state.checkouts
+
 const mapStateToProps = state => ({
   products: getCardProducts(state),
-  total: getTotal(state) 
+  total: getTotal(state),
+  user: getUser(state),
+  checkouts: getCheckout(state)
 })
 
 const mapDispatchToProps = dispatch => ({
   checkout: productId => dispatch(checkout(productId)),
   item: (productId, num) => dispatch(item(productId, num)),
-  order: (productId, shipping, email, fname, lname, apartment, city, country, province, postalcode, phone, cardnumber, namecard, expiredate, cvc) => dispatch(order(productId, shipping, email, fname, lname, apartment, city, country, province, postalcode, phone, cardnumber, namecard, expiredate, cvc))
+  order: (productId, shipping, email, fname, lname, apartment, city, country, province, postalcode, phone, cardnumber, namecard, expiredate, cvc) => dispatch(order(productId, shipping, email, fname, lname, apartment, city, country, province, postalcode, phone, cardnumber, namecard, expiredate, cvc)),
+  recieveCheckouts : (checkouts ) => dispatch(recieveCheckouts(checkouts))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

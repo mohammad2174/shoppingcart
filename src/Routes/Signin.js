@@ -3,12 +3,16 @@ import { Link } from "react-router-dom";
 import { setCurrentUser } from "../actions/index";
 import { connect } from "react-redux";
 import axios from 'axios';
+import { Navigate } from "react-router-dom";
+
 
 class SignIn extends Component {
   state = {
+    id: 0,
     email: '',
     password: '',
-    errorMessage: []
+    errorMessage: [],
+    redirect: false
   }
 
   handleSubmit = e => {
@@ -18,8 +22,14 @@ class SignIn extends Component {
     loginFormData.append("email", this.state.email)
     loginFormData.append("password", this.state.password)
     axios.post("http://localhost:8000/api/v1/login", loginFormData)
-    .then((response) => {
-      this.props.setCurrentUser(response.data.data)
+    .then((res) => {
+        this.setState({ redirect: true });
+        this.props.setCurrentUser({currentUser: {
+          password: this.state.password,
+          email: this.state.email,
+          name: res.data.data.name,
+          id: res.data.data.id
+        }})
     })
     .catch((err) => {
       this.setState({ errorMessage: err.response.data });
@@ -33,8 +43,10 @@ class SignIn extends Component {
   }
 
   render() {
-    const { setCurrentUser, user } = this.props;
-    // console.log(user.currentUser.api_token);
+    if(this.state.redirect) {
+      return <Navigate to="/checkout" />
+    }
+
     return (
       <>
         <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -100,30 +112,12 @@ class SignIn extends Component {
                 </div>
               </div>
               <div>
-              {user.currentUser === undefined || !user.currentUser.api_token ? 
                 <button
                   type="submit"
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  onClick={() => setCurrentUser({currentUser: {
-                    password: this.state.password,
-                    email: this.state.email,
-                  }})}
                 >
                   Sign in
                 </button>
-              :
-              <Link
-                  to="/checkout"
-                  type="submit"
-                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  onClick={() => setCurrentUser({currentUser: {
-                    password: this.state.password,
-                    email: this.state.email,
-                  }})}
-                >
-                  Sign in
-                </Link>  
-              }
               </div>
             </form>
             </div>
