@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 
 class Order extends Component {
   state = {
-    shipping: this.props.products.find(product => {return product.shipping}).shipping,
+    shipping: 5,
+    // shipping: this.props.products.find(product => {return product.shipping}).shipping,
     email: this.props.products.find(product => {return product.email}).email,
     phone: this.props.products.find(product => {return product.phone}).phone,
     cardnumber: this.props.products.find(product => {return product.cardnumber}).cardnumber,

@@ -21,6 +21,7 @@ state = {
   exfill: "gray",
   // shipping: this.props.products.find(product => {return product.shipping}).shipping,
   shipping: 5,
+  id: this.props.user.currentUser.currentUser.id,
   email: this.props.user.currentUser.currentUser.email,
   fname: this.props.user.currentUser.currentUser.name.slice(0, 5),
   lname: this.props.user.currentUser.currentUser.name.slice(6, 14),
@@ -33,7 +34,8 @@ state = {
   cardnumber: "",
   namecard: "",
   expiredate: "",
-  cvc : ""
+  cvc : "",
+  errorMessage: []
 }
 
 setSTClass = () => {
@@ -52,71 +54,46 @@ setEXClass = () => {
   this.setState({shipping : 5})
 }
 
-setApartment = (e) => {
-  this.setState({
-    apartment : e.target.value
+handleSubmit = e => {
+  e.preventDefault();
+
+  const formData = new FormData();
+  formData.append("user_id", this.state.id)
+  formData.append("email", this.state.email)
+  formData.append("fname", this.state.fname)
+  formData.append("lname", this.state.lname)
+  formData.append("apartment", this.state.apartment)
+  formData.append("city", this.state.city)
+  formData.append("country", this.state.country)
+  formData.append("province", this.state.province)
+  formData.append("postalcode", this.state.postalcode)
+  formData.append("phone", this.state.phone)
+  formData.append("shipping", this.state.shipping)
+  formData.append("cardnumber", this.state.cardnumber)
+  formData.append("namecard", this.state.namecard)
+  formData.append("expiredate", this.state.expiredate)
+  formData.append("cvc", this.state.cvc)
+  axios.post("http://localhost:8000/api/v1/order", formData)
+  .then((res) => {
+      console.log(res);
   })
+  .catch((err) => {
+    this.setState({ errorMessage: err.response.data });
+    console.log(err.response.data);
+  });
 }
 
-setCity = (e) => {
-  this.setState({
-    city : e.target.value
-  })
+handleChange = (event) => {
+  const { name, value } = event.target;
+  this.setState({ [name]: value });
 }
 
-setCountry = (e) => {
-  this.setState({
-    country : e.target.value
-  })
-}
-
-setProvince = (e) => {
-  this.setState({
-    province : e.target.value
-  })
-}
-
-setPostalcode = (e) => {
-  this.setState({
-    postalcode : e.target.value
-  })
-}
-
-setPhone = (e) => {
-  this.setState({
-    phone : e.target.value
-  })
-}
-
-setCardnumber = (e) => {
-  this.setState({
-    cardnumber : e.target.value
-  })
-}
-
-setNamecard = (e) => {
-  this.setState({
-    namecard : e.target.value
-  })
-}
-
-setExpiredate = (e) => {
-  this.setState({
-    expiredate : e.target.value
-  })
-}
-
-setCvc = (e) => {
-  this.setState({
-    cvc : e.target.value
-  })
-}
   render() {
       const { checkout, item, total, order, user } = this.props;
       const products = this.props.products
       const checkouts = this.props.checkouts.checkouts
-      console.log(checkouts);
       const subtotal = total
+      // console.log(products);
       const taxes = 5.25
       const id = products.length === 0 ? 0 : products.find(product => {return product.id}).id
       const date = new Date((new Date()).toJSON()).toDateString().slice(4,10).concat(',').concat(new Date((new Date()).toJSON()).toDateString().slice(10,15))
@@ -146,7 +123,7 @@ setCvc = (e) => {
           </div>
         </div>
         </div>
-      <div className="max-w-2xl mx-auto py-9 sm:py-16 lg:mt-50 lg:max-w-none">
+      <form className="max-w-2xl mx-auto py-9 sm:py-16 lg:mt-50 lg:max-w-none" onSubmit={this.handleSubmit}>
           <div class="mt-16 rounded-lg grid grid-cols-1 gap-16 md:grid-cols-2">
                 <div className="relative md:row-span-3">
                 <h2 className="text-xl font-extrabold text-gray-800">Contact information</h2>    
@@ -158,9 +135,10 @@ setCvc = (e) => {
                         disabled
                         type="email"
                         name="email-address"
-                        value={this.state.email}
                         id="email-address"
                         autoComplete="email"
+                        required
+                        value={this.state.email}
                         className="mt-1 bg-gray-200 cursor-not-allowed block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                       <hr className="mt-10" />
@@ -174,9 +152,10 @@ setCvc = (e) => {
                         disabled
                         type="text"
                         name="first-name"
-                        value={this.state.fname}
                         id="first-name"
                         autoComplete="given-name"
+                        required
+                        value={this.state.fname}
                         className="mt-1 bg-gray-200 cursor-not-allowed block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
@@ -189,9 +168,10 @@ setCvc = (e) => {
                         disabled
                         type="text"
                         name="last-name"
-                        value={this.state.lname}
                         id="last-name"
                         autoComplete="family-name"
+                        required
+                        value={this.state.lname}
                         className="mt-1 bg-gray-200 cursor-not-allowed block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
@@ -202,10 +182,10 @@ setCvc = (e) => {
                       <input
                         type="text"
                         name="apartment"
-                        value={this.state.apartment}
-                        onChange={this.setApartment}
                         id="apartment"
                         autoComplete="apartment"
+                        required
+                        onChange={this.handleChange}
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                       <div className="mt-6 grid grid-cols-6 gap-6">
@@ -216,10 +196,10 @@ setCvc = (e) => {
                       <input
                         type="text"
                         name="city"
-                        value={this.state.city}
-                        onChange={this.setCity}
                         id="city"
                         autoComplete="city"
+                        required
+                        onChange={this.handleChange}
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
@@ -231,41 +211,41 @@ setCvc = (e) => {
                       <input
                         type="text"
                         name="country"
-                        value={this.state.country}
-                        onChange={this.setCountry}
                         id="country"
                         autoComplete="country"
+                        required
+                        onChange={this.handleChange}
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
                       </div>
                       <div className="mt-6 grid grid-cols-6 gap-6">
                       <div className="col-span-6 sm:col-span-3">
-                      <label htmlFor="state" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="province" className="block text-sm font-medium text-gray-700">
                         State / Province
                       </label>
                       <input
                         type="text"
-                        name="state"
-                        value={this.state.province}
-                        onChange={this.setProvince}
-                        id="state"
-                        autoComplete="state"
+                        name="province"
+                        id="province"
+                        autoComplete="province"
+                        required
+                        onChange={this.handleChange}
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
 
                     <div className="col-span-6 sm:col-span-3">
-                      <label htmlFor="postal" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="postalcode" className="block text-sm font-medium text-gray-700">
                         Postal code
                       </label>
                       <input
                         type="text"
-                        name="postal"
-                        value={this.state.postalcode}
-                        onChange={this.setPostalcode}
-                        id="postal"
-                        autoComplete="postal"
+                        name="postalcode"
+                        id="postalcode"
+                        autoComplete="postalcode"
+                        required
+                        onChange={this.handleChange}
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
@@ -276,10 +256,10 @@ setCvc = (e) => {
                       <input
                         type="text"
                         name="phone"
-                        value={this.state.phone}
-                        onChange={this.setPhone}
                         id="phone"
                         autoComplete="phone"
+                        required
+                        onChange={this.handleChange}
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                       <hr className="mt-10" />
@@ -332,8 +312,8 @@ setCvc = (e) => {
                       <input
                         type="text"
                         name="cardnumber"
-                        value={this.state.cardnumber}
-                        onChange={this.setCardnumber}
+                        required
+                        onChange={this.handleChange}
                         id="cardnumber"
                         autoComplete="cardnumber"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -346,8 +326,8 @@ setCvc = (e) => {
                       <input
                         type="text"
                         name="namecard"
-                        value={this.state.namecard}
-                        onChange={this.setNamecard}
+                        required
+                        onChange={this.handleChange}
                         id="namecard"
                         autoComplete="namecard"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -355,16 +335,16 @@ setCvc = (e) => {
                     </div>
                     <div className="flex gap-4">
                     <div className="w-10/12 mt-8 col-span-6 sm:col-span-3">
-                      <label htmlFor="expiration" className="block text-xs font-medium text-gray-700 md:text-sm">
+                      <label htmlFor="expiredate" className="block text-xs font-medium text-gray-700 md:text-sm">
                         Expiration date (MM/YY)
                       </label>
                       <input
                         type="date"
-                        name="expiration"
-                        value={this.state.expiredate}
-                        onChange={this.setExpiredate}
-                        id="expiration"
-                        autoComplete="expiration"
+                        name="expiredate"
+                        required
+                        onChange={this.handleChange}
+                        id="expiredate"
+                        autoComplete="expiredate"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
@@ -375,8 +355,8 @@ setCvc = (e) => {
                       <input
                         type="text"
                         name="cvc"
-                        value={this.state.cvc}
-                        onChange={this.setCvc}
+                        required
+                        onChange={this.handleChange}
                         id="cvc"
                         autoComplete="cvc"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -453,7 +433,7 @@ setCvc = (e) => {
                 
                 <button
                   value={num}
-                  onClick={() => item(product.id, num)}
+                  onClick={() => item(checkout.user_id, num)}
                   className={classNames(
                     active ? 'w-24 bg-gray-200 text-gray-900 cursor-pointer' : 'w-24 text-gray-700 cursor-pointer',
                     'w-24 block px-4 py-2 text-sm cursor-pointer'
@@ -501,27 +481,29 @@ setCvc = (e) => {
                 }
                 </div>
            </div>
-      </div>
+      </form>
     </div> 
     )
   }
 }
 
-const getCardProducts = state => {
-  return state.card.addedIds.map(id => ({
-    ...state.products[id],
-    quantity : (state.card.quantityById[id] || 0)
-  }))
-}
+// const getCardProducts = state => {
+//   return state.card.addedIds.map(id => ({
+//     ...state.products[id],
+//     quantity : (state.card.quantityById[id] || 0)
+//   }))
+// }
 
-const getTotal = state => state.card.addedIds.reduce((total, id) => total + state.products[id].price * (state.card.quantityById[id] || 0), 0)
+// const getTotal = state => state.card.addedIds.reduce((total, id) => total + state.products[id].price * (state.card.quantityById[id] || 0), 0)
+
+const getTotal = state => state.checkouts.checkouts.map(product => {return product.price * product.quantity}).reduce((previousValue, currentValue) => previousValue + currentValue, 0)
 
 const getUser = state => state.user
 
 const getCheckout = state => state.checkouts
 
 const mapStateToProps = state => ({
-  products: getCardProducts(state),
+  // products: getCardProducts(state),
   total: getTotal(state),
   user: getUser(state),
   checkouts: getCheckout(state)
