@@ -50,7 +50,7 @@ class Card extends Component {
 
   render() {
     const {products, total, user } = this.props
-    console.log(this.props.user);
+    // console.log(this.props.user);
     const hasProducts = products.length > 0
     const nodes = hasProducts ? (
       products.map(product => <Shop {...product} />)
