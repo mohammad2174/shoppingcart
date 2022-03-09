@@ -4,6 +4,8 @@ import card from './card';
 import user from './user';
 import reviews from "./reviews";
 import checkouts from "./checkouts";
+import orders from "./orders";
+import currentuser from "./currentuser";
 
 
 export default combineReducers({
@@ -11,5 +13,7 @@ export default combineReducers({
     card,
     user,
     reviews,
-    checkouts
+    checkouts,
+    orders,
+    currentuser
 })

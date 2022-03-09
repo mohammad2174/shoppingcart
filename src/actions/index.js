@@ -66,3 +66,13 @@ export const recieveCheckouts = (checkouts) => ({
         type : types.RECIEVE_CHECKOUTS,
         checkouts
 })
+
+export const recieveOrders = (orders) => ({
+        type : types.RECIEVE_ORDERS,
+        orders
+})
+
+export const recieveUser = (user) => ({
+        type : types.RECIEVE_USER,
+        user
+})
