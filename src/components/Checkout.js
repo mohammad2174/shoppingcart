@@ -25,6 +25,7 @@ state = {
   email: this.props.user.currentUser.currentUser.email,
   fname: this.props.user.currentUser.currentUser.name.slice(0, 5),
   lname: this.props.user.currentUser.currentUser.name.slice(6, 14),
+  api_token: this.props.user.currentUser.currentUser.api_token,
   apartment: "",
   city: "",
   country: "",
@@ -35,6 +36,9 @@ state = {
   namecard: "",
   expiredate: "",
   cvc : "",
+  total : this.props.total,
+  // taxes : 5.25,
+  taxes : 6,
   errorMessage: []
 }
 
@@ -59,9 +63,6 @@ handleSubmit = e => {
 
   const formData = new FormData();
   formData.append("user_id", this.state.id)
-  formData.append("email", this.state.email)
-  formData.append("fname", this.state.fname)
-  formData.append("lname", this.state.lname)
   formData.append("apartment", this.state.apartment)
   formData.append("city", this.state.city)
   formData.append("country", this.state.country)
@@ -73,6 +74,10 @@ handleSubmit = e => {
   formData.append("namecard", this.state.namecard)
   formData.append("expiredate", this.state.expiredate)
   formData.append("cvc", this.state.cvc)
+  formData.append("subtotal", this.state.total)
+  formData.append("taxes", this.state.taxes)
+  formData.append("totalamount", Math.ceil(this.state.total + this.state.shipping + this.state.taxes))
+  formData.append("api_token", this.state.api_token)
   axios.post("http://localhost:8000/api/v1/order", formData)
   .then((res) => {
       console.log(res);
@@ -93,7 +98,7 @@ handleChange = (event) => {
       const products = this.props.products
       const checkouts = this.props.checkouts.checkouts
       const subtotal = total
-      // console.log(products);
+      // console.log(this.state.email);
       const taxes = 5.25
       const id = products.length === 0 ? 0 : products.find(product => {return product.id}).id
       const date = new Date((new Date()).toJSON()).toDateString().slice(4,10).concat(',').concat(new Date((new Date()).toJSON()).toDateString().slice(10,15))
@@ -108,7 +113,7 @@ handleChange = (event) => {
       function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
-      
+      console.log(user);
     return (
       <div className="max-w-7xl mt-16 mx-auto px-4 sm:px-6 lg:px-8">
         <div>
