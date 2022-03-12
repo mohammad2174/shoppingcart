@@ -8,7 +8,6 @@ import { addToCard } from "../actions";
 import { Link } from "react-router-dom";
 
 
-
 class Tops extends Component {
   state = {
     colors : [
@@ -85,8 +84,8 @@ class Tops extends Component {
           imageAlt: this.state.top.imageAlt,
           colors: this.state.selectedColor,
           sizes: this.state.selectedSize,
+          reviews: reviews.reviews ? reviews.reviews.map((review) => {return review}) : "no-data"
         }
-
       return (
         <>
         <Transition.Root show={this.state.notifyopen} as={Fragment}>
@@ -201,7 +200,9 @@ class Tops extends Component {
                   </div>
                   <div className="sm:col-span-8 lg:col-span-7">
                     <h2 className="text-2xl font-extrabold text-gray-900 sm:pr-12">{product.name}</h2>
-                    {reviews.reviews.map((review) => (
+                    {product.reviews !== "no-data" ? 
+                    <>
+                    {product.reviews.map((review) => (
                       <>
                     {review.product_id === product.id ?
                     <section aria-labelledby="information-heading" className="mt-2">
@@ -237,6 +238,9 @@ class Tops extends Component {
                     : ''}
                     </>
                     ))}
+                    </>
+                    : ""
+                    }
                     <section aria-labelledby="options-heading" className="mt-10">
                       <h3 id="options-heading" className="sr-only">
                         Product options
