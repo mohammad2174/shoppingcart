@@ -13,7 +13,8 @@ class FullNelson extends Component {
       data: [],
       perPage: 15,
       currentPage: 0,
-      products: this.props.products
+      products: this.props.products,
+      reviews: this.props.reviews.reviews ? this.props.reviews.reviews.map((review) => {return review}) : "no-data"
     }
 
     receivedData() {
@@ -21,11 +22,13 @@ class FullNelson extends Component {
         return classes.filter(Boolean).join(' ')
     }
       const data = this.state.products;
+      const reviews = this.state.reviews;
       const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
-      console.log(slice);
-      const postData = slice.map(pd => <React.Fragment>
+      console.log(data);
+      const postData = 
+              slice.map(pd => <React.Fragment>
               <>
-              {pd.name === 'Full Nelson' ?
+              {pd.brand === 'Full Nelson' ?
               <Link to={`/product/${pd.id}`}>
               <div key={pd.id} className="group relative">
                 <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-80">
@@ -41,6 +44,11 @@ class FullNelson extends Component {
                   </div>
                   <div>
                   {/* Reviews */}
+                  {reviews !== "no-data" ? 
+                    <>
+                    {reviews.map((review) => (
+                      <>
+                    {review.product_id === pd.id ?
                       <div className="mt-2">
                         <h4 className="sr-only">Reviews</h4>
                         <div>
@@ -49,19 +57,25 @@ class FullNelson extends Component {
                               <StarIcon
                                 key={rating}
                                 className={classNames(
-                                    pd.rating > rating ? 'text-yellow-400' : 'text-gray-200',
+                                    review.rating > rating ? 'text-yellow-400' : 'text-gray-200',
                                   'h-5 w-5 flex-shrink-0'
                                 )}
                                 aria-hidden="true"
                               />
                             ))}
                           </div>
-                          <p className="sr-only">{pd.rating} out of 5 stars</p>
+                          <p className="sr-only">{review.rating} out of 5 stars</p>
                           <p className="mt-1 text-sm font-medium text-gray-500">
-                            {pd.reviewCount} reviews
+                            {review.reviewCount} reviews
                           </p>
                         </div>
                       </div>
+                      : ''}
+                      </>
+                      ))}
+                      </>
+                      : ""
+                      }
                       <p className="text-base font-medium text-gray-700">${pd.price}</p>
                   </div>
                 </div>
@@ -96,8 +110,8 @@ class FullNelson extends Component {
     }
     render() {
         const { products } = this.props;
-
-      return (
+        // console.log(this.props);
+        return (
         <>
         <Navigation product={products} />
           <div className="mt-16 w-full text-center">
@@ -127,10 +141,12 @@ class FullNelson extends Component {
   }
 
 const getProducts = products => Object.keys(products).map(id => products[id])
+const getReview = state => state.reviews
 
 const mapStateToProps = state => {
   return {
-    products : getProducts(state.products)
+    products : getProducts(state.products),
+    reviews: getReview(state)
   }
 }
   

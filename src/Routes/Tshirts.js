@@ -86,6 +86,7 @@ class Tshirts extends Component {
             imageAlt: this.state.tshirt.imageAlt,
             colors: this.state.selectedColor,
             sizes: this.state.selectedSize,
+            reviews: reviews.reviews ? reviews.reviews.map((review) => {return review}) : "no-data"
           }
           
       return (
@@ -202,7 +203,9 @@ class Tshirts extends Component {
                   </div>
                   <div className="sm:col-span-8 lg:col-span-7">
                     <h2 className="text-2xl font-extrabold text-gray-900 sm:pr-12">{product.name}</h2>
-                    {reviews.reviews.map((review) => (
+                    {product.reviews !== "no-data" ? 
+                    <>
+                    {product.reviews.map((review) => (
                       <>
                     {review.product_id === product.id ?
                     <section aria-labelledby="information-heading" className="mt-2">
@@ -235,10 +238,12 @@ class Tshirts extends Component {
                         </div>
                       </div>
                     </section>
-                    : ''
-                    }
+                    : ''}
                     </>
                     ))}
+                    </>
+                    : ""
+                    }
                     <section aria-labelledby="options-heading" className="mt-10">
                       <h3 id="options-heading" className="sr-only">
                         Product options
