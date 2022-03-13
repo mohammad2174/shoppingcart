@@ -80,6 +80,7 @@ class Product extends Component {
 
     const formData = new FormData();
     formData.append("product_id", this.state.product_id)
+    formData.append("name", this.props.user.currentUser.currentUser.name)
     formData.append("rating", this.state.star.rating)
     formData.append("reviewCount", this.state.star.reviewCount)
     formData.append("subject", this.state.subject)
@@ -123,6 +124,7 @@ class Product extends Component {
     const pathname = window.location.pathname.split('')
     const id = pathname.length - 1 <= 9 ? pathname[pathname.length - 1] : pathname[(pathname.length - 2)].concat(pathname[(pathname.length - 1)])
     const products = this.props.products
+    const rv = reviews.reviews ? reviews.reviews.map((review) => {return review}) : "no-data"
     const index = (id - 1 === 0) || (id - 1 === 4) || (id - 1 === 8)|| (id - 1 === 12) || (id - 1 === 16)|| (id - 1 === 20) || (id - 1 === 24) || (id - 1 === 28) || (id - 1 === 32) || (id - 1 === 36) || (id - 1 === 40) || (id - 1 === 44) || (id - 1 === 48) || (id - 1 === 52) || (id - 1 === 56) || (id - 1 === 60)
     const index1 = (id - 1 === 1) || (id - 1 === 5) || (id - 1 === 9)|| (id - 1 === 13) || (id - 1 === 17)|| (id - 1 === 21) || (id - 1 === 22) || (id - 1 === 23) || (id - 1 === 33) || (id - 1 === 37) || (id - 1 === 41) || (id - 1 === 45) || (id - 1 === 49) || (id - 1 === 53) || (id - 1 === 57) || (id - 1 === 61)
     const index2 = (id - 1 === 2) || (id - 1 === 6) || (id - 1 === 10)|| (id - 1 === 14) || (id - 1 === 18)|| (id - 1 === 22) || (id - 1 === 23) || (id - 1 === 24) || (id - 1 === 34) || (id - 1 === 38) || (id - 1 === 42) || (id - 1 === 46) || (id - 1 === 50) || (id - 1 === 54) || (id - 1 === 58) || (id - 1 === 62)
@@ -220,7 +222,9 @@ class Product extends Component {
                 <div className="mt-8 relative col-span-2">
                   <span className="text-base text-gray-800 md:text-lg">{product.detail}</span> 
                 </div>
-                {reviews.reviews.map((review) => (
+                {rv !== "no-data" ? 
+                <>
+                {rv.map((review) => (
                 <div className="mt-12 grid grid-cols-3 gap-1 md:grid-cols-4">
           {review.product_id === product.id ?       
           <div className="col-span-1 -space-x-1 overflow-hidden">
@@ -253,11 +257,14 @@ class Product extends Component {
           </div>
           : '' }
           <div className="col-span-3">
+          {!user.currentUser || review.product_id !== product.id ?
+          ''
+          :
+          <>
           <h2 className="mt-8 text-base lg:text-lg md:text-lg col-span-2 font-black text-gray-900">Share your thoughts</h2>
           <p className="mt-2 text-sm lg:text-base md:text-base text-gray-500">
             if you've used this poducts, share your thoughts with other customers
           </p>
-          {user.currentUser ?
           <button
             type="submit"
             className="mt-6 w-3/4 h-10 border border-gray-300 rounded-md py-3 px-8 flex items-center justify-center text-base font-medium hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
@@ -265,9 +272,16 @@ class Product extends Component {
           >
             Write a review
           </button>
-          :
-          ''}
-          <Transition.Root show={this.state.open} as={Fragment}>
+          </>
+          } 
+          </div>
+                </div>
+                ))}
+                </>
+                : ""
+                }
+                </div>
+                <Transition.Root show={this.state.open} as={Fragment}>
       <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={this.setOpen}>
         <div className="flex min-h-screen text-center md:block md:px-2 lg:px-4" style={{ fontSize: 0 }}>
           <Transition.Child
@@ -351,7 +365,7 @@ class Product extends Component {
                         type="submit"
                         disabled = {this.state.message.length <= 0 || this.state.subject.length <= 0 || this.state.star.length <= 0 ? 'disabled' : ''}
                         className={this.state.message.length <= 0 || this.state.subject.length <= 0 || this.state.star.length <= 0 ? "inline-flex cursor-not-allowed justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" : "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"}
-                        onClick={this.state.message.length <= 0 || this.state.subject.length <= 0 || this.state.star.length <= 0 || this.state.errorMessage.length >= 0 ? '' : () => recieveReview(product.id, this.state.star.rating, this.state.star.reviewCount, this.state.message, this.state.subject) && this.setClose()}
+                        onClick={this.state.message.length <= 0 || this.state.subject.length <= 0 || this.state.star.length <= 0 || this.state.errorMessage.length >= 0 ? '' : () => recieveReview(product.id, user.currentUser.currentUser.name, this.state.star.rating, this.state.star.reviewCount, this.state.message, this.state.subject) && this.setClose()}
                       >
                         Submit
                       </button>
@@ -363,16 +377,14 @@ class Product extends Component {
           </Transition.Child>
         </div>
       </Dialog>
-    </Transition.Root> 
-          </div>
-                </div>
-                ))}
-                </div>
+                </Transition.Root>
                 <div className="w-full mt-8 items-start md:mt-0">
                     <h2 className="text-xl lg:text-4xl md:text-2xl font-black text-gray-900">${product.price}</h2>
                     <div className="mt-6">
                         <h4 className="sr-only">Reviews</h4>
-                        {reviews.reviews.map((review) => (
+                        {rv !== "no-data" ?
+                        <>
+                        {rv.map((review) => (
                           <>
                         {review.product_id === product.id ? 
                         <div className="flex items-center">
@@ -396,6 +408,9 @@ class Product extends Component {
                         : ''}
                         </>
                         ))}
+                        </>
+                        : ""
+                        }
                     </div>
                     <div className="mt-6">
                           <h4 className="text-sm text-gray-900 font-medium">Color</h4>
