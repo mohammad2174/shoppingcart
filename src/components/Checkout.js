@@ -21,11 +21,11 @@ state = {
   exfill: "gray",
   // shipping: this.props.products.find(product => {return product.shipping}).shipping,
   shipping: 5,
-  id: this.props.user.currentUser.currentUser.id,
-  email: this.props.user.currentUser.currentUser.email,
-  fname: this.props.user.currentUser.currentUser.name.slice(0, 5),
-  lname: this.props.user.currentUser.currentUser.name.slice(6, 14),
-  api_token: this.props.user.currentUser.currentUser.api_token,
+  id: this.props.user ? '' : this.props.user.currentUser.currentUser.id,
+  email: this.props.user ? '' : this.props.user.currentUser.currentUser.email,
+  fname: this.props.user ? '' : this.props.user.currentUser.currentUser.name.slice(0, 5),
+  lname: this.props.user ? '' : this.props.user.currentUser.currentUser.name.slice(6, 14),
+  api_token: this.props.user ? '' : this.props.user.currentUser.currentUser.api_token,
   apartment: "",
   city: "",
   country: "",
@@ -88,17 +88,25 @@ handleSubmit = e => {
   });
 }
 
+deleteSubmit = (id) => {
+  axios.get(`http://localhost:8000/api/v1/deletecheckout?id=${id}`)
+  .then(res => this.props.recieveCheckouts(res.data.data))
+  .catch((err) => {
+    this.setState({ errorMessage: err.response.data });
+    console.log(err.response.data);
+  });
+}
+
 handleChange = (event) => {
   const { name, value } = event.target;
   this.setState({ [name]: value });
 }
 
   render() {
-      const { checkout, item, total, order, user } = this.props;
+      const { item, total, order, user, checkout } = this.props;
       const products = this.props.products
       const checkouts = this.props.checkouts.checkouts
       const subtotal = total
-      // console.log(this.state.email);
       const taxes = 5.25
       const id = products.length === 0 ? 0 : products.find(product => {return product.id}).id
       const date = new Date((new Date()).toJSON()).toDateString().slice(4,10).concat(',').concat(new Date((new Date()).toJSON()).toDateString().slice(10,15))
@@ -116,18 +124,18 @@ handleChange = (event) => {
       console.log(user);
     return (
       <div className="max-w-7xl mt-16 mx-auto px-4 sm:px-6 lg:px-8">
-        <div>
+        <>
         <p className="mb-6 text-base font-extrabold text-gray-800">Preparing to ship on {date}</p>
         <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-          <div className={checkouts ? "bg-indigo-600 h-2.5 w-2/5 lg:w-2/6 rounded-full" : "h-2.5 w-2/5 lg:w-2/6 rounded-full"}></div>
+          <div className={checkouts && checkouts.length ? "bg-indigo-600 h-2.5 w-2/5 lg:w-2/6 rounded-full" : "h-2.5 w-2/5 lg:w-2/6 rounded-full"}></div>
           <div className="mt-6 grid grid-cols-4 gap-14 md:gap-60 text-xs md:text-sm font-bold">
-            <p className={checkouts ? "text-indigo-500" : "text-gray-500"}>Order&nbsp;placed</p>
-            <p className={checkouts ? "text-indigo-500" : "text-gray-500"}>Processing</p>
+            <p className={checkouts && checkouts.length ? "text-indigo-500" : "text-gray-500"}>Order&nbsp;placed</p>
+            <p className={checkouts && checkouts.length ? "text-indigo-500" : "text-gray-500"}>Processing</p>
             <p className="text-gray-500">Shipped</p>
             <p className="text-gray-500 justify-self-end">Delivered</p>
           </div>
         </div>
-        </div>
+        </>
       <form className="max-w-2xl mx-auto py-9 sm:py-16 lg:mt-50 lg:max-w-none" onSubmit={this.handleSubmit}>
           <div class="mt-16 rounded-lg grid grid-cols-1 gap-16 md:grid-cols-2">
                 <div className="relative md:row-span-3">
@@ -368,7 +376,7 @@ handleChange = (event) => {
                       />
                     </div>
                     </div>
-                    {checkouts ? 
+                    {checkouts && checkouts.length ? 
                     <div className="mt-6">
                       <Link to="/order">
                         <button
@@ -384,7 +392,7 @@ handleChange = (event) => {
                 </div>
                 <div className="relative md:row-span-1">
                 <h2 className="text-xl font-extrabold text-gray-800">Order summary</h2>
-                {checkouts ?
+                {checkouts && checkouts.length ?
                 <div className="mt-4 p-6 border border-gray-300 rounded-md">
                 <div className="flow-root">
         <ul role="list" className="-my-6 divide-y divide-gray-200">
@@ -402,7 +410,7 @@ handleChange = (event) => {
                 <div>
                   <div className="flex justify-between text-base font-medium text-gray-900">
                     <h3>{checkout.name}</h3>
-                    <button type="button" onClick={() => checkout(checkout.id)}>
+                    <button type="button" onClick={() => this.props.checkout(checkout.id) && this.deleteSubmit(checkout.id)}>
                     <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M19 24h-14c-1.104 0-2-.896-2-2v-16h18v16c0 1.104-.896 2-2 2m-9-14c0-.552-.448-1-1-1s-1 .448-1 1v9c0 .552.448 1 1 1s1-.448 1-1v-9zm6 0c0-.552-.448-1-1-1s-1 .448-1 1v9c0 .552.448 1 1 1s1-.448 1-1v-9zm6-5h-20v-2h6v-1.5c0-.827.673-1.5 1.5-1.5h5c.825 0 1.5.671 1.5 1.5v1.5h6v2zm-12-2h4v-1h-4v1z"/></svg>
                     </button>
                   </div>
@@ -501,7 +509,7 @@ handleChange = (event) => {
 
 // const getTotal = state => state.card.addedIds.reduce((total, id) => total + state.products[id].price * (state.card.quantityById[id] || 0), 0)
 
-const getTotal = state => state.checkouts.checkouts.map(product => {return product.price * product.quantity}).reduce((previousValue, currentValue) => previousValue + currentValue, 0)
+const getTotal = state => state.checkouts.checkouts ? state.checkouts.checkouts.map(product => {return product.price * product.quantity}).reduce((previousValue, currentValue) => previousValue + currentValue, 0) : ''
 
 const getUser = state => state.user
 
