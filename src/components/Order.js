@@ -25,15 +25,16 @@ class Order extends Component {
   }
 
   state = {
-    shipping: this.props.orders.orders.find(order => {return order.shipping}).shipping,
-    taxes: this.props.orders.orders.find(order => {return order.taxes}).taxes,
-    email: this.props.user.currentUser.currentUser.email,
-    phone: this.props.orders.orders.find(order => {return order.phone}).phone,
-    cardnumber: this.props.orders.orders.find(order => {return order.cardnumber}).cardnumber,
-    expiredate: this.props.orders.orders.find(order => {return order.expiredate}).expiredate
+    shipping: this.props.orders.orders ? this.props.orders.orders.find(order => {return order.shipping}).shipping : '',
+    taxes: this.props.orders.orders ? this.props.orders.orders.find(order => {return order.taxes}).taxes : '',
+    email: this.props.user.currentUser.currentUser ? this.props.user.currentUser.currentUser.email : '',
+    phone: this.props.orders.orders ? this.props.orders.orders.find(order => {return order.phone}).phone : '',
+    cardnumber: this.props.orders.orders ? this.props.orders.orders.find(order => {return order.cardnumber}).cardnumber : '',
+    expiredate: this.props.orders.orders ? this.props.orders.orders.find(order => {return order.expiredate}).expiredate : '',
+    date: this.props.orders.orders ? this.props.orders.orders.find(order => {return order.date}).date : ''
   }
   render() {
-      const date = new Date((new Date()).toJSON()).toDateString().slice(4,10).concat(',').concat(new Date((new Date()).toJSON()).toDateString().slice(10,15))
+      const date = this.state.date
       const firstcharemail = this.state.email.slice(0, 1)
       const firstcharphone = this.state.phone.toString().slice(0, 1)
       const regex = /[@]/g;
@@ -44,7 +45,8 @@ class Order extends Component {
       const firstexpiredate = this.state.expiredate.slice(-5, -3);
       const orders = this.props.orders.orders
       const checkouts = this.props.checkouts.checkouts
-      console.log(this.state.expiredate.slice(-2));
+      // console.log(this.state.expiredate.slice(-2));
+      console.log(orders);
     return (
       <div className="max-w-7xl mt-16 mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-2xl font-extrabold text-gray-800">Order Details</h2>
@@ -54,7 +56,7 @@ class Order extends Component {
                 <div class="mt-6 rounded-lg grid grid-cols-1 gap-1 md:grid-cols-2">
                   <div className="relative md:row-span-1">
                       <img
-                       src={checkout.imageSrc}
+                       src={checkout.catimageSrc}
                        alt={checkout.imageAlt}
                        className="h-full w-full md:w-4/5 rounded-lg object-center object-cover"
                      />

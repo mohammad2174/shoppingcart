@@ -2,12 +2,17 @@ import React, { Component, Fragment } from "react";
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { connect } from "react-redux";
-import { checkout, item, order, recieveCheckouts } from "../actions";
+import { checkout, item, order, recieveCheckouts, recieveProducts } from "../actions";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 
 
 class Checkout extends Component {
+  componentWillMount() {
+    axios.get(`http://localhost:8000/api/v1/products`)
+      .then(res => this.props.recieveProducts(res.data.data))
+      .catch(err => err.response.data)
+  }
   componentDidMount() {
     axios.get(`http://localhost:8000/api/v1/checkouts`)
     .then(res => this.props.recieveCheckouts(res.data.data))
@@ -21,11 +26,11 @@ state = {
   exfill: "gray",
   // shipping: this.props.products.find(product => {return product.shipping}).shipping,
   shipping: 5,
-  id: this.props.user ? '' : this.props.user.currentUser.currentUser.id,
-  email: this.props.user ? '' : this.props.user.currentUser.currentUser.email,
-  fname: this.props.user ? '' : this.props.user.currentUser.currentUser.name.slice(0, 5),
-  lname: this.props.user ? '' : this.props.user.currentUser.currentUser.name.slice(6, 14),
-  api_token: this.props.user ? '' : this.props.user.currentUser.currentUser.api_token,
+  // id: this.props.user ? '' : this.props.user.currentUser.currentUser.id,
+  // email: this.props.user ? '' : this.props.user.currentUser.currentUser.email,
+  // fname: this.props.user ? '' : this.props.user.currentUser.currentUser.name.slice(0, 5),
+  // lname: this.props.user ? '' : this.props.user.currentUser.currentUser.name.slice(6, 14),
+  // api_token: this.props.user ? '' : this.props.user.currentUser.currentUser.api_token,
   apartment: "",
   city: "",
   country: "",
@@ -39,6 +44,8 @@ state = {
   total : this.props.total,
   // taxes : 5.25,
   taxes : 6,
+  date : new Date((new Date()).toJSON()).toDateString().slice(4,10).concat(',').concat(new Date((new Date()).toJSON()).toDateString().slice(10,15)),
+  quantity: this.props.checkouts.checkouts ? this.props.checkouts.checkouts.find(checkout => {return checkout.quantity}).quantity : '',
   errorMessage: []
 }
 
@@ -62,7 +69,7 @@ handleSubmit = e => {
   e.preventDefault();
 
   const formData = new FormData();
-  formData.append("user_id", this.state.id)
+  formData.append("user_id", this.props.user.currentUser.currentUser.id)
   formData.append("apartment", this.state.apartment)
   formData.append("city", this.state.city)
   formData.append("country", this.state.country)
@@ -77,7 +84,8 @@ handleSubmit = e => {
   formData.append("subtotal", this.state.total)
   formData.append("taxes", this.state.taxes)
   formData.append("totalamount", Math.ceil(this.state.total + this.state.shipping + this.state.taxes))
-  formData.append("api_token", this.state.api_token)
+  formData.append("date", this.state.date)
+  formData.append("api_token", this.props.user.currentUser.currentUser.api_token)
   axios.post("http://localhost:8000/api/v1/order", formData)
   .then((res) => {
       console.log(res);
@@ -102,13 +110,17 @@ handleChange = (event) => {
   this.setState({ [name]: value });
 }
 
+setQuantity = (value) => {
+  this.setState({ quantity: value });
+}
+
   render() {
-      const { item, total, order, user, checkout } = this.props;
-      const products = this.props.products
+      const { item, total, order, user, checkout, products } = this.props;
       const checkouts = this.props.checkouts.checkouts
-      const subtotal = total
+      const product = checkouts ? products.find(product => {return product.name === checkouts.find(checkout => {return checkout.name}).name}) : ''
+      const subtotal = total * this.state.quantity
       const taxes = 5.25
-      const id = products.length === 0 ? 0 : products.find(product => {return product.id}).id
+      // const id = products.length === 0 ? 0 : products.find(product => {return product.id}).id
       const date = new Date((new Date()).toJSON()).toDateString().slice(4,10).concat(',').concat(new Date((new Date()).toJSON()).toDateString().slice(10,15))
       const totalamount = Math.ceil(subtotal + this.state.shipping + taxes)
         const fib = (n) => {
@@ -121,7 +133,7 @@ handleChange = (event) => {
       function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
-      console.log(user);
+      // console.log(this.state.date);
     return (
       <div className="max-w-7xl mt-16 mx-auto px-4 sm:px-6 lg:px-8">
         <>
@@ -151,7 +163,7 @@ handleChange = (event) => {
                         id="email-address"
                         autoComplete="email"
                         required
-                        value={this.state.email}
+                        value={this.props.user.currentUser.currentUser.email}
                         className="mt-1 bg-gray-200 cursor-not-allowed block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                       <hr className="mt-10" />
@@ -168,7 +180,7 @@ handleChange = (event) => {
                         id="first-name"
                         autoComplete="given-name"
                         required
-                        value={this.state.fname}
+                        value={this.props.user.currentUser.currentUser.name.slice(0, 5)}
                         className="mt-1 bg-gray-200 cursor-not-allowed block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
@@ -184,7 +196,7 @@ handleChange = (event) => {
                         id="last-name"
                         autoComplete="family-name"
                         required
-                        value={this.state.lname}
+                        value={this.props.user.currentUser.currentUser.name.slice(6, 14)}
                         className="mt-1 bg-gray-200 cursor-not-allowed block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
@@ -380,7 +392,7 @@ handleChange = (event) => {
                     <div className="mt-6">
                       <Link to="/order">
                         <button
-                          onClick={() => order(id, this.state.shipping, this.state.email, this.state.fname, this.state.lname, this.state.apartment, this.state.city, this.state.country, this.state.province, this.state.postalcode, this.state.phone, this.state.cardnumber, this.state.namecard, this.state.expiredate, this.state.cvc)}
+                          onClick={() => order(this.props.user.currentUser.currentUser.id, this.state.shipping, this.props.user.currentUser.currentUser.email, this.props.user.currentUser.currentUser.name.slice(0, 5), this.props.user.currentUser.currentUser.name.slice(6, 14), this.state.apartment, this.state.city, this.state.country, this.state.province, this.state.postalcode, this.state.phone, this.state.cardnumber, this.state.namecard, this.state.expiredate, this.state.cvc)}
                           className="flex justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
                         >
                           {`${'Pay $' + totalamount}`}
@@ -423,7 +435,7 @@ handleChange = (event) => {
                   <Menu as="div" className="relative inline-block text-left">
       <div>
         <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
-          {checkout.quantity}
+          {this.state.quantity}
           <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
         </Menu.Button>
       </div>
@@ -437,16 +449,16 @@ handleChange = (event) => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        {products.map((product) => (
+
         <Menu.Items className="origin-top-right absolute right-0 mt-2 w-24 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-          {fib(product.inventory + checkout.quantity).map((num) =>
+          {fib(product.inventory).map((num) =>
             <Menu.Item>
               {({ active }) => (
                 
                 <button
                   value={num}
-                  onClick={() => item(checkout.user_id, num)}
+                  onClick={() => item(checkout.user_id, num) && this.setQuantity(num)}
                   className={classNames(
                     active ? 'w-24 bg-gray-200 text-gray-900 cursor-pointer' : 'w-24 text-gray-700 cursor-pointer',
                     'w-24 block px-4 py-2 text-sm cursor-pointer'
@@ -459,7 +471,7 @@ handleChange = (event) => {
             )}
           </div>
         </Menu.Items>
-        ))}
+       
       </Transition>
                   </Menu>
                 </div>
@@ -500,23 +512,16 @@ handleChange = (event) => {
   }
 }
 
-// const getCardProducts = state => {
-//   return state.card.addedIds.map(id => ({
-//     ...state.products[id],
-//     quantity : (state.card.quantityById[id] || 0)
-//   }))
-// }
-
-// const getTotal = state => state.card.addedIds.reduce((total, id) => total + state.products[id].price * (state.card.quantityById[id] || 0), 0)
-
 const getTotal = state => state.checkouts.checkouts ? state.checkouts.checkouts.map(product => {return product.price * product.quantity}).reduce((previousValue, currentValue) => previousValue + currentValue, 0) : ''
 
 const getUser = state => state.user
 
 const getCheckout = state => state.checkouts
 
+const getProducts = products => Object.keys(products).map(id => products[id])
+
 const mapStateToProps = state => ({
-  // products: getCardProducts(state),
+  products : getProducts(state.products),
   total: getTotal(state),
   user: getUser(state),
   checkouts: getCheckout(state)
@@ -526,7 +531,8 @@ const mapDispatchToProps = dispatch => ({
   checkout: productId => dispatch(checkout(productId)),
   item: (productId, num) => dispatch(item(productId, num)),
   order: (productId, shipping, email, fname, lname, apartment, city, country, province, postalcode, phone, cardnumber, namecard, expiredate, cvc) => dispatch(order(productId, shipping, email, fname, lname, apartment, city, country, province, postalcode, phone, cardnumber, namecard, expiredate, cvc)),
-  recieveCheckouts : (checkouts ) => dispatch(recieveCheckouts(checkouts))
+  recieveCheckouts : (checkouts ) => dispatch(recieveCheckouts(checkouts)),
+  recieveProducts : products => dispatch(recieveProducts(products))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
