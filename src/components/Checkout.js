@@ -41,11 +41,11 @@ state = {
   namecard: "",
   expiredate: "",
   cvc : "",
+  quantity: this.props.checkouts.checkouts ? this.props.checkouts.checkouts.find(checkout => {return checkout.quantity}).quantity : '',
   total : this.props.total,
   // taxes : 5.25,
   taxes : 6,
   date : new Date((new Date()).toJSON()).toDateString().slice(4,10).concat(',').concat(new Date((new Date()).toJSON()).toDateString().slice(10,15)),
-  quantity: this.props.checkouts.checkouts ? this.props.checkouts.checkouts.find(checkout => {return checkout.quantity}).quantity : '',
   errorMessage: []
 }
 
@@ -105,6 +105,15 @@ deleteSubmit = (id) => {
   });
 }
 
+minusSubmit = (id, quantity) => {
+  axios.get(`http://localhost:8000/api/v1/quantity?id=${id}&quantity=${quantity}`)
+  .then(res => console.log(res.data.data))
+  .catch((err) => {
+    this.setState({ errorMessage: err.response.data });
+    console.log(err.response.data);
+  });
+}
+
 handleChange = (event) => {
   const { name, value } = event.target;
   this.setState({ [name]: value });
@@ -117,10 +126,11 @@ setQuantity = (value) => {
   render() {
       const { item, total, order, user, checkout, products } = this.props;
       const checkouts = this.props.checkouts.checkouts
+      const id = checkouts ? this.props.checkouts.checkouts.find(checkout => {return checkout.id}).id : ''
       const product = checkouts ? products.find(product => {return product.name === checkouts.find(checkout => {return checkout.name}).name}) : ''
-      const subtotal = total * this.state.quantity
+      const quantity = checkouts ? this.props.checkouts.checkouts.find(checkout => {return checkout.quantity}).quantity : ''
+      const subtotal = this.state.quantity ? total * this.state.quantity : total * quantity
       const taxes = 5.25
-      // const id = products.length === 0 ? 0 : products.find(product => {return product.id}).id
       const date = new Date((new Date()).toJSON()).toDateString().slice(4,10).concat(',').concat(new Date((new Date()).toJSON()).toDateString().slice(10,15))
       const totalamount = Math.ceil(subtotal + this.state.shipping + taxes)
         const fib = (n) => {
@@ -133,7 +143,7 @@ setQuantity = (value) => {
       function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
-      // console.log(this.state.date);
+      console.log(this.state.quantity);
     return (
       <div className="max-w-7xl mt-16 mx-auto px-4 sm:px-6 lg:px-8">
         <>
@@ -392,7 +402,7 @@ setQuantity = (value) => {
                     <div className="mt-6">
                       <Link to="/order">
                         <button
-                          onClick={() => order(this.props.user.currentUser.currentUser.id, this.state.shipping, this.props.user.currentUser.currentUser.email, this.props.user.currentUser.currentUser.name.slice(0, 5), this.props.user.currentUser.currentUser.name.slice(6, 14), this.state.apartment, this.state.city, this.state.country, this.state.province, this.state.postalcode, this.state.phone, this.state.cardnumber, this.state.namecard, this.state.expiredate, this.state.cvc)}
+                          onClick={() => order(this.props.user.currentUser.currentUser.id, this.state.shipping, this.props.user.currentUser.currentUser.email, this.props.user.currentUser.currentUser.name.slice(0, 5), this.props.user.currentUser.currentUser.name.slice(6, 14), this.state.apartment, this.state.city, this.state.country, this.state.province, this.state.postalcode, this.state.phone, this.state.cardnumber, this.state.namecard, this.state.expiredate, this.state.cvc)  && this.minusSubmit(id, this.state.quantity ? this.state.quantity : quantity)}
                           className="flex justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
                         >
                           {`${'Pay $' + totalamount}`}
@@ -435,7 +445,11 @@ setQuantity = (value) => {
                   <Menu as="div" className="relative inline-block text-left">
       <div>
         <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
-          {this.state.quantity}
+        {checkouts && checkouts.length ?
+          <>
+          {this.state.quantity ? this.state.quantity : quantity}
+          </>
+          : ''}
           <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
         </Menu.Button>
       </div>
