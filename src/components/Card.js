@@ -11,14 +11,6 @@ import axios from 'axios';
 class Card extends Component {
   state = {
     open : this.props.open,
-    // user_id : this.props.user ? this.props.user.currentUser.currentUser.id : 0,
-    // name : this.props.products.find(product => {return product.name}).name,
-    // price : this.props.products.find(product => {return product.price}).price,
-    // quantity : this.props.products.find(product => {return product.quantity}).quantity,
-    // color : this.props.products.find(product => {return product.color}).color,
-    // size : this.props.products.find(product => {return product.size}).size,
-    // imageAlt : this.props.products.find(product => {return product.imageAlt}).imageAlt,
-    // catimageSrc : this.props.products.find(product => {return product.catimageSrc}).catimageSrc
   }
 
   setOpen = () => {
@@ -50,7 +42,6 @@ class Card extends Component {
 
   render() {
     const {products, total, user } = this.props
-    // console.log(this.props.user);
     const hasProducts = products.length > 0
     const nodes = hasProducts ? (
       products.map(product => <Shop {...product} />)
@@ -123,7 +114,6 @@ class Card extends Component {
                         <button
                           disabled = {hasProducts ? '' : 'disabled'}
                           className={hasProducts ? "flex justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700" : "flex cursor-not-allowed justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"}
-                          // onClick={() => this.setCheckout()}
                         >
                           Checkout
                         </button>

@@ -43,11 +43,11 @@ class Header extends Component {
   };
 
   onChange = (imageList, addUpdateIndex) => { 
-    console.log(imageList, addUpdateIndex);
     this.setState({ images: imageList });
   }
 
   onFileUpload = (data) => {
+    console.log(data);
     const formData = new FormData();
     formData.append("image", data);
     axios.post(`http://localhost:8000/api/v1/update?id=${this.props.user.currentUser.currentUser.id}`, formData);
@@ -91,18 +91,22 @@ class Header extends Component {
               onClick={onImageUpload}
               {...dragProps}
             >
-              {this.state.images.length === 0 ?
+              {user.currentUser.currentUser.image.length === 0 ?
               <label for="upload">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
               </label>
-              : '' }
+              : 
+              <>
+              <img className="cursor-pointer inline-block h-7 w-7 rounded-full ring-2 ring-white" src={user.currentUser.currentUser.image} alt="" width="100" />
+              </>
+              }
             </button>
             &nbsp;
             {imageList.map((image, index) => (
               <div key={index} className="image-item">
-                <button onClick={this.onFileUpload(image['file'].name)}>
+                <button onClick={this.onFileUpload(image.data_url)}>
                 <img className="cursor-pointer inline-block h-7 w-7 rounded-full ring-2 ring-white" src={image['data_url']} alt="" width="100" />
                 </button>
               </div>

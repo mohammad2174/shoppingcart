@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { addToCard } from "../actions";
 import { Link } from "react-router-dom";
 import { recieveProducts, recieveReview } from "../actions";
+import userLogo from "../assests/icons8-user-64.png";
 import axios from 'axios';
 
 
@@ -129,7 +130,7 @@ class Product extends Component {
     const index1 = (id - 1 === 1) || (id - 1 === 5) || (id - 1 === 9)|| (id - 1 === 13) || (id - 1 === 17)|| (id - 1 === 21) || (id - 1 === 22) || (id - 1 === 23) || (id - 1 === 33) || (id - 1 === 37) || (id - 1 === 41) || (id - 1 === 45) || (id - 1 === 49) || (id - 1 === 53) || (id - 1 === 57) || (id - 1 === 61)
     const index2 = (id - 1 === 2) || (id - 1 === 6) || (id - 1 === 10)|| (id - 1 === 14) || (id - 1 === 18)|| (id - 1 === 22) || (id - 1 === 23) || (id - 1 === 24) || (id - 1 === 34) || (id - 1 === 38) || (id - 1 === 42) || (id - 1 === 46) || (id - 1 === 50) || (id - 1 === 54) || (id - 1 === 58) || (id - 1 === 62)
     const suggestions = index ? products.slice(id - 1, (id -1) + 4) : products.slice(id - 4, (id -1) + 1) && index1 ? products.slice(id - 2, (id -1) + 3) : products.slice(id - 3, (id -1) + 2) && index2 ? products.slice(id - 3, (id -1) + 2) : products.slice(id - 4, (id -1) + 1)
-
+    console.log(user.currentUser.currentUser)
     function classNames(...classes) {
       return classes.filter(Boolean).join(' ')
     }
@@ -230,10 +231,10 @@ class Product extends Component {
           <div className="col-span-1 -space-x-1 overflow-hidden">
           <img
           className="inline-block h-12 w-12 rounded-full ring-2 ring-white"
-          src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+          src={user.currentUser.currentUser.image ? user.currentUser.currentUser.image : userLogo}    
           alt=""
           />
-            <p className="mt-6 pl-0.5 text-sm lg:text-base md:text-base font-black text-gray-900">Emilia Russel</p>
+            <p className="mt-6 pl-0.5 text-sm lg:text-base md:text-base font-black text-gray-900">{review.name}</p>
             <div className="mt-2 pl-0.5 flex items-center">
             {[0, 1, 2, 3, 4].map((rating) => (
             <StarIcon
@@ -256,8 +257,11 @@ class Product extends Component {
           </p>
           </div>
           : '' }
-          <div className="col-span-3">
-          {!user.currentUser || review.product_id !== product.id ?
+          
+                </div>
+                ))}
+                <div className="col-span-3">
+          {!user.currentUser ?
           ''
           :
           <>
@@ -275,8 +279,6 @@ class Product extends Component {
           </>
           } 
           </div>
-                </div>
-                ))}
                 </>
                 : ""
                 }
