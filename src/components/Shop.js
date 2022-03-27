@@ -32,7 +32,7 @@ class Shop extends Component {
                 <div className="flex-1 flex items-end justify-between text-sm">
                   <p className="text-gray-500">Qty x {quantity}</p>
 
-                  <div className="flex">
+                  <div className="flex ml-px md:ml-32">
                     <button type="button" onClick={() => checkout(id)} className="font-medium text-indigo-600 hover:text-indigo-500">
                       Remove
                     </button>

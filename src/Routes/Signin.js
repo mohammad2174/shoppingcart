@@ -28,6 +28,7 @@ class SignIn extends Component {
           password: this.state.password,
           email: this.state.email,
           name: res.data.data.name,
+          image: res.data.data.image,
           id: res.data.data.id,
           api_token: res.data.data.api_token
         }})
