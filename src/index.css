@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.font-link {
+  font-family: 'Oswald', sans-serif;
+}
+
 .pagination {
   display: flex;
   flex-basis: 70%;

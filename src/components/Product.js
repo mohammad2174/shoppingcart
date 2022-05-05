@@ -143,7 +143,7 @@ class Product extends Component {
             <div class="bg-white rounded-lg border-gray-300 border p-3 shadow-lg">
               <div class="flex flex-row">
                 <div class="px-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
@@ -154,7 +154,7 @@ class Product extends Component {
                 <div>
                   <button
                     type="button"
-                    className="top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8"
+                    className="text-gray-400 top-4 right-4 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8"
                     onClick={() => this.setNotifyClose()}
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -172,7 +172,7 @@ class Product extends Component {
             {product.id == id
               ?
               <>
-                <div className="flex gap-1 text-xs font-extrabold tracking-tight text-gray-900 sm:text-base gap-2">
+                <div className="flex gap-1 gap-2 text-xs font-extrabold tracking-tight text-gray-900 sm:text-base">
                   <Link to="/">{product.id == 1 || product.id == 2 || product.id == 3 || product.id == 4 ? "Men" : "Women"}</Link><span className="text-gray-400">\</span>
                   <Link to="/women">{product.id == 9 || product.id == 10 || product.id == 11 || product.id == 12 || product.id == 13 || product.id == 14 || product.id == 15 || product.id == 16 || product.id == 25 || product.id == 26 || product.id == 27 || product.id == 28 || product.id == 37 || product.id == 38 || product.id == 39 || product.id == 40 || product.id == 49 || product.id == 50 || product.id == 51 || product.id == 52 || product.id == 53 || product.id == 54 || product.id == 55 || product.id == 56 ? "Accessories" : "Clothing"}</Link><span className="text-gray-400">\</span>
                   {product.id == 1 || product.id == 2 || product.id == 3 || product.id == 4 ? <><Link to="/man-tops">Tops</Link><span className="text-gray-400">\</span></> : <><Link to="/woman-tops">{(product.id == 5 || product.id == 6 || product.id == 7 || product.id == 8 ? "Tops" : "") || (product.id == 9 || product.id == 10 || product.id == 11 || product.id == 12 ? "Watches" : "") || (product.id == 13 || product.id == 14 || product.id == 15 || product.id == 16 ? "Wallets" : "") || (product.id == 17 || product.id == 18 || product.id == 19 || product.id == 20 ? "T-Shirts" : "") || (product.id == 21 || product.id == 22 || product.id == 23 || product.id == 24 ? "Sweaters" : "") || (product.id == 25 || product.id == 26 || product.id == 27 || product.id == 28 ? "Sunglasses" : "") || (product.id == 29 || product.id == 30 || product.id == 31 || product.id == 32 ? "Pants" : "") || (product.id == 33 || product.id == 34 || product.id == 35 || product.id == 36 ? "Jackets" : "") || (product.id == 37 || product.id == 38 || product.id == 39 || product.id == 40 ? "Hats" : "") || (product.id == 41 || product.id == 42 || product.id == 43 || product.id == 44 ? "Dresses" : "") || (product.id == 45 || product.id == 46 || product.id == 47 || product.id == 48 ? "Denim" : "") || (product.id == 49 || product.id == 50 || product.id == 51 || product.id == 52 ? "Belts" : "") || (product.id == 53 || product.id == 54 || product.id == 55 || product.id == 56 ? "Bags" : "") || (product.id == 57 || product.id == 58 || product.id == 59 || product.id == 60 ? "Activewear" : "")}</Link><span className="text-gray-400">\</span></>}
@@ -183,36 +183,36 @@ class Product extends Component {
                     <img
                       src={product.imageSrc}
                       alt={product.imageAlt}
-                      className="h-screen w-full rounded-lg object-center object-cover"
+                      className="object-cover object-center w-full h-screen rounded-lg"
                     />
                   </div>
                   <div className="relative md:row-span-1">
                     <img
                       src={product.imageSrc}
                       alt={product.imageAlt}
-                      className="w-full rounded-lg object-center object-cover xl:h-80 lg:h-44 md:h-44"
+                      className="object-cover object-center w-full rounded-lg xl:h-80 lg:h-44 md:h-44"
                     />
                     <img
                       src={product.catimageSrc}
                       alt={product.imageAlt}
-                      className="mt-3 w-full rounded-lg object-center object-cover xl:h-80 lg:h-44 md:h-44"
+                      className="object-cover object-center w-full mt-3 rounded-lg xl:h-80 lg:h-44 md:h-44"
                     />
                   </div>
                   <div className="relative md:row-span-1">
                     <img
                       src={product.catimageSrc}
                       alt={product.imageAlt}
-                      className="h-screen w-full rounded-lg object-center object-cover"
+                      className="object-cover object-center w-full h-screen rounded-lg"
                     />
                   </div>
                 </div>
-                <div className="max-w-2xl mx-auto py-4 lg:max-w-none">
-                  <h2 className="text-2xl lg:text-5xl md:text-4xl font-black text-gray-900">{product.name}</h2>
+                <div className="max-w-2xl py-4 mx-auto lg:max-w-none">
+                  <h2 className="text-2xl font-black text-gray-900 lg:text-5xl md:text-4xl">{product.name}</h2>
                   <div class="mt-6 rounded-lg grid grid-cols-1 gap-1 md:grid-cols-3">
-                    <div className="relative w-fit col-span-2 border-r border-gray-200">
+                    <div className="relative col-span-2 border-r border-gray-200 w-fit">
                       <span className="text-base text-gray-800 md:text-lg">{product.title}</span>
-                      <h2 className="mt-12 text-base lg:text-lg md:text-lg col-span-2 font-black text-gray-900">Highlights</h2>
-                      <div className="mt-8 relative col-span-2">
+                      <h2 className="col-span-2 mt-12 text-base font-black text-gray-900 lg:text-lg md:text-lg">Highlights</h2>
+                      <div className="relative col-span-2 mt-8">
                         <ul className="ml-4 text-base text-gray-400 list-disc">
                           <li>Hand cut and sewn locally</li>
                           <li>Dyed with our proprietary colors</li>
@@ -220,18 +220,18 @@ class Product extends Component {
                           <li>Ultra-soft 100% cotton</li>
                         </ul>
                       </div>
-                      <h2 className="mt-8 text-base lg:text-lg md:text-lg col-span-2 font-black text-gray-900">Details</h2>
-                      <div className="mt-8 relative col-span-2">
+                      <h2 className="col-span-2 mt-8 text-base font-black text-gray-900 lg:text-lg md:text-lg">Details</h2>
+                      <div className="relative col-span-2 mt-8">
                         <span className="text-base text-gray-800 md:text-lg">{product.detail}</span>
                       </div>
                       {rv !== "no-data" ?
                         <>
                           {rv.map((review) => (
-                            <div className="mt-12 grid grid-cols-3 gap-1 md:grid-cols-4">
+                            <div className="grid grid-cols-3 gap-1 mt-12 md:grid-cols-4">
                               {review.product_id === product.id ?
                                 <div className="col-span-1 -space-x-1 overflow-hidden">
                                   <img
-                                    className="inline-block h-12 w-12 rounded-full ring-2 ring-white"
+                                    className="inline-block w-12 h-12 rounded-full ring-2 ring-white"
                                     src={user.currentUser === "undefined" ? user.currentUser.currentUser.image : userLogo}
                                     alt=""
                                   />
@@ -252,8 +252,8 @@ class Product extends Component {
                                 : ''}
                               {review.product_id === product.id ?
                                 <div class="col-span-3">
-                                  <h2 className="text-sm lg:text-base md:text-base font-black text-gray-700">{review.subject}</h2>
-                                  <p className="mt-4 text-xs lg:text-sm md:text-sm text-gray-500">
+                                  <h2 className="text-sm font-black text-gray-700 lg:text-base md:text-base">{review.subject}</h2>
+                                  <p className="mt-4 text-xs text-gray-500 lg:text-sm md:text-sm">
                                     {review.message}
                                   </p>
                                 </div>
@@ -266,13 +266,13 @@ class Product extends Component {
                               ''
                               :
                               <>
-                                <h2 className="mt-8 text-base lg:text-lg md:text-lg col-span-2 font-black text-gray-900">Share your thoughts</h2>
-                                <p className="mt-2 text-sm lg:text-base md:text-base text-gray-500">
+                                <h2 className="col-span-2 mt-8 text-base font-black text-gray-900 lg:text-lg md:text-lg">Share your thoughts</h2>
+                                <p className="mt-2 text-sm text-gray-500 lg:text-base md:text-base">
                                   if you've used this poducts, share your thoughts with other customers
                                 </p>
                                 <button
                                   type="submit"
-                                  className="mt-6 w-3/4 h-10 border border-gray-300 rounded-md py-3 px-8 flex items-center justify-center text-base font-medium hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                  className="flex items-center justify-center w-3/4 h-10 px-8 py-3 mt-6 text-base font-medium border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                                   onClick={() => this.setOpen()}
                                 >
                                   Write a review
@@ -285,7 +285,7 @@ class Product extends Component {
                       }
                     </div>
                     <Transition.Root show={this.state.open} as={Fragment}>
-                      <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={this.setOpen}>
+                      <Dialog as="div" className="fixed inset-0 z-10 overflow-y-auto" onClose={this.setOpen}>
                         <div className="flex min-h-screen text-center md:block md:px-2 lg:px-4" style={{ fontSize: 0 }}>
                           <Transition.Child
                             as={Fragment}
@@ -296,7 +296,7 @@ class Product extends Component {
                             leaveFrom="opacity-100"
                             leaveTo="opacity-0"
                           >
-                            <Dialog.Overlay className="hidden fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity md:block" />
+                            <Dialog.Overlay className="fixed inset-0 hidden transition-opacity bg-gray-500 bg-opacity-75 md:block" />
                           </Transition.Child>
 
                           {/* This element is to trick the browser into centering the modal contents. */}
@@ -312,18 +312,18 @@ class Product extends Component {
                             leaveFrom="opacity-100 translate-y-0 md:scale-100"
                             leaveTo="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
                           >
-                            <div className="flex text-base text-left transform transition w-full md:inline-block md:max-w-2xl md:px-4 md:my-8 md:align-middle lg:max-w-4xl">
-                              <div className="w-full relative flex items-center bg-white px-4 pt-14 pb-8 overflow-hidden shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
+                            <div className="flex w-full text-base text-left transition transform md:inline-block md:max-w-2xl md:px-4 md:my-8 md:align-middle lg:max-w-4xl">
+                              <div className="relative flex items-center w-full px-4 pb-8 overflow-hidden bg-white shadow-2xl pt-14 sm:px-6 sm:pt-8 md:p-6 lg:p-8">
                                 <button
                                   type="button"
-                                  className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8"
+                                  className="absolute text-gray-400 top-4 right-4 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8"
                                   onClick={() => this.setClose()}
                                 >
                                   <span className="sr-only">Close</span>
-                                  <XIcon className="h-6 w-6" aria-hidden="true" />
+                                  <XIcon className="w-6 h-6" aria-hidden="true" />
                                 </button>
 
-                                <div className="w-full cursor-pointer grid grid-cols-1 gap-y-8 gap-x-6 items-start sm:grid-cols-12 lg:gap-x-8">
+                                <div className="grid items-start w-full grid-cols-1 cursor-pointer gap-y-8 gap-x-6 sm:grid-cols-12 lg:gap-x-8">
                                   <form className="sm:col-span-full lg:col-span-full" onSubmit={this.handleSubmit}>
                                     <h2 className="text-2xl font-extrabold text-gray-900 sm:pr-12">{product.name}</h2>
                                     <div className="mt-2 pl-0.5 flex items-center">
@@ -339,7 +339,7 @@ class Product extends Component {
                                         />
                                       ))}
                                     </div>
-                                    <label htmlFor="street-address" className="mt-4 block text-sm font-medium text-gray-700">
+                                    <label htmlFor="street-address" className="block mt-4 text-sm font-medium text-gray-700">
                                       Subject
                                     </label>
                                     {this.state.errorMessage.subject ? <p className="text-red-500">{this.state.errorMessage.subject[0]}</p> : <p className="text-red-500">{this.state.errorMessage.data}</p>}
@@ -348,10 +348,10 @@ class Product extends Component {
                                       name="subject"
                                       id="subject"
                                       autoComplete="subject"
-                                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                      className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                       onChange={this.handleChange}
                                     />
-                                    <label htmlFor="message" className="mt-4 block text-sm font-medium text-gray-700">
+                                    <label htmlFor="message" className="block mt-4 text-sm font-medium text-gray-700">
                                       Message
                                     </label>
                                     {this.state.errorMessage.message ? <p className="text-red-500">{this.state.errorMessage.message[0]}</p> : <p className="text-red-500">{this.state.errorMessage.data}</p>}
@@ -360,7 +360,7 @@ class Product extends Component {
                                       name="message"
                                       id="message"
                                       autoComplete="address-level2"
-                                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                      className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                       onChange={this.handleChange}
                                     />
                                     <div className="mt-8">
@@ -381,8 +381,8 @@ class Product extends Component {
                         </div>
                       </Dialog>
                     </Transition.Root>
-                    <div className="w-full mt-8 items-start md:mt-0">
-                      <h2 className="text-xl lg:text-4xl md:text-2xl font-black text-gray-900">${product.price}</h2>
+                    <div className="items-start w-full mt-8 md:mt-0">
+                      <h2 className="text-xl font-black text-gray-900 lg:text-4xl md:text-2xl">${product.price}</h2>
                       <div className="mt-6">
                         <h4 className="sr-only">Reviews</h4>
                         {rv !== "no-data" ?
@@ -416,7 +416,7 @@ class Product extends Component {
                         }
                       </div>
                       <div className="mt-6">
-                        <h4 className="text-sm text-gray-900 font-medium">Color</h4>
+                        <h4 className="text-sm font-medium text-gray-900">Color</h4>
 
                         <RadioGroup value={this.state.selectedColor} onChange={this.setSelectedColor} className="mt-4">
                           <RadioGroup.Label className="sr-only">Choose a color</RadioGroup.Label>
@@ -451,7 +451,7 @@ class Product extends Component {
                       </div>
                       <div className="mt-10">
                         <div className="flex items-center justify-between">
-                          <h4 className="text-sm text-gray-900 font-medium">Size</h4>
+                          <h4 className="text-sm font-medium text-gray-900">Size</h4>
                         </div>
 
                         <RadioGroup value={this.state.selectedSize} onChange={this.setSelectedSize} className="mt-4">
@@ -487,7 +487,7 @@ class Product extends Component {
                                     ) : (
                                       <div
                                         aria-hidden="true"
-                                        className="absolute -inset-px rounded-md border-2 border-gray-200 pointer-events-none"
+                                        className="absolute border-2 border-gray-200 rounded-md pointer-events-none -inset-px"
                                       >
                                         <svg
                                           className="absolute inset-0 w-full h-full text-gray-200 stroke-2"
@@ -518,19 +518,19 @@ class Product extends Component {
                   </div>
                 </div>
                 <div className="bg-white">
-                  <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+                  <div className="max-w-2xl px-4 py-16 mx-auto sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
                     <h2 className="text-lg font-extrabold tracking-tight text-gray-900 md:text-2xl">Customers also purchased</h2>
-                    <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                    <div className="grid grid-cols-1 mt-6 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                       {suggestions.map((suggest) => (
-                        <div key={suggest.id} className="group relative">
-                          <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+                        <div key={suggest.id} className="relative group">
+                          <div className="w-full overflow-hidden bg-gray-200 rounded-md min-h-80 aspect-w-1 aspect-h-1 group-hover:opacity-75 lg:h-80 lg:aspect-none">
                             <img
                               src={suggest.imageSrc}
                               alt={suggest.imageAlt}
-                              className="w-full h-full object-center object-cover lg:w-full lg:h-full"
+                              className="object-cover object-center w-full h-full lg:w-full lg:h-full"
                             />
                           </div>
-                          <div className="mt-4 flex justify-between">
+                          <div className="flex justify-between mt-4">
                             <div>
                               <h3 className="text-sm text-gray-700">
                                 <Link to={`/product/${suggest.id}`} onClick={() => recieveProducts(products) && this.scrollToTop()}>
