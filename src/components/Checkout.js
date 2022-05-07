@@ -151,12 +151,12 @@ class Checkout extends Component {
     }
     console.log(this.state.errorMessage);
     return (
-      <div className="max-w-7xl mt-16 mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="px-4 mx-auto mt-16 max-w-7xl sm:px-6 lg:px-8">
         <>
           <p className="mb-6 text-base font-extrabold text-gray-800">Preparing to ship on {date}</p>
           <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
             <div className={checkouts && checkouts.length ? "bg-indigo-600 h-2.5 w-2/5 lg:w-2/6 rounded-full" : "h-2.5 w-2/5 lg:w-2/6 rounded-full"}></div>
-            <div className="mt-6 grid grid-cols-4 gap-14 md:gap-60 text-xs md:text-sm font-bold">
+            <div className="grid grid-cols-4 mt-6 text-xs font-bold gap-14 md:gap-60 md:text-sm">
               <p className={checkouts && checkouts.length ? "text-indigo-500" : "text-gray-500"}>Order&nbsp;placed</p>
               <p className={checkouts && checkouts.length ? "text-indigo-500" : "text-gray-500"}>Processing</p>
               <p className="text-gray-500">Shipped</p>
@@ -169,7 +169,7 @@ class Checkout extends Component {
             <div className="relative md:row-span-3">
               <h2 className="text-xl font-extrabold text-gray-800">Contact information</h2>
               <div className="col-span-6 sm:col-span-4">
-                <label htmlFor="email-address" className="mt-6 block text-sm font-medium text-gray-700">
+                <label htmlFor="email-address" className="block mt-6 text-sm font-medium text-gray-700">
                   Email address
                 </label>
                 <input
@@ -180,11 +180,11 @@ class Checkout extends Component {
                   autoComplete="email"
                   required
                   value={this.props.user.currentUser.currentUser.email}
-                  className="mt-1 bg-gray-200 cursor-not-allowed block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                  className="block w-full mt-1 bg-gray-200 border-gray-300 rounded-md shadow-sm cursor-not-allowed sm:text-sm"
                 />
                 <hr className="mt-10" />
                 <h2 className="mt-10 text-xl font-extrabold text-gray-800">Shipping information</h2>
-                <div className="mt-6 grid grid-cols-6 gap-6">
+                <div className="grid grid-cols-6 gap-6 mt-6">
                   <div className="col-span-6 sm:col-span-3">
                     <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
                       First name
@@ -197,7 +197,7 @@ class Checkout extends Component {
                       autoComplete="given-name"
                       required
                       value={this.props.user.currentUser.currentUser.name.slice(0, 5)}
-                      className="mt-1 bg-gray-200 cursor-not-allowed block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      className="block w-full mt-1 bg-gray-200 border-gray-300 rounded-md shadow-sm cursor-not-allowed sm:text-sm"
                     />
                   </div>
 
@@ -213,11 +213,11 @@ class Checkout extends Component {
                       autoComplete="family-name"
                       required
                       value={this.props.user.currentUser.currentUser.name.slice(6, 14)}
-                      className="mt-1 bg-gray-200 cursor-not-allowed block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      className="block w-full mt-1 bg-gray-200 border-gray-300 rounded-md shadow-sm cursor-not-allowed sm:text-sm"
                     />
                   </div>
                 </div>
-                <label htmlFor="apartment" className="mt-6 block text-sm font-medium text-gray-700">
+                <label htmlFor="apartment" className="block mt-6 text-sm font-medium text-gray-700">
                   {this.state.errorMessage.apartment ? <p className="text-red-500">{this.state.errorMessage.apartment[0]}</p> : <p className="text-red-500">{this.state.errorMessage.data}</p>}
                   Apartment, suite, etc.
                 </label>
@@ -229,7 +229,7 @@ class Checkout extends Component {
                   onChange={this.handleChange}
                   className={this.state.errorMessage.apartment || this.state.errorMessage.apartment ? "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-red-400 rounded-md" : "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"}
                 />
-                <div className="mt-6 grid grid-cols-6 gap-6">
+                <div className="grid grid-cols-6 gap-6 mt-6">
                   <div className="col-span-6 sm:col-span-3">
                     <label htmlFor="city" className="block text-sm font-medium text-gray-700">
                       {this.state.errorMessage.city ? <p className="text-red-500">{this.state.errorMessage.city[0]}</p> : <p className="text-red-500">{this.state.errorMessage.data}</p>}
@@ -260,7 +260,7 @@ class Checkout extends Component {
                     />
                   </div>
                 </div>
-                <div className="mt-6 grid grid-cols-6 gap-6">
+                <div className="grid grid-cols-6 gap-6 mt-6">
                   <div className="col-span-6 sm:col-span-3">
                     <label htmlFor="province" className="block text-sm font-medium text-gray-700">
                       {this.state.errorMessage.province ? <p className="text-red-500">{this.state.errorMessage.province[0]}</p> : <p className="text-red-500">{this.state.errorMessage.data}</p>}
@@ -291,7 +291,7 @@ class Checkout extends Component {
                     />
                   </div>
                 </div>
-                <label htmlFor="phone" className="mt-6 block text-sm font-medium text-gray-700">
+                <label htmlFor="phone" className="block mt-6 text-sm font-medium text-gray-700">
                   {this.state.errorMessage.phone ? <p className="text-red-500">{this.state.errorMessage.phone[0]}</p> : <p className="text-red-500">{this.state.errorMessage.data}</p>}
                   Phone
                 </label>
@@ -305,8 +305,8 @@ class Checkout extends Component {
                 />
                 <hr className="mt-10" />
                 <h2 className="mt-10 text-xl font-extrabold text-gray-800">Delivery method</h2>
-                <div className="flex mt-6 grid grid-cols-6 gap-6">
-                  <div className="col-span-6 sm:col-span-3 cursor-pointer">
+                <div className="flex grid grid-cols-6 gap-6 mt-6">
+                  <div className="col-span-6 cursor-pointer sm:col-span-3">
                     <div className={this.state.stclass} onClick={this.setEXClass}>
                       <div className="flex justify-between">
                         <p className="font-bold text-gray-800">Standard</p>
@@ -316,7 +316,7 @@ class Checkout extends Component {
                       <p className="mt-8 font-bold text-gray-800">$5</p>
                     </div>
                   </div>
-                  <div className="col-span-6 sm:col-span-3 cursor-pointer">
+                  <div className="col-span-6 cursor-pointer sm:col-span-3">
                     <div className={this.state.exclass} onClick={this.setSTClass}>
                       <div className="flex justify-between">
                         <p className="font-bold text-gray-800">Express</p>
@@ -329,7 +329,7 @@ class Checkout extends Component {
                 </div>
                 <hr className="mt-10" />
                 <h2 className="mt-10 text-xl font-extrabold text-gray-800">Payment</h2>
-                <div className="mt-4 flex">
+                <div className="flex mt-4">
                   <div>
                     <input type="radio" id="creditcard" name="drone" value="creditcard"
                       checked />
@@ -346,7 +346,7 @@ class Checkout extends Component {
                     <label for="etransfer" className="ml-3 mr-10">eTransfer</label>
                   </div>
                 </div>
-                <div className="mt-8 col-span-6 sm:col-span-3">
+                <div className="col-span-6 mt-8 sm:col-span-3">
                   <label htmlFor="cardnumber" className="block text-sm font-medium text-gray-700">
                     {this.state.errorMessage.cardnumber ? <p className="text-red-500">{this.state.errorMessage.cardnumber[0]}</p> : <p className="text-red-500">{this.state.errorMessage.data}</p>}
                     Card number
@@ -360,7 +360,7 @@ class Checkout extends Component {
                     className={this.state.errorMessage.cardnumber || this.state.errorMessage.cardnumber ? "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-red-400 rounded-md" : "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"}
                   />
                 </div>
-                <div className="mt-8 col-span-6 sm:col-span-3">
+                <div className="col-span-6 mt-8 sm:col-span-3">
                   <label htmlFor="namecard" className="block text-sm font-medium text-gray-700">
                     {this.state.errorMessage.namecard ? <p className="text-red-500">{this.state.errorMessage.namecard[0]}</p> : <p className="text-red-500">{this.state.errorMessage.data}</p>}
                     Name on card
@@ -375,7 +375,7 @@ class Checkout extends Component {
                   />
                 </div>
                 <div className="flex gap-4">
-                  <div className="w-10/12 mt-8 col-span-6 sm:col-span-3">
+                  <div className="w-10/12 col-span-6 mt-8 sm:col-span-3">
                     <label htmlFor="expiredate" className="block text-xs font-medium text-gray-700 md:text-sm">
                       {this.state.errorMessage.expiredate ? <p className="text-red-500">{this.state.errorMessage.expiredate[0]}</p> : <p className="text-red-500">{this.state.errorMessage.data}</p>}
                       Expiration date (MM/YY)
@@ -389,7 +389,7 @@ class Checkout extends Component {
                       className={this.state.errorMessage.expiredate || this.state.errorMessage.expiredate ? "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-red-400 rounded-md" : "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"}
                     />
                   </div>
-                  <div className="mt-8 col-span-6 sm:col-span-3">
+                  <div className="col-span-6 mt-8 sm:col-span-3">
                     <label htmlFor="cvc" className="block text-xs font-medium text-gray-700 md:text-sm">
                       {this.state.errorMessage.cvc ? <p className="text-red-500">{this.state.errorMessage.cvc[0]}</p> : <p className="text-red-500">{this.state.errorMessage.data}</p>}
                       CVC
@@ -409,7 +409,7 @@ class Checkout extends Component {
                     {/* <Link to="/order"> */}
                     <button
                       onClick={() => order(this.props.user.currentUser.currentUser.id, this.state.shipping, this.props.user.currentUser.currentUser.email, this.props.user.currentUser.currentUser.name.slice(0, 5), this.props.user.currentUser.currentUser.name.slice(6, 14), this.state.apartment, this.state.city, this.state.country, this.state.province, this.state.postalcode, this.state.phone, this.state.cardnumber, this.state.namecard, this.state.expiredate, this.state.cvc) && this.minusSubmit(id, this.state.quantity ? this.state.quantity : quantity)}
-                      className="flex justify-center items-center w-full mt-12 px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                      className="flex items-center justify-center w-full px-6 py-3 mt-12 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700"
                     >
                       {`${'Pay $' + totalamount}`}
                     </button>
@@ -421,20 +421,20 @@ class Checkout extends Component {
             <div className="relative md:row-span-1">
               <h2 className="text-xl font-extrabold text-gray-800">Order summary</h2>
               {checkouts && checkouts.length ?
-                <div className="mt-4 p-6 border border-gray-300 rounded-md">
+                <div className="p-6 mt-4 border border-gray-300 rounded-md">
                   <div className="flow-root">
                     <ul role="list" className="-my-6 divide-y divide-gray-200">
                       {checkouts.map((checkout) => (
-                        <li key={checkout.id} className="py-6 flex">
-                          <div className="flex-shrink-0 w-28 h-28 border border-gray-200 rounded-md overflow-hidden">
+                        <li key={checkout.id} className="flex py-6">
+                          <div className="flex-shrink-0 overflow-hidden border border-gray-200 rounded-md w-28 h-28">
                             <img
                               src={checkout.catimageSrc}
                               alt={checkout.imageAlt}
-                              className="w-full h-full object-center object-cover"
+                              className="object-cover object-center w-full h-full"
                             />
                           </div>
 
-                          <div className="ml-4 flex-1 flex flex-col">
+                          <div className="flex flex-col flex-1 ml-4">
                             <div>
                               <div className="flex justify-between text-base font-medium text-gray-900">
                                 <h3>{checkout.name}</h3>
@@ -445,18 +445,18 @@ class Checkout extends Component {
                               <p className="mt-1 text-sm text-gray-500">{checkout.color}</p>
                               <p className="mt-1 text-sm text-gray-500">{checkout.size}</p>
                             </div>
-                            <div className="flex-1 flex items-end justify-between text-sm">
+                            <div className="flex items-end justify-between flex-1 text-sm">
                               <p className="text-gray-500">${checkout.price}</p>
 
                               <Menu as="div" className="relative inline-block text-left">
                                 <div>
-                                  <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+                                  <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
                                     {checkouts && checkouts.length ?
                                       <>
                                         {this.state.quantity ? this.state.quantity : quantity}
                                       </>
                                       : ''}
-                                    <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
+                                    <ChevronDownIcon className="w-5 h-5 ml-2 -mr-1" aria-hidden="true" />
                                   </Menu.Button>
                                 </div>
 
@@ -470,7 +470,7 @@ class Checkout extends Component {
                                   leaveTo="transform opacity-0 scale-95"
                                 >
 
-                                  <Menu.Items className="origin-top-right absolute right-0 mt-2 w-24 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                  <Menu.Items className="absolute right-0 w-24 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <div className="py-1">
                                       {fib(product.inventory).map((num) =>
                                         <Menu.Item>
@@ -500,20 +500,20 @@ class Checkout extends Component {
                       ))}
                     </ul>
                   </div>
-                  <div className="mt-6 border-t border-gray-200 py-6 px-4 sm:px-6">
+                  <div className="px-4 py-6 mt-6 border-t border-gray-200 sm:px-6">
                     <div className="flex justify-between text-base font-medium text-gray-900">
                       <p>Subtotal</p>
                       <p>${subtotal}</p>
                     </div>
-                    <div className="flex mt-6 justify-between text-base font-medium text-gray-900">
+                    <div className="flex justify-between mt-6 text-base font-medium text-gray-900">
                       <p>Shipping</p>
                       <p>${this.state.shipping}</p>
                     </div>
-                    <div className="flex mt-6 justify-between text-base font-medium text-gray-900">
+                    <div className="flex justify-between mt-6 text-base font-medium text-gray-900">
                       <p>Taxes</p>
                       <p>${taxes}</p>
                     </div>
-                    <div className="flex mt-6 border-t border-gray-200 justify-between text-base font-medium text-gray-900">
+                    <div className="flex justify-between mt-6 text-base font-medium text-gray-900 border-t border-gray-200">
                       <p>Total</p>
                       <p>${totalamount}</p>
                     </div>

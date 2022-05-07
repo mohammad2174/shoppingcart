@@ -53,11 +53,11 @@ class SignIn extends Component {
 
     return (
       <>
-        <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-md w-full space-y-8">
+        <div className="flex items-center justify-center min-h-full px-4 py-12 sm:px-6 lg:px-8">
+          <div className="w-full max-w-md space-y-8">
             <div>
-              <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
-              <p className="mt-2 text-center text-sm text-gray-600">
+              <h2 className="mt-6 text-3xl font-extrabold text-center text-gray-900">Sign in to your account</h2>
+              <p className="mt-2 text-sm text-center text-gray-600">
                 Or{' '}
                 <Link to="/register">
                   <span className="font-medium text-gray-600 cursor-pointer hover:text-indigo-500">
@@ -66,10 +66,10 @@ class SignIn extends Component {
                 </Link>
               </p>
             </div>
-            <div className="bg-white shadow-2xl overflow-hidden sm:rounded-lg">
-              <form className="w-10/12 m-9 space-y-6" onSubmit={this.handleSubmit}>
+            <div className="overflow-hidden bg-white shadow-2xl sm:rounded-lg">
+              <form className="w-10/12 space-y-6 m-9" onSubmit={this.handleSubmit}>
                 <input type="hidden" name="remember" defaultValue="true" />
-                <div className="rounded-md shadow-sm -space-y-px">
+                <div className="-space-y-px rounded-md shadow-sm">
                   {this.state.errorMessage.email ? <p className="text-red-500">{this.state.errorMessage.email[0]}</p> : <p className="text-red-500">{this.state.errorMessage.data}</p>}
                   <div>
                     Email address
@@ -97,15 +97,15 @@ class SignIn extends Component {
                   </div>
                 </div>
 
-                <div className="flex pt-12 items-center justify-between">
+                <div className="flex items-center justify-between pt-12">
                   <div className="flex items-center">
                     <input
                       id="remember-me"
                       name="remember-me"
                       type="checkbox"
-                      className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                      className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
                     />
-                    <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                    <label htmlFor="remember-me" className="block ml-2 text-sm text-gray-900">
                       Remember me
                     </label>
                   </div>
@@ -119,7 +119,7 @@ class SignIn extends Component {
                 <div>
                   <button
                     type="submit"
-                    className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Sign in
                   </button>
