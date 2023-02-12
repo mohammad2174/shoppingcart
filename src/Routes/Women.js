@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/no-redundant-roles */
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react';

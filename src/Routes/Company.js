@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from "react";
 import phoneLogo from "../assests/icons8-phone-32.png";
 import mailLogo from "../assests/icons8-mail-50.png";

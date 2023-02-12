@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-redundant-roles */
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { recieveOrders, recieveCheckouts, recieveUser } from "../actions";

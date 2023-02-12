@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-redundant-roles */
 import React, { Component, Fragment } from "react";
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
@@ -127,6 +128,7 @@ class Checkout extends Component {
   }
 
   render() {
+    // eslint-disable-next-line no-unused-vars
     const { item, total, order, user, checkout, products } = this.props;
     const checkouts = this.props.checkouts.checkouts
     const id = checkouts ? this.props.checkouts.checkouts.find(checkout => { return checkout.id }).id : ''

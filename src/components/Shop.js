@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-redundant-roles */
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { checkout } from "../actions";

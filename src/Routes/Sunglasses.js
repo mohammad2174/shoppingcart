@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 import React, { Component, Fragment } from "react";
 import { Dialog, RadioGroup, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';

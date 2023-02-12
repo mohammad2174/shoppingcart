@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 import { ADD_TO_CARD, RECIEVE_PRODUCTS, CHECKOUT_REQUEST, ITEM_REQUEST, ORDER_REQUEST, WRITE_REVIEWS } from "../constants/actionTypes";
 
 const products = (state = {}, action) => {
