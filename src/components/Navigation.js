@@ -156,31 +156,27 @@ class Navigation extends Component {
                     {({ open }) => (
                   <>
                   {category.id === 'men' ? 
-                  <Link to="/men" className="relative flex">
-                  <Popover.Button
-                    className={classNames(
-                    open
-                    ? 'border-indigo-600 text-indigo-600'
-                    : 'border-transparent text-gray-700 hover:text-gray-800',
-                    'relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px'
-                    )}
+                  <Link to="/men" 
+                  className={classNames(
+                    window.location.pathname.slice(1) === 'men'
+                  ? 'border-indigo-600 text-indigo-600'
+                  : 'border-transparent text-gray-700 hover:text-gray-800',
+                  'relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px'
+                  )}
                   >
                   {category.name}
-                  </Popover.Button>
                   </Link>
                 : '' }
                 {category.id === 'women' ? 
-                <Link to="/women" className="relative flex">
-                <Popover.Button
-                  className={classNames(
-                  open
-                  ? 'border-indigo-600 text-indigo-600'
-                  : 'border-transparent text-gray-700 hover:text-gray-800',
+                <Link to="/women" 
+                className={classNames(
+                  window.location.pathname.slice(1) === 'women'
+                ? 'border-indigo-600 text-indigo-600'
+                : 'border-transparent text-gray-700 hover:text-gray-800',
                 'relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px'
                 )}
                 >
                 {category.name}
-                </Popover.Button>
                 </Link>
                 : '' }
                 </>
