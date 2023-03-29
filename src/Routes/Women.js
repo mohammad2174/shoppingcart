@@ -413,7 +413,7 @@ class Men extends Component {
                   <div className="row-start-1 grid grid-cols-2 gap-y-5 gap-x-2 text-xs sm:grid-cols-3 sm:gap-x-2 sm:gap-y-10 sm:text-sm">
                     {category.sections.map((section) => (
                       <div key={section.name}>
-                        <p id={`${section.name}-heading`} className="font-medium text-gray-900">
+                        <p id={`${section.name}-heading`} className="font-semibold text-base text-gray-900">
                           {section.name}
                         </p>
                         <ul
