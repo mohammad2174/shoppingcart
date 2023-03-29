@@ -64,7 +64,7 @@ class Header extends Component {
             <div className="py-1.5 pl-2 bg-gray-900 font-normal leading-7 text-white sm:text-lg sm:truncate">
               <div className="flex flex-row justify-between">
                 <Link to="/">
-                  <span>Shop Snazzy</span>
+                  <span>Shop SaghiOMey</span>
                 </Link>
                 <div className="pr-3.5 flex flex-row justify-between">
                   {user.currentUser ?
